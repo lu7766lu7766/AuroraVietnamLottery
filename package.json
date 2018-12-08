@@ -11,7 +11,7 @@
         "build:android": "yarn build && cordova build android",
         "build:ios": "yarn build && cordova build ios",
         "run:android": "yarn build && cordova run android",
-        "run:ios": "yarn build && cordova run ios",
+        "run:ios": "yarn build && cordova run ios"
     },
     "author": "Apache Cordova Team",
     "license": "Apache-2.0",
