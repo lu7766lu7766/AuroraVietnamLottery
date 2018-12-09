@@ -1,10 +1,10 @@
 var path = require('path')
 var webpackConfig = require('./webpack.config')
 
-var resolve = (dir) =>
-{
-  return path.join(__dirname, dir)
-}
+// var resolve = (dir) =>
+// {
+//   return path.join(__dirname, dir)
+// }
 
 module.exports = {
   baseUrl: '/',
@@ -21,8 +21,9 @@ module.exports = {
     hotOnly: false,
     before: app =>
     {
-      var express = require('express')
-      app.use('/assets', express.static(resolve('assets')))
+      // var express = require('express')
+      // app.use('/assets', express.static(resolve('assets')))
+      // console.log(resolve('assets'))
     }
   }
 }

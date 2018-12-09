@@ -1,25 +1,44 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: '/login',
+      name: 'login',
+      component: () => import('pages/Login')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/register',
+      name: 'register',
+      component: () => import('pages/Register')
+    },
+    {
+      path: '/',
+      component: () => import('pages/Betting'),
+      children: [
+        {
+          path: 'lo',
+          component: () => import('pages/Betting/Lo'),
+          children: [
+            {
+              path: 'game1',
+              name: 'LoGame1',
+              component: () => import('pages/Betting/Lo/Game1')
+            },
+            {
+              path: 'game2',
+              name: 'LoGame2',
+              component: () => import('pages/Betting/Lo/Game2')
+            }
+          ]
+        }
+      ]
+    },
+    {path: '*', redirect: '/login'}
   ]
 })
