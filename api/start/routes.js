@@ -18,17 +18,17 @@ const Route = use('Route')
 
 // Route.on('/').render('welcome')
 // Route.get('/', () => 'hello world!!')
-Route.group(() =>
-{
-  Route.post('login', 'UserController.login')
-  Route.get('check', 'UserController.isLogin')
-  Route.get('logout', 'UserController.logout')
+Route.post('login', 'UserController.login')
+Route.get('check', 'UserController.isLogin')
+Route.post('register', 'UserController.register')
 
-  Route.post('register', 'UserController.register')
-})//.middleware(['cors'])//.format(['json'])
+// Route.get('listTokens', 'UserController.listTokens')
+// Route.get('generate', 'UserController.generate')
 
 Route.group(() =>
 {
-  Route.post('/bet', 'BetController.logout')
-  Route.get('/result', 'BetController.result')
+  // Route.get('bet', 'BetController.test')
+  Route.get('user', 'UserController.getUser')
+  Route.post('bet', 'BetController.index')
+  Route.get('result', 'BetController.result')
 }).middleware(['auth'])

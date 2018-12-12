@@ -20,10 +20,14 @@ class UserSeeder
 {
   async run() {
     // const users = await Database.table('users')
-    const user = new User()
+    // const user = new User()
+    const user = Create.model('User')
 
     user.user_id = 'lu7766'
     user.password = 'lu90354'
+    user.name = 'Jac Wang'
+    user.point = '100000'
+    user.role_id = 1
 
     await user.save()
   }

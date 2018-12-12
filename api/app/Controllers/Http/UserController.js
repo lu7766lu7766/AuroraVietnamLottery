@@ -2,34 +2,24 @@
 const SUCCESS = 0
 const USER_OR_PASSWORD_ERROR = 1000
 const USER_EXISTS = 1001
+const INVALID_API_TOKEN = 1002
 
-const User = use('App/Models/User')
+const userService = Create.service('User')
 
 class UserController
 {
   /**
    * login api
    */
-  async login({request, auth}) {
-    //
-    const {userID, password} = request.all()
-    await auth.logout()
+  async login(context) {
+    // return make('userService').login(context)
     try
-    {
-      await auth.remember(true).attempt(userID, password)
-    } catch (err)
-    {
-    }
-
-    var {data: isLogin} = await this.isLogin({auth})
-    if (isLogin)
     {
       return {
         code: SUCCESS,
-        data: await auth.getUser()
+        data: await userService.login(context)
       }
-    }
-    else
+    } catch (e)
     {
       return {
         code: USER_OR_PASSWORD_ERROR,
@@ -41,15 +31,14 @@ class UserController
   /**
    * check is login or not
    */
-  async isLogin({auth}) {
+  async isLogin(context) {
     try
     {
-      await auth.check()
       return {
         code: SUCCESS,
-        data: true
+        data: await userService.isLogin(context)
       }
-    } catch (error)
+    } catch (e)
     {
       return {
         code: SUCCESS,
@@ -59,37 +48,40 @@ class UserController
   }
 
   /**
-   * do logout api
+   * get user detail
    */
-  async logout({auth}) {
-    //
-    await auth.logout()
-    return {
-      code: SUCCESS
+  async getUser(context) {
+    try
+    {
+      return {
+        code: SUCCESS,
+        data: await userService.getUser(context)
+      }
+    } catch (e)
+    {
+      return {
+        code: INVALID_API_TOKEN,
+        data: {}
+      }
     }
   }
 
   /**
    * add new user
    */
-  async register({request}) {
-    const {userID, password} = request.all() //request.input('userID', 'password')
+  async register(context) {
     try
     {
-      await User.findByOrFail('user_id', userID)
+      await userService.register(context)
       return {
-        code: USER_EXISTS
+        code: SUCCESS,
+        data: await context.auth.attempt(userID, password)
       }
     } catch (e)
     {
-      const user = new User()
-      user.user_id = userID
-      user.password = password
-
-      await user.save()
-
       return {
-        code: SUCCESS
+        code: USER_EXISTS,
+        data: {}
       }
     }
   }
