@@ -9,6 +9,8 @@ class User
    */
   async login({request, auth}) {
     //
+    await Validator('Login').validateAll(request.all())
+
     const {userID, password} = request.all()
 
     const tokenData = await auth.attempt(userID, password)

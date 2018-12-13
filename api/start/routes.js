@@ -18,7 +18,7 @@ const Route = use('Route')
 
 // Route.on('/').render('welcome')
 // Route.get('/', () => 'hello world!!')
-Route.post('login', 'UserController.login')
+Route.post('login', 'UserController.login') // .validator('Login')
 Route.get('check', 'UserController.isLogin')
 Route.post('register', 'UserController.register')
 

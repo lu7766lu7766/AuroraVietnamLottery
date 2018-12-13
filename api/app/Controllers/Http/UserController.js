@@ -1,8 +1,4 @@
 'use strict'
-const SUCCESS = 0
-const USER_OR_PASSWORD_ERROR = 1000
-const USER_EXISTS = 1001
-const INVALID_API_TOKEN = 1002
 
 const userService = Create.service('User')
 
@@ -15,16 +11,10 @@ class UserController
     // return make('userService').login(context)
     try
     {
-      return {
-        code: SUCCESS,
-        data: await userService.login(context)
-      }
+      return await userService.login(context)
     } catch (e)
     {
-      return {
-        code: USER_OR_PASSWORD_ERROR,
-        data: {}
-      }
+      throw [Codes.USER_OR_PASSWORD_ERROR, false]
     }
   }
 
@@ -34,16 +24,10 @@ class UserController
   async isLogin(context) {
     try
     {
-      return {
-        code: SUCCESS,
-        data: await userService.isLogin(context)
-      }
+      return await userService.isLogin(context)
     } catch (e)
     {
-      return {
-        code: SUCCESS,
-        data: false
-      }
+      throw [Codes.SUCCESS, false]
     }
   }
 
@@ -51,19 +35,7 @@ class UserController
    * get user detail
    */
   async getUser(context) {
-    try
-    {
-      return {
-        code: SUCCESS,
-        data: await userService.getUser(context)
-      }
-    } catch (e)
-    {
-      return {
-        code: INVALID_API_TOKEN,
-        data: {}
-      }
-    }
+    return await userService.getUser(context)
   }
 
   /**
@@ -73,16 +45,10 @@ class UserController
     try
     {
       await userService.register(context)
-      return {
-        code: SUCCESS,
-        data: await context.auth.attempt(userID, password)
-      }
+      return await context.auth.attempt(userID, password)
     } catch (e)
     {
-      return {
-        code: USER_EXISTS,
-        data: {}
-      }
+      throw [Codes.USER_EXISTS, {}]
     }
   }
 }
