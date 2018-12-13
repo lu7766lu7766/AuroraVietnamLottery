@@ -12,9 +12,12 @@ class UserRepositories
     user.user_id = request.input('userID')
     user.password = request.input('password')
     user.name = request.input('name')
-    user.role_id = request.input('roleID')
-    user.parent_id = request.input('parentID')
-      ? request.input('parentID')
+    user.role_id = request.roleID
+      ? request.roleID
+      : Constant('Role').GAMER_CODE
+    user.point = 0
+    user.parent_id = request.parentID
+      ? request.parentID
       : null
 
     await user.save()

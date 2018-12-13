@@ -45,10 +45,24 @@ class UserController
     try
     {
       await userService.register(context)
-      return await context.auth.attempt(userID, password)
+      return await userService.login(context)
     } catch (e)
     {
-      throw [Codes.USER_EXISTS, {}]
+      throw [Codes.USER_EXISTS, e]
+    }
+  }
+
+  /**
+   * add new user
+   */
+  async createUser(context) {
+    try
+    {
+      await userService.createUser(context)
+      return await userService.login(context)
+    } catch (e)
+    {
+      throw [Codes.USER_EXISTS, e]
     }
   }
 }
