@@ -9,7 +9,6 @@ class User
    */
   async login({request, auth}) {
     //
-    await Validator('Login').validateAll(request.all())
 
     const {userID, password} = request.all()
     const tokenData = await auth.attempt(userID, password)
@@ -46,20 +45,62 @@ class User
    */
   async createUser({request, auth}) {
     // auth middleware
-    try
+    const user = await this.getUser({auth})
+    request.roleID = (user.role_id + 1) >= Constant('Role').GAMER_CODE
+      ? Constant('Role').GAMER_CODE
+      : (user.role_id + 1)
+    request.parentID = user.id
+    await userRepository.addUser({request})
+  }
+
+  /**
+   * api for change a user's point
+   */
+  async changePoint({request, auth}) {
+    // auth middleware
+    const createUser = await this.getUser({auth})
+    const user = await userRepository.findUserByID(request.input('userID'))
+    if (createUser.id == user.id && createUser.id != 1)
     {
-      const user = await this.getUser({auth})
-      request.roleID = (user.role_id + 1) >= Constant('Role').GAMER_CODE
-        ? Constant('Role').GAMER_CODE
-        : (user.role_id + 1)
-      request.parentID = user.id
-      await userRepository.addUser({request})
-    } catch (e)
+      throw [
+        Codes.CONNOT_ADD_POINT_YOURSELF,
+        'can not add poing by yourself'
+      ]
+    }
+
+    let result = true
+    // transaction 確保兩句都會執行到
+    await DB.transaction(async (trx) =>
     {
-      // throw [Codes.PLEASE_LOGIN, e]
+      const changPoint = +request.input('point')
+      const newPoint = changPoint + request.input('point') + user.point
+      if (newPoint < 0)
+      {
+        return result = false
+      }
+      await trx.table('point_logs').insert({
+        creator_id: createUser.id,
+        user_id: user.id,
+        point: changPoint
+      })
+      await trx.table('users').where('id', user.id).update({
+        point: newPoint
+      })
+    })
+    if (result)
+    {
+      return result
+    }
+    else
+    {
+      throw [Codes.POINT_CANNOT_LESS_0, result]
     }
   }
 
+  /**
+   * delete older access token
+   * it will cause could not login with multi device
+   */
   async deleteOldTokensByUser(user) {
     const lastToken = await DB.table('tokens').where('user_id', user.id).select('id').last()
     await DB.table('tokens').where('user_id', user.id).whereNot('id', lastToken.id).update('is_revoked', 1)

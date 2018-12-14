@@ -9,6 +9,7 @@ class UserController
    */
   async login(context) {
     // return make('userService').login(context)
+    await Validator('Login').validateAll(context.request.all())
     try
     {
       return await userService.login(context)
@@ -42,6 +43,7 @@ class UserController
    * add new user
    */
   async register(context) {
+    await Validator('Login').validateAll(context.request.all())
     try
     {
       await userService.register(context)
@@ -56,6 +58,7 @@ class UserController
    * add new user
    */
   async createUser(context) {
+    await Validator('Login').validateAll(context.request.all())
     try
     {
       await userService.createUser(context)
@@ -64,6 +67,14 @@ class UserController
     {
       throw [Codes.USER_EXISTS, e]
     }
+  }
+
+  /**
+   * add user point
+   */
+  async changePoint(context) {
+    await Validator('UserPoint').validateAll(context.request.all())
+    return await userService.changePoint(context)
   }
 }
 

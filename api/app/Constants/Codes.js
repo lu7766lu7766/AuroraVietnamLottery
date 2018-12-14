@@ -10,6 +10,9 @@ class Codes
 
   static get USER_EXISTS() { return 2001}
 
+  static get CONNOT_ADD_POINT_YOURSELF() { return 2002}
+
+  static get POINT_CANNOT_LESS_0() { return 2003}
 }
 
 module.exports = Codes

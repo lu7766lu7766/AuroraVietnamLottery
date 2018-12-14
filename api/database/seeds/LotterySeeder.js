@@ -21,7 +21,6 @@ class LotterySeeder
     {
       body['number' + num] = Math.round(Math.random() * 99999)
     })
-    const DB = use('Database')
     await DB.table('lotteries').insert(Object.assign(body, {
       created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
       updated_at: moment().format('YYYY-MM-DD HH:mm:ss')

@@ -28,6 +28,7 @@ Route.post('register', 'UserController.register')
 Route.group(() =>
 {
   Route.post('createUser', 'UserController.createUser')
+  Route.post('changePoint', 'UserController.changePoint')
   // Route.get('bet', 'BetController.test')
   Route.get('user', 'UserController.getUser')
   Route.post('bet', 'BetController.index')

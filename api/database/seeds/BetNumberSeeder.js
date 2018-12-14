@@ -16,7 +16,6 @@ const Factory = use('Factory')
 class BetNumberSeeder
 {
   async run() {
-    const DB = use('Database')
     await DB.table('bet_numbers').insert([
       {
         bet_id: '1', number: '1',

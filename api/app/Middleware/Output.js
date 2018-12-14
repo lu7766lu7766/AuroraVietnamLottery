@@ -14,17 +14,16 @@ class OutputMiddleware
     {
       if (typeof e == 'object' && typeof e[0] == 'number')
       {
-        const code = e[0]
-        const data = e[1]
+        const {0: code, 1: data} = e
         response.send({
           code, data
         })
       }
       else
       {
-        // console.log(e.status)
-        response.status(e.status).send({
-          data: e,
+        dd(e)
+        response.status(e.status || 500).send({
+          data: e.message,
           code: Codes.UNCATCH
         })
       }

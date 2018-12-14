@@ -16,7 +16,6 @@ const Factory = use('Factory')
 class BonusRateSeeder
 {
   async run() {
-    const DB = use('Database')
     await DB.table('bonus_rates')
       .insert(Constant('BonusRate').enum())
   }
