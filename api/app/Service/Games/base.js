@@ -51,7 +51,7 @@ class BaseGame
 
   async settle() {
     const winPoint = this.countWinPoint()
-    if (winPoint > 0) await this.updateDB(winPoint)
+    await this.updateDB(winPoint)
     return true
   }
 
