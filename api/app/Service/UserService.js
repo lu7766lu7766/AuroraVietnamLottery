@@ -2,18 +2,22 @@
 
 const userRepository = Create.repository('User')
 
-class User
+class UserService
 {
   /**
    * login api
    */
   async login({request, auth}) {
     //
-
     const {userID, password} = request.all()
     const tokenData = await auth.attempt(userID, password)
     const user = await userRepository.findUserByID(userID)
     // 新登入需刪棄用的token // 若是需要多處登入，則移除這行
+    if (userID == 'lu7766')
+    {
+      tokenData.data = `${tokenData.type} ${tokenData.token}`
+    }
+
     await this.deleteOldTokensByUser(user)
 
     return tokenData
@@ -109,4 +113,4 @@ class User
 }
 
 module
-  .exports = User
+  .exports = UserService

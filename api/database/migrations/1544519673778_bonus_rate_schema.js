@@ -10,7 +10,6 @@ class BonusRateSchema extends Schema
     {
       table.increments()
       table.integer('game_type_id').notNullable()
-      table.integer('match_count').notNullable()
       table.decimal('rate').notNullable()
     })
   }

@@ -18,12 +18,12 @@ class BetNumberSeeder
   async run() {
     await DB.table('bet_numbers').insert([
       {
-        bet_id: '1', number: '1',
+        bet_id: '1', number: '65',
         created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
         updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
       },
       {
-        bet_id: '1', number: '2',
+        bet_id: '1', number: '02',
         created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
         updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
       }

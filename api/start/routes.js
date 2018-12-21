@@ -22,15 +22,17 @@ Route.post('login', 'UserController.login') // .validator('Login')
 Route.get('check', 'UserController.isLogin')
 Route.post('register', 'UserController.register')
 
-// Route.get('listTokens', 'UserController.listTokens')
-// Route.get('generate', 'UserController.generate')
+Route.get('settle', 'BetController.settle').middleware('local')
 
 Route.group(() =>
 {
   Route.post('createUser', 'UserController.createUser')
-  Route.post('changePoint', 'UserController.changePoint')
-  // Route.get('bet', 'BetController.test')
+  Route.post('changePoint', 'UserController.changePoint ')
   Route.get('user', 'UserController.getUser')
+
   Route.post('bet', 'BetController.index')
+
+
   Route.get('result', 'BetController.result')
+
 }).middleware(['auth'])

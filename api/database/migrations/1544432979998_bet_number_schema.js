@@ -10,7 +10,7 @@ class BetNumberSchema extends Schema
     {
       table.increments()
       table.integer('bet_id').notNullable()
-      table.string('number').notNullable()
+      table.string('number', 10).notNullable()
       table.timestamps()
     })
   }

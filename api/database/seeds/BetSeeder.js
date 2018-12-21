@@ -18,6 +18,7 @@ class BetSeeder
   async run() {
     await DB.table('bets')
       .insert({
+        lotteries_date: '17122018',
         user_id: '1',
         game_type_id: '1',
         point: '100',

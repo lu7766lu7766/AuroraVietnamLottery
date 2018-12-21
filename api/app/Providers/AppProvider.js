@@ -17,15 +17,16 @@ class AppProvider extends ServiceProvider
     global.DB = use('Database')
     global.Create = class Create
     {
-      static service(name) { return new (app.use(`App/Service/${name}`)) }
+      static service(name) { return new (app.use(`App/Service/${name}Service`)) }
 
       static model(name) { return new (app.use(`App/Models/${name}`)) }
 
-      static repository(name) { return new (app.use(`App/Repositories/${name}`)) }
+      static repository(name) { return new (app.use(`App/Repositories/${name}Repositories`)) }
     }
+    global.Factory = (name) => { return app.use(`App/Factories/${name}`) }
     global.Constant = (name) => { return app.use(`App/Constants/${name}`) }
     global.Model = (name) => { return app.use(`App/Models/${name}`) }
-    global.Validator = (name) => { return app.use(`App/Validators/${name}`) }
+    global.Validator = (name) => { return app.use(`App/Validators/${name}Validator`) }
     global.Codes = Constant('Codes')
     // global.service = name => new (this.app.use(`App/Service/${name}Service`))
     // global.model = name => new (this.app.use(`App/Models/${name}`))

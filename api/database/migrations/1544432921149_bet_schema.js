@@ -9,9 +9,12 @@ class BetSchema extends Schema
     this.create('bets', (table) =>
     {
       table.increments()
+      table.string('lotteries_date').notNullable()
       table.integer('user_id').notNullable()
       table.integer('game_type_id').notNullable()
       table.integer('point').notNullable()
+      table.boolean('is_settle').default(false).notNullable()
+      table.boolean('test_field').default(false).notNullable()
       table.timestamps()
     })
   }

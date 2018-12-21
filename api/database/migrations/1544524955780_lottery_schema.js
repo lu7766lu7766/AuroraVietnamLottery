@@ -8,7 +8,7 @@ class LotterySchema extends Schema
   up() {
     this.create('lotteries', (table) =>
     {
-      table.increments()
+      table.string('date').unique()
       _.range(1, 28).forEach(num =>
       {
         table.string('number' + num, 10).notNullable()

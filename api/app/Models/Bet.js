@@ -5,6 +5,10 @@ const Model = use('Model')
 
 class Bet extends Model
 {
+  lottery() {
+    return this.hasOne('App/Models/Lottery', 'lotteries_date', 'date')
+  }
+
   user() {
     return this.hasOne('App/Models/User', 'user_id', 'id')
   }
