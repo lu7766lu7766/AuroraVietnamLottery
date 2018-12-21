@@ -22,7 +22,8 @@ Route.post('login', 'UserController.login') // .validator('Login')
 Route.get('check', 'UserController.isLogin')
 Route.post('register', 'UserController.register')
 
-Route.get('settle', 'BetController.settle').middleware('local')
+Route.get('fetch', 'ReportController.fetch').middleware('local')
+Route.get('settle', 'ReportController.settle').middleware('local')
 
 Route.group(() =>
 {
@@ -32,7 +33,6 @@ Route.group(() =>
 
   Route.post('bet', 'BetController.index')
 
-
-  Route.get('result', 'BetController.result')
+  Route.get('result', 'ReportController.result')
 
 }).middleware(['auth'])

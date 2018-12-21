@@ -15,20 +15,26 @@ class ReportService
   get format() { return 'YYYY-MM-DD HH:mm:ss' }
 
   async checkTodayNumbers(date) {
-    const res = await reportRepo.getTargetDayNumbers(date)
+    const res = await reportRepo.getTargetDateNumbers(date)
     return !!res.length
   }
 
   async fetchNumbers(date) {
-    // await new Promise.all([this.getNumberBySource1, this.getNumberBySource2])
-    const sqlBody = await this.getNumberBySource1(date)
-    sqlBody.created_at = sqlBody.updated_at = moment().format(this.format)
-    sqlBody.date = date
-    await reportRepo.addRowBySql(sqlBody)
-    return true
+    // await new Promise.all([this.getNumbersBySource1, this.getNumberBySource2])
+    try
+    {
+      const sqlBody = await this.getNumbersBySource1(date)
+      sqlBody.created_at = sqlBody.updated_at = moment().format(this.format)
+      sqlBody.date = date
+      await reportRepo.addRowBySql(sqlBody)
+      return true
+    } catch (e)
+    {
+      return false
+    }
   }
 
-  async getNumberBySource1(date) {
+  async getNumbersBySource1(date) {
     const response = await aRequest(this.source1)
     const $ = cheerio.load(response.body)
     const sqlBody = {}
@@ -37,6 +43,10 @@ class ReportService
     {
       sqlBody['number' + (i + 1)] = $(this).text()
     })
+    if (Object.keys(sqlBody).length < 27)
+    {
+      throw Codes.CANNOT_TAKE_LOTTERY_NUMBERS
+    }
     return sqlBody
   }
 
@@ -52,7 +62,7 @@ class ReportService
     for (let x of bets)
     {
       // const bet = await Model('Bet').query().with('user').with('numbers').where('id', x.id).fetch()
-      let bet = await Model('Bet').find(x.id)
+      let bet = await betRepo.getBetData(x.id)
       await bet.loadMany({
         lottery: null,
         user: null,

@@ -12,7 +12,7 @@ class BaseGame
    */
   get lotteryLast2Numbers() {
     const allNumbers = []
-    _.forEach(_.range(0, this.MAX_NUMBERS + 1), i =>
+    _.forEach(_.range(1, this.MAX_NUMBERS + 1), i =>
     {
       allNumbers.push(this.lottery[`number${i}`].substr(-2))
     })
@@ -50,8 +50,8 @@ class BaseGame
   }
 
   async settle() {
-    const win_point = this.countWinPoint()
-    if (win_point > 0) await this.updateDB()
+    const winPoint = this.countWinPoint()
+    if (winPoint > 0) await this.updateDB(winPoint)
     return true
   }
 
@@ -66,16 +66,12 @@ class BaseGame
    * update db
    */
   async updateDB(winPoint) {
-    const trx = await DB.beginTransaction()
-    const log = Create.model('SettleLog')
-    log.bet_id = this.betID
-    log.user_id = this.user.id
-    log.win_point = winPoint
-    log.date = this.lottery.date
-    log.save()
-    const user = Model('User').find(this.user.id)
-    user.point += winPoint
-    trx.commit()
+    Create.repository('Report').winPoint({
+      userID: this.user.id,
+      betID: this.betID,
+      date: this.lottery.date,
+      winPoint
+    })
   }
 }
 

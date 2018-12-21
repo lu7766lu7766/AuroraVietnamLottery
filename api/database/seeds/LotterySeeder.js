@@ -19,6 +19,7 @@ class LotterySeeder
     let body = {}
     body.date = '17122018'
     body.number1 = '46365'
+    // body.number1 = '46366'
     body.number2 = '59917'
     body.number3 = '16680'
     body.number4 = '55318'

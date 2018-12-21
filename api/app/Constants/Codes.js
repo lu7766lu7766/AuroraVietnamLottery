@@ -22,7 +22,7 @@ class Codes
 
   static get INVALID_TIME() { return 3002}
 
-  static get CANNOT_FIND_BUNUS_RATE() { return 3003}
+  static get CANNOT_TAKE_LOTTERY_NUMBERS() { return 3003}
 }
 
 module.exports = Codes

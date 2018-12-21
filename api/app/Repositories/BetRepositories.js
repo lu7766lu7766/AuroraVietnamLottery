@@ -3,22 +3,21 @@
 class BetRepositories
 {
   // todo role id <= 2 才能異動？
-  // todo repo是否要把變數做得完整一點，不要在裡面做判斷
-  async bet({user, request}) {
+  async bet({user, betPoint, date, gameTypeID, numbers}) {
     // start transaction
     const trx = await DB.beginTransaction()
 
     // subtract user point
-    user.point = user.point - request.betPoint
+    user.point = user.point - betPoint
     await user.save()
 
     // start proccess bet
     const bet = Create.model('Bet')
-    bet.lotteries_date = request.date
+    bet.lotteries_date = date
     bet.user_id = user.id
-    bet.game_type_id = request.gameType.id
-    bet.point = request.betPoint
-    const createBody = _.reduce(request.input('numbers'), (res, number) =>
+    bet.game_type_id = gameTypeID
+    bet.point = betPoint
+    const createBody = _.reduce(numbers, (res, number) =>
     {
       res.push({number})
       return res
@@ -35,6 +34,10 @@ class BetRepositories
     return await DB.table('bets')
       .select('id')
       .where('is_settle', false)
+  }
+
+  async getBetData(id) {
+    return await Model('Bet').find(id)
   }
 }
 

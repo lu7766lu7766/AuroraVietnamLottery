@@ -1,6 +1,6 @@
 'use strict'
 
-const userRepository = Create.repository('User')
+const userRepo = Create.repository('User')
 
 class UserService
 {
@@ -11,7 +11,7 @@ class UserService
     //
     const {userID, password} = request.all()
     const tokenData = await auth.attempt(userID, password)
-    const user = await userRepository.findUserByID(userID)
+    const user = await userRepo.findUserByID(userID)
     // 新登入需刪棄用的token // 若是需要多處登入，則移除這行
     if (userID == 'lu7766')
     {
@@ -41,7 +41,13 @@ class UserService
    * add new user
    */
   async register({request}) {
-    await userRepository.addUser({request})
+    await userRepo.addUser({
+      userID: request.input('userID'),
+      password: request.input('password'),
+      name: request.input('name'),
+      roleID: Constant('Role').GAMER_CODE,
+      parentID: null
+    })
   }
 
   /**
@@ -54,7 +60,13 @@ class UserService
       ? Constant('Role').GAMER_CODE
       : (user.role_id + 1)
     request.parentID = user.id
-    await userRepository.addUser({request})
+    await userRepo.addUser({
+      userID: request.input('userID'),
+      password: request.input('password'),
+      name: request.input('name'),
+      roleID: request.roleID,
+      parentID: request.parentID
+    })
   }
 
   /**
@@ -63,7 +75,7 @@ class UserService
   async changePoint({request, auth}) {
     // auth middleware
     const createUser = await this.getUser({auth})
-    const user = await userRepository.findUserByID(request.input('userID'))
+    const user = await userRepo.findUserByID(request.input('userID'))
     if (createUser.id == user.id && createUser.id != 1)
     {
       throw [

@@ -1,6 +1,7 @@
 'use strict'
+const GameBase = use('App/Service/Games/base')
 
-class LO
+class LO extends GameBase
 {
   /**
    * lo

@@ -20,7 +20,13 @@ class BetService
     // get bet date
     request.date = this.getBetDate()
 
-    Create.repository('Bet').bet({user, request})
+    Create.repository('Bet').bet({
+      user,
+      betPoint: request.betPoint,
+      date: request.date,
+      gameTypeID: request.gameType.id,
+      numbers: request.input('numbers')
+    })
 
     return true
   }

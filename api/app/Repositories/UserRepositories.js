@@ -6,19 +6,14 @@ class UserRepositories
     return Model('User').findByOrFail('user_id', id)
   }
 
-  async addUser({request}) {
+  async addUser({userID, password, name, roleID, parentID}) {
     const user = Create.model('User')
-    user.user_id = request.input('userID')
-    user.password = request.input('password')
-    user.name = request.input('name')
-    user.role_id = request.roleID
-      ? request.roleID
-      : Constant('Role').GAMER_CODE
+    user.user_id = userID
+    user.password = password
+    user.name = name
+    user.role_id = roleID
     user.point = 0
-    user.parent_id = request.parentID
-      ? request.parentID
-      : null
-
+    user.parent_id = parentID
     await user.save()
   }
 }
