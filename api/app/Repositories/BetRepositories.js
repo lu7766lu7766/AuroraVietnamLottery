@@ -16,7 +16,7 @@ class BetRepositories
     bet.lotteries_date = date
     bet.user_id = user.id
     bet.game_type_id = gameTypeID
-    bet.point = betPoint
+    bet.bet_point = betPoint
     const createBody = _.reduce(numbers, (res, number) =>
     {
       res.push({number})

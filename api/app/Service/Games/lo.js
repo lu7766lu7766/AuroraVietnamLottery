@@ -16,7 +16,9 @@ class LO extends GameBase
   }
 
   countWinPoint() {
-    return this.betPoint * this.countMatchedNumbers() * this.bunusRate.rate
+    return this.countMatchedNumbers()
+      ? (this.betPoint * this.countMatchedNumbers() * this.bunusRate.rate)
+      : 0
   }
 }
 

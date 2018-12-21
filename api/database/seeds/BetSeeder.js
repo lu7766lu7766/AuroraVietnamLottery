@@ -23,7 +23,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '1',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -32,7 +32,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '1',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -41,7 +41,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '1',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -50,7 +50,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '2',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -59,7 +59,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '3',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -68,7 +68,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '4',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -77,7 +77,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '5',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -86,7 +86,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '6',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -95,7 +95,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '7',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         },
@@ -104,7 +104,7 @@ class BetSeeder
           lotteries_date: '17122018',
           user_id: '1',
           game_type_id: '8',
-          point: '100',
+          bet_point: '100',
           created_at: moment().format('YYYY-MM-DD HH:mm:ss'),
           updated_at: moment().format('YYYY-MM-DD HH:mm:ss')
         }

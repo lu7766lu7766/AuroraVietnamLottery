@@ -46,7 +46,7 @@ class BaseGame
     this.lottery = bet.lottery
     this.user = bet.user
     this.betNumbers = _.map(bet.numbers, 'number')
-    this.betPoint = bet.point
+    this.betPoint = bet.bet_point
   }
 
   /**

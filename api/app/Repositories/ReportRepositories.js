@@ -14,21 +14,16 @@ class ReportRepositories
 
   async winPoint({userID, betID, date, winPoint}) {
     const trx = await DB.beginTransaction()
+    const bet = await Model('Bet').find(betID)
     if (winPoint > 0)
     {
-      const log = Create.model('SettleLog')
-      log.bet_id = betID
-      log.user_id = userID
-      log.win_point = winPoint
-      log.date = date
-      log.save()
+      bet.win_point = winPoint
       const user = await Model('User').find(userID)
       user.point += +winPoint
-      user.save()
+      await user.save()
     }
-    const bet = await Model('Bet').find(betID)
     bet.is_settle = true
-    bet.save()
+    await bet.save()
     trx.commit()
   }
 }

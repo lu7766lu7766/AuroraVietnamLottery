@@ -8,7 +8,7 @@ class BetService
     // check now is valid time
     this.checkBetTime()
 
-    request.betPoint = parseInt(request.input('point'))
+    request.betPoint = parseInt(request.input('betPoint'))
 
     // check user point is enough
     const user = await userService.getUser({auth})

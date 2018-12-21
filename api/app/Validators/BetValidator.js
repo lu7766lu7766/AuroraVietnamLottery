@@ -12,21 +12,22 @@ class BetValidator extends Validator
     const gameTypeRules = Constant('GameType').rules()
     return {
       'gameTypeID': 'required',
-      'point': 'required|number',
+      'betPoint': 'required|number',
       'numbers': 'required|array|' + this.getSizeString(gameTypeRules[this.input.gameTypeID].length),
-      'numbers.*': this.getSizeString(gameTypeRules[this.input.gameTypeID].strlen)
+      'numbers.*': 'numberString|' + this.getSizeString(gameTypeRules[this.input.gameTypeID].strlen)
     }
   }
 
   static get messages() {
     return {
       'gameTypeID.required': 'game type is required',
-      'point.required': 'point is required',
-      'point.number': 'point is must be a number',
+      'betPoint.required': 'bet point is required',
+      'betPoint.number': 'bet point is must be a number',
       'numbers.require': 'numbers is required',
       'numbers.array': 'numbers is must be a array',
       'numbers.min': 'numbers quantity is invalid',
       'numbers.max': 'numbers quantity is invalid',
+      'numbers.*.numberString': 'number is invalid',
       'numbers.*.min': 'number length is invalid',
       'numbers.*.max': 'number length is invalid'
     }

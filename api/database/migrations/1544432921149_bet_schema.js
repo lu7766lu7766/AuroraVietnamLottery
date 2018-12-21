@@ -12,9 +12,9 @@ class BetSchema extends Schema
       table.string('lotteries_date').notNullable()
       table.integer('user_id').notNullable()
       table.integer('game_type_id').notNullable()
-      table.integer('point').notNullable()
+      table.integer('bet_point').notNullable()
       table.boolean('is_settle').default(false).notNullable()
-      table.boolean('test_field').default(false).notNullable()
+      table.integer('win_point').default(0).notNullable()
       table.timestamps()
     })
   }
