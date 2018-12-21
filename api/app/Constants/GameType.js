@@ -44,6 +44,43 @@ class GameTypeConstants
       [this.DIT_CODE]: this.DIT
     }
   }
+
+  static rules() {
+    return {
+      [this.LO_CODE]: {
+        length: 1,
+        strlen: 2
+      },
+      [this.X2_CODE]: {
+        length: 2,
+        strlen: 2
+      },
+      [this.X3_CODE]: {
+        length: 3,
+        strlen: 2
+      },
+      [this.X4_CODE]: {
+        length: 4,
+        strlen: 2
+      },
+      [this.KEP_CODE]: {
+        length: 10,
+        strlen: 2
+      },
+      [this.THREEC_CODE]: {
+        length: 1,
+        strlen: 3
+      },
+      [this.DAU_CODE]: {
+        length: 1,
+        strlen: 1
+      },
+      [this.DIT_CODE]: {
+        length: 1,
+        strlen: 1
+      }
+    }
+  }
 }
 
 module.exports = GameTypeConstants

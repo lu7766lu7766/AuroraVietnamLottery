@@ -49,6 +49,9 @@ class BaseGame
     this.betPoint = bet.point
   }
 
+  /**
+   * main function
+   */
   async settle() {
     const winPoint = this.countWinPoint()
     await this.updateDB(winPoint)

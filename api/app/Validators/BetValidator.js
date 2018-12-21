@@ -2,16 +2,19 @@
 
 const Validator = require('./Validator')
 
-// todo 碼數驗證，不同玩法，可以買的長度不一樣
 class BetValidator extends Validator
 {
+  static getSizeString(val) {
+    return `min:${val}|max:${val}`
+  }
+
   static get rules() {
-    console.log()
+    const gameTypeRules = Constant('GameType').rules()
     return {
       'gameTypeID': 'required',
       'point': 'required|number',
-      'numbers': 'required|array',
-      'numbers.*': 'min:2|max:2'
+      'numbers': 'required|array|' + this.getSizeString(gameTypeRules[this.input.gameTypeID].length),
+      'numbers.*': this.getSizeString(gameTypeRules[this.input.gameTypeID].strlen)
     }
   }
 
@@ -21,9 +24,11 @@ class BetValidator extends Validator
       'point.required': 'point is required',
       'point.number': 'point is must be a number',
       'numbers.require': 'numbers is required',
-      'numbers.array': 'numbers is must be a array'
-      // 'numbers.*.min': 'too short'
-      // 'numbers.*.max': 'too long'
+      'numbers.array': 'numbers is must be a array',
+      'numbers.min': 'numbers quantity is invalid',
+      'numbers.max': 'numbers quantity is invalid',
+      'numbers.*.min': 'number length is invalid',
+      'numbers.*.max': 'number length is invalid'
     }
   }
 }

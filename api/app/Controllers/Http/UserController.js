@@ -70,7 +70,7 @@ class UserController
   }
 
   /**
-   * add user point
+   * change user point
    */
   async changePoint(context) {
     await Validator('UserPoint').validateAll(context.request.all())
