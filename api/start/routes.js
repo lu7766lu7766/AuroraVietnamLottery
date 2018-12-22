@@ -27,12 +27,15 @@ Route.get('settle', 'ReportController.settle').middleware('local')
 
 Route.group(() =>
 {
-  Route.post('createUser', 'UserController.createUser')
-  Route.post('changePoint', 'UserController.changePoint ')
+  Route.post('user/create', 'UserController.createUser')
+  Route.put('point', 'UserController.changePoint')
   Route.get('user', 'UserController.getUser')
 
   Route.post('bet', 'BetController.index')
 
-  Route.get('result', 'ReportController.result')
+  Route.get('detail/bet', 'ReportController.betDetail')
+  Route.get('detail/bet/total', 'ReportController.betTotal')
+  Route.get('detail/store', 'ReportController.storeDetail')
+  Route.get('detail/store/total', 'ReportController.storeTotal')
 
 }).middleware(['auth'])

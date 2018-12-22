@@ -30,6 +30,10 @@ class AppProvider extends ServiceProvider
     global.Codes = Constant('Codes')
     // global.service = name => new (this.app.use(`App/Service/${name}Service`))
     // global.model = name => new (this.app.use(`App/Models/${name}`))
+    global.GetIncrement = async table => (await DB.table('INFORMATION_SCHEMA.TABLES').select('AUTO_INCREMENT')
+      .where('TABLE_SCHEMA', 'vietnam')
+      .where('TABLE_NAME', table)
+      .first()).AUTO_INCREMENT
   }
 }
 

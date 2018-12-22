@@ -80,6 +80,42 @@ class ReportService
       // throw gameProccesor
     }
   }
+
+  async getUser({auth}) {
+    return await Create.service('User').getUser({auth})
+  }
+
+  /**
+   * 投注明細
+   */
+  async betDetail({auth, request}) {
+    const user = await this.getUser({auth})
+    return reportRepo.getBetDetail(user.id, request.input('page'), request.input('perPage'), request.input('isSettle'))
+  }
+
+  /**
+   * 投注明細總計
+   */
+  async betTotal({auth, request}) {
+    const user = await this.getUser({auth})
+    return reportRepo.getBetTotal(user.id, request.input('isSettle'))
+  }
+
+  /**
+   * 儲值, 提領明細
+   */
+  async storeDetail({auth, request}) {
+    const user = await this.getUser({auth})
+    return await reportRepo.getStoreDetail(user.id, request.input('page'), request.input('perPage'), request.input('status'))
+  }
+
+  /**
+   * 儲值, 提領明細總計
+   */
+  async storeTotal({auth, request}) {
+    const user = await this.getUser({auth})
+    return await reportRepo.getStoreTotal(user.id, request.input('status'))
+  }
 }
 
 module.exports = ReportService

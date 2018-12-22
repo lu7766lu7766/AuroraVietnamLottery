@@ -19,12 +19,45 @@ class BetController
     this.settle()
   }
 
+  /**
+   * 結算
+   */
   async settle() {
-    reportService.settle()
+    return reportService.settle()
   }
 
-  async result({request}) {
+  /**
+   * 投注明細
+   */
+  async betDetail({auth, request}) {
+    await Validator('Page').validateAll(request.all())
+    await Validator('BetReport').validateAll(request.all())
+    return reportService.betDetail({auth, request})
+  }
 
+  /**
+   * 投注明細總計
+   */
+  async betTotal({auth, request}) {
+    await Validator('BetReport').validateAll(request.all())
+    return reportService.betTotal({auth, request})
+  }
+
+  /**
+   * 儲值, 提領明細
+   */
+  async storeDetail({auth, request}) {
+    await Validator('Page').validateAll(request.all())
+    await Validator('Store').validateAll(request.all())
+    return reportService.storeDetail({auth, request})
+  }
+
+  /**
+   * 儲值, 提領明細總計
+   */
+  async storeTotal({auth, request}) {
+    await Validator('Store').validateAll(request.all())
+    return reportService.storeTotal({auth, request})
   }
 }
 

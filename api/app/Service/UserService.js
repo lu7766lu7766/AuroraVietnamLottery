@@ -11,7 +11,7 @@ class UserService
     //
     const {userID, password} = request.all()
     const tokenData = await auth.attempt(userID, password)
-    const user = await userRepo.findUserByID(userID)
+    const user = await userRepo.findUserByUserID(userID)
     // 新登入需刪棄用的token // 若是需要多處登入，則移除這行
     if (userID == 'lu7766')
     {
@@ -75,7 +75,7 @@ class UserService
   async changePoint({request, auth}) {
     // auth middleware
     const createUser = await this.getUser({auth})
-    const user = await userRepo.findUserByID(request.input('userID'))
+    const user = await userRepo.findUserByUserID(request.input('userID'))
     if (createUser.id == user.id && createUser.id != 1)
     {
       throw [
@@ -89,7 +89,7 @@ class UserService
     await DB.transaction(async (trx) =>
     {
       const changPoint = +request.input('point')
-      const newPoint = changPoint + request.input('point') + user.point
+      const newPoint = changPoint + user.point
       if (newPoint < 0)
       {
         return result = false

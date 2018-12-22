@@ -5,10 +5,12 @@ const Schema = use('Schema')
 
 class UserSchema extends Schema
 {
-  up() {
+  async up() {
+    const rand = Math.round(Math.random() * 100000)
     this.create('users', (table) =>
     {
       table.increments()
+      // table.string('id', 100).notNullable().unique()
       table.string('user_id', 20).notNullable().unique()
       table.string('password', 100).notNullable()
       table.string('name', 20)
@@ -16,7 +18,7 @@ class UserSchema extends Schema
       table.integer('role_id')
       table.integer('parent_id')
       table.timestamps()
-    })
+    }).raw('ALTER TABLE `users` AUTO_INCREMENT=' + rand)
   }
 
   down() {

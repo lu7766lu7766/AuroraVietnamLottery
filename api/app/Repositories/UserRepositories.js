@@ -2,7 +2,7 @@
 
 class UserRepositories
 {
-  async findUserByID(id) {
+  async findUserByUserID(id) {
     return Model('User').findByOrFail('user_id', id)
   }
 
