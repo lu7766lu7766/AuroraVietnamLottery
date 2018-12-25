@@ -8,6 +8,8 @@ class Codes
 
   static get VALIDSTE_FAIL() { return 1000 }
 
+  static get NO_PERMISSION() { return 1001 }
+
   static get USER_OR_PASSWORD_ERROR() { return 2000}
 
   static get USER_EXISTS() { return 2001}
