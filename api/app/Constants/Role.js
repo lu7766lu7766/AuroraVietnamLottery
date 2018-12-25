@@ -19,6 +19,10 @@ class RoleConstants
       [this.GAMER_CODE]: this.GAMER
     }
   }
+
+  static rule() {
+    return [this.ADMIN_CODE, this.SUPPLIES_CODE, this.GAMER_CODE].join(',')
+  }
 }
 
 module.exports = RoleConstants

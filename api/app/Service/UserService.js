@@ -56,14 +56,22 @@ class UserService
   async createUser({request, auth}) {
     // auth middleware
     const user = await this.getUser({auth})
+
     request.roleID = (user.role_id + 1) >= Constant('Role').GAMER_CODE
       ? Constant('Role').GAMER_CODE
       : (user.role_id + 1)
+
+    // 管理者才有權限決定新用戶權限，沒給就是新增者的下個等級
+    if (user.role_id == Constant('Role').ADMIN_CODE)
+    {
+      request.roleID = request.input('roleID', request.roleID)
+    }
+
     request.parentID = user.id
     await userRepo.addUser({
       userID: request.input('userID'),
       password: request.input('password'),
-      name: request.input('name'),
+      name: request.input('name', request.input('userID')),
       roleID: request.roleID,
       parentID: request.parentID
     })

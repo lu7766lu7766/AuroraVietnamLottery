@@ -4,7 +4,7 @@ class LocalMiddleware
 {
   async handle({auth}, next) {
     const user = await auth.getUser()
-    if (user.role_id == 1)
+    if (user.role_id == Constant('Role').ADMIN_CODE)
     {
       await next()
     }

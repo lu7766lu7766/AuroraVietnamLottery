@@ -43,7 +43,7 @@ class UserController
    * add new user
    */
   async register(context) {
-    await Validator('Login').validateAll(context.request.all())
+    await Validator('User').validateAll(context.request.all())
     try
     {
       await userService.register(context)
@@ -58,7 +58,7 @@ class UserController
    * add new user
    */
   async createUser(context) {
-    await Validator('Login').validateAll(context.request.all())
+    await Validator('User').validateAll(context.request.all())
     try
     {
       await userService.createUser(context)
