@@ -12,7 +12,7 @@ class PageValidator extends Validator
 
   static get messages() {
     return {
-      'isSettle.number': 'status must be number'
+      'status.number': 'status must be number'
     }
   }
 }

@@ -29,6 +29,7 @@ Route.group(() =>
 {
   Route.post('user/create', 'UserController.createUser')
   Route.put('point', 'UserController.changePoint')
+  Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
   Route.get('user', 'UserController.getUser')
 
   Route.post('bet', 'BetController.index')

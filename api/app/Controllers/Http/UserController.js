@@ -76,6 +76,14 @@ class UserController
     await Validator('UserPoint').validateAll(context.request.all())
     return await userService.changePoint(context)
   }
+
+  /**
+   * change user point
+   */
+  async passPointChanged(context) {
+    await Validator('PassPoint').validateAll(context.request.all())
+    return await userService.passPointChanged(context)
+  }
 }
 
 module.exports = UserController

@@ -12,6 +12,7 @@ class PointLogSchema extends Schema
       table.integer('creator_id').notNullable()
       table.integer('user_id').notNullable()
       table.integer('point').notNullable()
+      table.boolean('is_pass').defaultTo(false)
       table.timestamps()
     })
   }
