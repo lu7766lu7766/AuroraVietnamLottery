@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Lo</h1>
-    
+    i'm bet report
   </div>
 </template>

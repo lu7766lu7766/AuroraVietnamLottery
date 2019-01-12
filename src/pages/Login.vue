@@ -18,16 +18,16 @@
       </v-ons-row>
 
 
-      <v-ons-list>
+      <v-ons-list v-loading="loading">
         <v-ons-list-item>
           <div class="center">
-            <v-ons-input placeholder="your phone" float v-model="userID">
+            <v-ons-input placeholder="Your ID" float v-model="userID">
             </v-ons-input>
           </div>
         </v-ons-list-item>
         <v-ons-list-item>
           <div class="center">
-            <v-ons-input placeholder="password" float type="password" v-model="password">
+            <v-ons-input placeholder="Password" float type="password" v-model="password">
             </v-ons-input>
           </div>
         </v-ons-list-item>
@@ -55,15 +55,21 @@
 </template>
 
 <script>
+  import ReqMixins from 'mixins/request'
+  import { LoginType } from 'module/login'
+
   export default {
+    mixins: [ReqMixins],
     data: () => ({
       userID: '',
       password: ''
     }),
     methods: {
-      login() {
+      async login() {
+        const res = await this.callApi('login', _.pick(this, ['userID', 'password']))
+        this.$store.commit(LoginType.setAccessToken, res.data)
         this.$router.push({
-          name: 'LoGame1'
+          name: 'betting'
         })
       }
     }

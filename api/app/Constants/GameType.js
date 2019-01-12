@@ -81,6 +81,59 @@ class GameTypeConstants
       }
     }
   }
+
+  static options() {
+    return [
+      {
+        code: this.LO_CODE,
+        name: this.LO,
+        length: 1,
+        strlen: 2
+      },
+      {
+        code: this.X2_CODE,
+        name: this.X2,
+        length: 2,
+        strlen: 2
+      },
+      {
+        code: this.X3_CODE,
+        name: this.X3,
+        length: 3,
+        strlen: 2
+      },
+      {
+        code: this.X4_CODE,
+        name: this.X4,
+        length: 4,
+        strlen: 2
+      },
+      {
+        code: this.KEP_CODE,
+        name: this.KEP,
+        length: 0,
+        strlen: 2
+      },
+      {
+        code: this.THREEC_CODE,
+        name: this.THREEC,
+        length: 1,
+        strlen: 3
+      },
+      {
+        code: this.DAU_CODE,
+        name: this.DAU,
+        length: 1,
+        strlen: 1
+      },
+      {
+        code: this.DIT_CODE,
+        name: this.DIT,
+        length: 1,
+        strlen: 1
+      }
+    ]
+  }
 }
 
 module.exports = GameTypeConstants

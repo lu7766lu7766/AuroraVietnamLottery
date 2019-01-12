@@ -25,9 +25,13 @@ Route.post('register', 'UserController.register')
 Route.get('fetch', 'ReportController.fetch').middleware('local')
 Route.get('settle', 'ReportController.settle').middleware('local')
 
+
 Route.group(() =>
 {
+  Route.get('options/gameType', 'BetController.gameTypeOptions')
+
   Route.post('user/create', 'UserController.createUser')
+  // Route.post('user/update', 'UserController.updateUser')
   Route.put('point', 'UserController.changePoint')
   Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
   Route.get('user', 'UserController.getUser')

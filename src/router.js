@@ -18,24 +18,29 @@ export default new Router({
       component: () => import('pages/Register')
     },
     {
-      path: '/',
-      component: () => import('pages/Betting'),
+      path: '/betting',
+      component: () => import('pages/Main'),
       children: [
         {
-          path: 'lo',
-          component: () => import('pages/Betting/Lo'),
-          children: [
-            {
-              path: 'game1',
-              name: 'LoGame1',
-              component: () => import('pages/Betting/Lo/Game1')
-            },
-            {
-              path: 'game2',
-              name: 'LoGame2',
-              component: () => import('pages/Betting/Lo/Game2')
-            }
-          ]
+          path: '',
+          name: 'betting',
+          component: () => import('pages/Betting')
+        }
+      ]
+    },
+    {
+      path: 'report',
+      component: () => import('pages/Main'),
+      children: [
+        {
+          path: 'bet',
+          name: 'bet-report',
+          component: () => import('pages/Report/Bet')
+        },
+        {
+          path: 'store',
+          name: 'store-report',
+          component: () => import('pages/Report/Store')
         }
       ]
     },

@@ -25,7 +25,7 @@ module.exports = {
       // $: 'jquery',
       _: 'lodash',
       axios: 'axios',
-      // moment: 'moment'
+      moment: 'moment'
     })
   ]
 }

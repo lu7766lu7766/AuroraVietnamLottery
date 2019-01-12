@@ -1,5 +1,5 @@
 <template>
   <div>
-    i'm game2
+    i'm store report
   </div>
 </template>

@@ -10,6 +10,10 @@ class BetController
 
     return await betService.bet(context)
   }
+
+  async gameTypeOptions() {
+    return Constant('gameType').options()
+  }
 }
 
 module.exports = BetController
