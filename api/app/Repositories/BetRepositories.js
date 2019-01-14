@@ -34,6 +34,10 @@ class BetRepositories
     return await DB.table('bets')
       .select('id')
       .where('is_settle', false)
+      .whereExists(function ()
+      {
+        this.table('lotteries').whereRaw('lotteries.date = bets.lotteries_date')
+      })
   }
 
   async getBetData(id) {

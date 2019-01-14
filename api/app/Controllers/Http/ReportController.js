@@ -2,11 +2,12 @@
 
 const reportService = Create.service('Report')
 
-class BetController
+class ReportController
 {
   /**
    * check new lottery numbers
    * get bet result
+   * example. http://127.0.0.1:3333/fetch?date=12012019
    * @returns {Promise<void>}
    */
   async fetch({request}) {
@@ -61,4 +62,4 @@ class BetController
   }
 }
 
-module.exports = BetController
+module.exports = ReportController
