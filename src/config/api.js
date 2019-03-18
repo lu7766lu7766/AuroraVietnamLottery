@@ -3,6 +3,10 @@ export default {
     uri: 'login',
     method: 'post'
   },
+  register: {
+    uri: 'register',
+    method: 'post'
+  },
   info: {
     user: {
       uri: 'user'

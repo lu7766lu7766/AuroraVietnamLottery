@@ -16,6 +16,7 @@ class LoginValidator extends Validator
   static get messages() {
     return {
       'userID.required': 'id is required',
+      'userID.unique': Codes.USER_EXISTS,
       'password.required': 'password is required'
     }
   }

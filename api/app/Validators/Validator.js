@@ -18,7 +18,14 @@ class myValidator
 
     if (validation.fails())
     {
-      throw [Codes.VALIDSTE_FAIL, _.map(validation.messages(), 'message')]
+      const messages = _.map(validation.messages(), 'message')
+      const fmsg = _.filter(messages, msg => _.isNumber(msg))
+      throw [
+        fmsg.length
+          ? fmsg[0]
+          : Codes.VALIDSTE_FAIL,
+        messages
+      ]
     }
     else
     {

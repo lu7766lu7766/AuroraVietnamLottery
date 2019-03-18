@@ -2,6 +2,7 @@ import { createApiBody, roopParse } from 'lib/myLib'
 import apis, { SuccessCodes, UnLoginCode } from 'src/config/api'
 import store from 'src/store'
 import { LoginType } from 'module/login'
+import errorCode from 'src/config/error'
 
 axios.interceptors.response.use((response) =>
 {
@@ -38,7 +39,14 @@ export default {
 
       if (SuccessCodes.indexOf(res.data.code) == -1)
       {
-        alert('service error!')
+        if (errorCode[res.data.code])
+        {
+          alert(errorCode[res.data.code])
+        }
+        else
+        {
+          alert('service error!')
+        }
         throw 'sevice error'
       }
 

@@ -35,7 +35,7 @@
         <v-ons-list-item>
           <v-ons-row>
             <v-ons-col>
-              <v-ons-button modifier="material" @click="login">
+              <v-ons-button modifier="cta" @click="login">
                 Login
               </v-ons-button>
             </v-ons-col>

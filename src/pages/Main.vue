@@ -20,6 +20,11 @@
             <div class="center" @click="openSide = false; $router.push({ name: 'store-report'})">Store Report</div>
           </v-ons-list-item>
 
+          <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
+          <v-ons-list-item tappable>
+            <div class="center" @click="openSide = false; logout()">Logout</div>
+          </v-ons-list-item>
+
         </v-ons-list>
       </v-ons-page>
     </v-ons-splitter-side>
@@ -53,6 +58,7 @@
 <script>
   import ReqMixins from 'mixins/request'
   import { UserType } from 'module/user'
+  import { LoginType } from 'module/login'
 
   export default {
     mixins: [ReqMixins],
@@ -63,6 +69,9 @@
       async dataInit() {
         const res = await this.callApi('info.user')
         this.$store.commit(UserType.setInfo, res.data)
+      },
+      logout() {
+        this.$store.commit(LoginType.clearAccessToken)
       }
     },
     computed: {
