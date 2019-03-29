@@ -36,16 +36,21 @@ class AppProvider extends ServiceProvider
       .where('TABLE_NAME', table)
       .first()).AUTO_INCREMENT
 
+    console.dir(Logger)
     global.Log = class Log
     {
-      static get format() { return 'YYYY-MM-DD HH:mm:ss '}
+      static get format() { return 'YYYY-MM-DD HH:mm:ss'}
 
       static info(msg) {
-        Logger.transport('file').info(`${moment().format(this.format)}: ${msg}`)
+        Logger
+          .transport('info')
+          .info(`${moment().format(this.format)}: ${msg}`)
       }
 
       static error(msg) {
-        Logger.transport('file').error(`${moment().format(this.format)}: ${msg}`)
+        Logger
+          .transport('error')
+          .error(`${moment().format(this.format)}: ${msg}`)
       }
     }
     global.dd = Logger.alert

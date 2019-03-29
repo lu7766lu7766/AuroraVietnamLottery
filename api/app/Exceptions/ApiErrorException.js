@@ -13,10 +13,12 @@ class ApiErrorException extends LogicalException
    */
   static handle(error, {request, response}) {
     // console.log(error, error.message)
-    response.status(200).send({
+    const transBody = {
       code: error.status,
       data: error.message
-    })
+    }
+    Log.info(JSON.stringify(transBody))
+    response.status(200).send(transBody)
   }
 }
 
