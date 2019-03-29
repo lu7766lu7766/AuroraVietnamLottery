@@ -64,10 +64,14 @@
     }),
     methods: {
       async register() {
-        const res = await this.callApi('register', _.pick(this, ['userID', 'password']))
-        this.$store.commit(LoginType.setAccessToken, res.data)
-        this.$router.push({
-          name: 'betting'
+        this.callApi('register', _.pick(this, ['userID', 'password']), {
+          s: res =>
+          {
+            this.$store.commit(LoginType.setAccessToken, res.data)
+            this.$router.push({
+              name: 'betting'
+            })
+          }
         })
       }
     }

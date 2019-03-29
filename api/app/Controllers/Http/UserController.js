@@ -8,28 +8,14 @@ class UserController
    * login api
    */
   async login(context) {
-    // return make('userService').login(context)
-    await Validator('Login').validateAll(context.request.all())
-    try
-    {
-      return await userService.login(context)
-    } catch (e)
-    {
-      throw [Codes.USER_OR_PASSWORD_ERROR, false]
-    }
+    return await userService.login(context)
   }
 
   /**
    * check is login or not
    */
   async isLogin(context) {
-    try
-    {
-      return await userService.isLogin(context)
-    } catch (e)
-    {
-      throw [Codes.SUCCESS, false]
-    }
+    return await userService.isLogin(context)
   }
 
   /**
@@ -43,47 +29,41 @@ class UserController
    * add new user
    */
   async register(context) {
-    await Validator('User').validateAll(context.request.all())
-    try
-    {
-      await userService.register(context)
-      return await userService.login(context)
-    } catch (e)
-    {
-      throw [Codes.USER_EXISTS, e]
-    }
+    await userService.register(context)
+    return await userService.login(context)
   }
 
   /**
    * add new user
    */
   async createUser(context) {
-    await Validator('User').validateAll(context.request.all())
-    try
-    {
-      await userService.createUser(context)
-      return await userService.login(context)
-    } catch (e)
-    {
-      throw [Codes.USER_EXISTS, e]
-    }
+    await userService.createUser(context)
+    return await userService.login(context)
   }
 
   /**
-   * change user point
+   * transfer user point 傳送者會扣點
    */
-  async changePoint(context) {
-    await Validator('UserPoint').validateAll(context.request.all())
-    return await userService.changePoint(context)
+  async transferPoint(context) {
+    await userService.transferPoint(context)
+    return true
   }
 
   /**
-   * change user point
+   * add point 不扣點
    */
-  async passPointChanged(context) {
-    await Validator('PassPoint').validateAll(context.request.all())
-    return await userService.passPointChanged(context)
+  async addPoint(context) {
+    await userService.addPoint(context)
+    return true
   }
+
+  // /**
+  //  * change user point
+  //  */
+  // async passPointChanged(context) {
+  //   await Validator('PassPoint').validateAll(context.request.all())
+  //   return await userService.passPointChanged(context)
+  // }
 }
 
 module.exports = UserController

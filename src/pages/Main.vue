@@ -6,12 +6,13 @@
       <v-ons-page>
         <v-ons-list>
 
+          <!---------- Game ---------->
           <v-ons-list-item class="bg-secondary text-white">Game</v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
             <div class="center" @click="openSide = false; $router.push({ name: 'betting'})">Betting</div>
           </v-ons-list-item>
 
-
+          <!---------- Report ---------->
           <v-ons-list-item class="bg-secondary text-white">Report</v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
             <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Result</div>
@@ -20,6 +21,13 @@
             <div class="center" @click="openSide = false; $router.push({ name: 'store-report'})">Store Report</div>
           </v-ons-list-item>
 
+          <!---------- Transfer---------->
+          <v-ons-list-item class="bg-secondary text-white">Transfer</v-ons-list-item>
+          <v-ons-list-item tappable>
+            <div class="center" @click="openSide = false; logout()">Point</div>
+          </v-ons-list-item>
+
+          <!---------- System---------->
           <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
           <v-ons-list-item tappable>
             <div class="center" @click="openSide = false; logout()">Logout</div>
@@ -67,8 +75,12 @@
     }),
     methods: {
       async dataInit() {
-        const res = await this.callApi('info.user')
-        this.$store.commit(UserType.setInfo, res.data)
+        this.callApi('info.user', {}, {
+          s: res =>
+          {
+            this.$store.commit(UserType.setInfo, res.data)
+          }
+        })
       },
       logout() {
         this.$store.commit(LoginType.clearAccessToken)
@@ -76,9 +88,7 @@
     },
     computed: {
       thisPoint() {
-        return this.$store.state.User.info && this.$store.state.User.info.point
-          ? this.$store.state.User.info.point
-          : 0
+        return _(this).getVal('$store.state.User.info.point', 0)
       }
     },
     mounted() {

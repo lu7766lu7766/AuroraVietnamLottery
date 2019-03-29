@@ -20,7 +20,7 @@ class RoleConstants
     }
   }
 
-  static rule() {
+  static validateString() {
     return [this.ADMIN_CODE, this.SUPPLIES_CODE, this.GAMER_CODE].join(',')
   }
 }

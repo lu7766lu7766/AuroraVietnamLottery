@@ -1,7 +1,7 @@
 'use strict'
 const userService = Create.service('User')
 
-class BetService
+class Bet
 {
 
   async bet({auth, request}) {
@@ -37,7 +37,7 @@ class BetService
   checkPoint(user, point) {
     if (user.point < point)
     {
-      throw [Codes.POINT_NOT_ENOUGH, false]
+      throw new ApiErrorException(Codes('User1000').POINT_CANNOT_LESS_0())
     }
   }
 
@@ -51,7 +51,7 @@ class BetService
       return await Model('GameType').findOrFail(gameType)
     } catch (e)
     {
-      throw [Codes.GAME_TYPE_NOT_FOUNT, false]
+      throw new ApiErrorException(Codes('Bet2000').GAME_TYPE_NOT_FOUNT)
     }
   }
 
@@ -64,7 +64,7 @@ class BetService
     const now = moment()
     if (moment(now).isBetween(now.format(`${format} 18:59`), now.format(`${format} 19:16`), 'minute'))
     {
-      throw [Codes.INVALID_TIME, false]
+      throw new ApiErrorException(Codes('Bet2000').INVALID_TIME)
     }
   }
 
@@ -86,4 +86,4 @@ class BetService
   }
 }
 
-module.exports = BetService
+module.exports = Bet

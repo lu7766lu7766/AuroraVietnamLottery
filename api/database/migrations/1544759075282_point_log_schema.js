@@ -9,10 +9,11 @@ class PointLogSchema extends Schema
     this.create('point_logs', (table) =>
     {
       table.increments()
-      table.integer('creator_id').notNullable()
-      table.integer('user_id').notNullable()
+      table.integer('source_user_id').notNullable()
+      table.integer('target_user_id').notNullable()
       table.integer('point').notNullable()
-      table.boolean('is_pass').defaultTo(false)
+      table.integer('type_id').notNullable()
+      // table.boolean('is_pass').defaultTo(false)
       table.timestamps()
     })
   }

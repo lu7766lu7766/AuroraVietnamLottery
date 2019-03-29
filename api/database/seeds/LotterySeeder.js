@@ -17,7 +17,7 @@ class LotterySeeder
 {
   async run() {
     let body = {}
-    body.date = '17122018'
+    body.date = '2018-12-17'
     body.number1 = '46365'
     // body.number1 = '46366'
     body.number2 = '59917'

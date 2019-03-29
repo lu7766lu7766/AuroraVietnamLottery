@@ -11,7 +11,7 @@ class LocalMiddleware
     }
     else
     {
-      throw [Codes.JUST_FOR_LOCAL, false]
+      throw new ApiErrorException(Codes('Common').ERROR)
     }
   }
 }

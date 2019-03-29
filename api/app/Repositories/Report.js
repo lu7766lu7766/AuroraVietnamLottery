@@ -1,6 +1,6 @@
 'use strict'
 
-class ReportRepositories
+class Report
 {
   async getTargetDateNumbers(date) {
     return await DB.table('lotteries')
@@ -75,4 +75,4 @@ class ReportRepositories
   }
 }
 
-module.exports = ReportRepositories
+module.exports = Report

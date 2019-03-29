@@ -12,6 +12,18 @@ axios.interceptors.response.use((response) =>
   return Promise.reject(error.response)
 })
 
+_.mixin({
+  getVal: function (data, prop, defaultVal = '')
+  {
+    const res = _.head(_(data).at(prop).value())
+    return !_.isUndefined(res)
+      ? res
+      : defaultVal
+  }
+}, {
+  chain: false
+})
+
 export default {
   install: function (Vue, options)
   {
@@ -36,18 +48,20 @@ export default {
           return
         })
 
-
       if (SuccessCodes.indexOf(res.data.code) == -1)
       {
+        let msg = ''
         if (errorCode[res.data.code])
         {
-          alert(errorCode[res.data.code])
+          msg += errorCode[res.data.code] + '\n'
         }
         else
         {
-          alert('service error!')
+          msg += 'service error!' + '\n'
         }
-        throw 'sevice error'
+        // throw 'sevice error'
+        res.data.msg = msg
+        throw roopParse(res.data)
       }
 
       return roopParse(res.data)

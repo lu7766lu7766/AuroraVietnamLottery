@@ -1,6 +1,6 @@
 'use strict'
 
-class BetRepositories
+class Bet
 {
   // todo role id <= 2 才能異動？
   async bet({user, betPoint, date, gameTypeID, numbers}) {
@@ -45,4 +45,4 @@ class BetRepositories
   }
 }
 
-module.exports = BetRepositories
+module.exports = Bet

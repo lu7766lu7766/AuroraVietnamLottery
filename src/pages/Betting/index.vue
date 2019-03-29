@@ -27,8 +27,12 @@
     }),
     methods: {
       async dataInit() {
-        const res = await this.callApi('options.gameType')
-        this.options = _.keyBy(res.data, 'name')
+        this.callApi('options.gameType', {}, {
+          s: res =>
+          {
+            this.options = _.keyBy(res.data, 'name')
+          }
+        })
       },
       handleClick(tab) {
         this.cpName = tab.name

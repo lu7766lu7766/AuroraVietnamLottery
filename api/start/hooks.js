@@ -2,6 +2,8 @@ const {hooks} = require('@adonisjs/ignitor')
 
 hooks.after.providersBooted(() =>
 {
+  // Validator
+
   const Validator = use('Validator')
 
   const numberStringFn = async (data, field, message, args, get) =>
@@ -26,5 +28,4 @@ hooks.after.providersBooted(() =>
     }
   }
   Validator.extend('sometimes', sometimesFn)
-
 })

@@ -7,7 +7,7 @@
           <v-ons-input :placeholder="'Number ' + (index + 1)"
                        float
                        :name="'number'+index"
-                       v-validate="'required|length:' + strlen"
+                       v-validate="'required|integer|length:' + strlen"
                        v-model="data.numbers[index]">
           </v-ons-input>
           <span class="el-message-box__errormsg"
@@ -61,6 +61,14 @@
           numbers,
           point: 100
         }
+      }
+    },
+    watch: {
+      title() {
+        this.$nextTick(() =>
+        {
+          this.$validator.validate()
+        })
       }
     },
     methods: {

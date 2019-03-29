@@ -31,7 +31,7 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'session',
-    uid: 'user_id',
+    uid: 'user_name',
     password: 'password'
   },
 
@@ -52,7 +52,7 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'basic',
-    uid: 'user_id',
+    uid: 'user_name',
     password: 'password'
   },
 
@@ -69,7 +69,7 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'jwt',
-    uid: 'user_id',
+    uid: 'user_name',
     password: 'password',
     options: {
       secret: Env.get('APP_KEY')
@@ -88,7 +88,7 @@ module.exports = {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'api',
-    uid: 'user_id',
+    uid: 'user_name',
     password: 'password'
   }
 }

@@ -12,6 +12,10 @@ class PointLog extends Model
   user() {
     return this.hasOne('App/Models/User', 'user_id', 'id')
   }
+
+  type() {
+    return this.hasOne('App/Models/PointLogType', 'type_id', 'id')
+  }
 }
 
 module.exports = PointLog

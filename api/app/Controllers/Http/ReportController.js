@@ -12,27 +12,25 @@ class ReportController
    */
   async fetch({request}) {
     // check has new numbers?
-    const date = request.input('date', moment().format('DDMMYYYY'))
+    const date = moment(request.input('date', moment())).format('YYYY-MM-DD')
     if (!await reportService.checkTodayNumbers(date))
     {
       await reportService.fetchNumbers(date)
     }
-    this.settle()
+    return await this.settle()
   }
 
   /**
    * 結算
    */
   async settle() {
-    return reportService.settle()
+    return await reportService.settle()
   }
 
   /**
    * 投注明細
    */
   async betDetail({auth, request}) {
-    await Validator('Page').validateAll(request.all())
-    await Validator('BetReport').validateAll(request.all())
     return reportService.betDetail({auth, request})
   }
 
@@ -40,7 +38,6 @@ class ReportController
    * 投注明細總計
    */
   async betTotal({auth, request}) {
-    await Validator('BetReport').validateAll(request.all())
     return reportService.betTotal({auth, request})
   }
 
@@ -48,8 +45,6 @@ class ReportController
    * 儲值, 提領明細
    */
   async storeDetail({auth, request}) {
-    await Validator('Page').validateAll(request.all())
-    await Validator('Store').validateAll(request.all())
     return reportService.storeDetail({auth, request})
   }
 
@@ -57,7 +52,6 @@ class ReportController
    * 儲值, 提領明細總計
    */
   async storeTotal({auth, request}) {
-    await Validator('Store').validateAll(request.all())
     return reportService.storeTotal({auth, request})
   }
 }

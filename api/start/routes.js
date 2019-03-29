@@ -18,29 +18,38 @@ const Route = use('Route')
 
 // Route.on('/').render('welcome')
 // Route.get('/', () => 'hello world!!')
-Route.post('login', 'UserController.login') // .validator('Login')
-Route.get('check', 'UserController.isLogin')
-Route.post('register', 'UserController.register')
-
-Route.get('fetch', 'ReportController.fetch').middleware('local')
-Route.get('settle', 'ReportController.settle').middleware('local')
-
+Route.post('login', 'UserController.login').validator('Login')
+Route.get('isLogin', 'UserController.isLogin')
+Route.post('register', 'UserController.register').validator('AddUser')
 
 Route.group(() =>
 {
+  Route.get('fetch', 'ReportController.fetch')
+  Route.get('settle', 'ReportController.settle')
+}).middleware('local')
+
+Route.group(() =>
+{
+  // about point
+  Route.put('transferPoint', 'UserController.transferPoint').validator('TransferPoint')
+  Route.put('addPoint', 'UserController.addPoint').middleware('admin').validator(['TransferPoint'])
+
+  // about options
   Route.get('options/gameType', 'BetController.gameTypeOptions')
 
-  Route.post('user/create', 'UserController.createUser')
-  // Route.post('user/update', 'UserController.updateUser')
-  Route.put('point', 'UserController.changePoint')
-  Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
+  // about user
+  Route.post('user/create', 'UserController.createUser').validator('AddUser')
   Route.get('user', 'UserController.getUser')
 
-  Route.post('bet', 'BetController.index')
+  // about bet
+  Route.post('bet', 'BetController.index').validator('Bet')
 
-  Route.get('detail/bet', 'ReportController.betDetail')
-  Route.get('detail/bet/total', 'ReportController.betTotal')
-  Route.get('detail/store', 'ReportController.storeDetail')
-  Route.get('detail/store/total', 'ReportController.storeTotal')
+  // about report
+  Route.get('detail/bet', 'ReportController.betDetail').validator(['Page', 'BetReport'])
+  Route.get('detail/bet/total', 'ReportController.betTotal').validator('BetReport')
+  Route.get('detail/store', 'ReportController.storeDetail').validator(['Page', 'Store'])
+  Route.get('detail/store/total', 'ReportController.storeTotal').validator(['Store'])
 
+  // Route.post('user/update', 'UserController.updateUser')
+  // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
 }).middleware(['auth'])

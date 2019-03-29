@@ -1,6 +1,6 @@
 'use strict'
 
-class LocalMiddleware
+class AdminMiddleware
 {
   async handle({auth}, next) {
     const user = await auth.getUser()
@@ -10,9 +10,9 @@ class LocalMiddleware
     }
     else
     {
-      throw [Codes.NO_PERMISSION, false]
+      throw new ApiErrorException(Codes('User1000').NO_PERMISSION)
     }
   }
 }
 
-module.exports = LocalMiddleware
+module.exports = AdminMiddleware
