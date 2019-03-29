@@ -36,7 +36,14 @@ class AppProvider extends ServiceProvider
       .where('TABLE_NAME', table)
       .first()).AUTO_INCREMENT
 
-    console.dir(Logger)
+    // mkdir tmp folder at rootPath, fot logger file
+    const mkdirp = require('mkdirp')
+    const path = require('path')
+    const Helpers = use('Helpers')
+    mkdirp(path.join(Helpers.appRoot(), 'tmp'), function (err)
+    {
+    })
+
     global.Log = class Log
     {
       static get format() { return 'YYYY-MM-DD HH:mm:ss'}
