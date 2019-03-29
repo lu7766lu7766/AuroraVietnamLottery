@@ -9,7 +9,9 @@
     "test": "node ace test",
     "dev": "adonis serve --dev",
     "db:refresh": "adonis migration:refresh --seed",
-    "settle": "curl -G http://127.0.0.1:3333/settle"
+    "settle": "curl -G http://127.0.0.1:3333/settle",
+    "task:add": "node ace make:task",
+    "task:run": "node ace run:scheduler"
   },
   "keywords": [
     "adonisjs",
@@ -30,13 +32,15 @@
     "@adonisjs/session": "^1.0.27",
     "@adonisjs/shield": "^1.0.8",
     "@adonisjs/validator": "^5.0.6",
+    "adonis-scheduler": "^3.0.2",
     "async-request": "^1.2.0",
     "cheerio": "^1.0.0-rc.2",
     "lodash": "^4.17.11",
     "mkdirp": "^0.5.1",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
-    "mysql2": "^1.6.4"
+    "mysql2": "^1.6.4",
+    "shelljs": "^0.8.3"
   },
   "devDependencies": {},
   "autoload": {

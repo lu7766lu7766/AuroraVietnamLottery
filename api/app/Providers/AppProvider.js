@@ -61,6 +61,9 @@ class AppProvider extends ServiceProvider
       }
     }
     global.dd = Logger.alert
+
+    // Log.info('first message')
+    // Log.error('first message')
   }
 }
 
