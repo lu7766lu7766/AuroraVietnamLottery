@@ -3,9 +3,11 @@ const userService = Create.service('User')
 
 class Bet
 {
-  stopBetStartTime = '19:09:59'
-  stopBetEndTime = '19:31:00'
-  dateFormat = 'YYYY-MM-DD'
+  constructor() {
+    this.stopBetStartTime = '19:09:59'
+    this.stopBetEndTime = '19:31:00'
+    this.dateFormat = 'YYYY-MM-DD'
+  }
 
   async bet({auth, request}) {
     // check now is valid time
@@ -22,8 +24,7 @@ class Bet
 
     // get bet date
     request.date = this.getBetDate()
-
-    Create.repository('Bet').bet({
+    await Create.repository('Bet').bet({
       user,
       betPoint: request.betPoint,
       date: request.date,

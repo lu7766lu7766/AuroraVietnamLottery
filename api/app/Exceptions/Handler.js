@@ -50,7 +50,7 @@ class ExceptionHandler extends BaseExceptionHandler
         ApiErrorException.handle(error, ctx)
         break
       default:
-        Log.error(e)
+        Log.error(error)
         dd('handle!!', error.status, error.name, error.message, error.messages)
         res.status(error.status).send(error.message)
         break
