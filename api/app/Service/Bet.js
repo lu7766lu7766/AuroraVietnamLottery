@@ -3,12 +3,15 @@ const userService = Create.service('User')
 
 class Bet
 {
+  stopBetStartTime = '19:09:59'
+  stopBetEndTime = '19:31:00'
+  dateFormat = 'YYYY-MM-DD'
 
   async bet({auth, request}) {
     // check now is valid time
     this.checkBetTime()
 
-    request.betPoint = parseInt(request.input('betPoint'))
+    request.betPoint = +request.input('betPoint')
 
     // check user point is enough
     const user = await userService.getUser({auth})
@@ -56,32 +59,34 @@ class Bet
   }
 
   /**
-   * check bet time is between 19:00~19:15
+   * between not contain equal so need more(less) 1 second
+   * check bet time is between 19:10~19:30
    * true throw INVALID_TIME
    */
   checkBetTime() {
-    const format = 'YYYY-MM-DD'
     const now = moment()
-    if (moment(now).isBetween(now.format(`${format} 18:59`), now.format(`${format} 19:16`), 'minute'))
+    if (now.isBetween(
+      now.format(`${this.dateFormat} ${this.stopBetStartTime}`), now.format(`${this.dateFormat} ${this.stopBetEndTime}`
+      ), 'second'))
     {
       throw new ApiErrorException(Codes('Bet2000').INVALID_TIME)
     }
   }
 
   /**
-   * check bet date is over 19:15 ?
+   * after not contain equal so need more(less) 1 second
+   * check bet date is over 19:10 ?
    * true will add one day
    */
   getBetDate() {
-    const format = 'DDMMYYYY'
     const now = moment()
-    if (moment(now).isAfter(now.format('YYYY-MM-DD 19:15'), 'minute'))
+    if (now.isAfter(now.format(`${this.dateFormat} ${this.stopBetStartTime}`), 'second'))
     {
-      return now.add(1, 'day').format(format)
+      return now.add(1, 'day').format(this.dateFormat)
     }
     else
     {
-      return now.format(format)
+      return now.format(this.dateFormat)
     }
   }
 }

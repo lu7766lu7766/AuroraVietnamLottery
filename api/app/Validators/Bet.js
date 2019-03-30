@@ -10,7 +10,7 @@ class BetValidator
     const gameTypeRules = Constant('GameType').rules()
     return {
       'gameTypeID': 'required',
-      'betPoint': 'required|number',
+      'betPoint': 'required|integer',
       'numbers': 'required|array|'
         + BetValidator.getSizeString(gameTypeRules[this.ctx.request.input('gameTypeID')].length),
       'numbers.*': 'numberString|'

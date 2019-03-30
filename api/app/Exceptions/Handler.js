@@ -50,7 +50,8 @@ class ExceptionHandler extends BaseExceptionHandler
         ApiErrorException.handle(error, ctx)
         break
       default:
-        console.log('handle!!', error.status, error.name, error.message, error.messages)
+        Log.error(e)
+        dd('handle!!', error.status, error.name, error.message, error.messages)
         res.status(error.status).send(error.message)
         break
     }
