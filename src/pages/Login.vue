@@ -66,16 +66,20 @@
     }),
     methods: {
       async login() {
-        this.callApi('login', _.pick(this, ['userID', 'password']), {
-          s: res =>
-          {
-            this.$store.commit(LoginType.setAccessToken, res.data)
-            this.$router.push({
-              name: 'betting'
-            })
-          }
-        })
+        this.$api.user
+        // this.callApi('login', _.pick(this, ['userID', 'password']), {
+        //   s: res =>
+        //   {
+        //     this.$store.commit(LoginType.setAccessToken, res.data)
+        //     this.$router.push({
+        //       name: 'betting'
+        //     })
+        //   }
+        // })
       }
+    },
+    async mounted() {
+      console.dir(await this.$api.user.getUserInfo())
     }
   }
 </script>

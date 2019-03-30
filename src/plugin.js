@@ -4,6 +4,8 @@ import store from 'src/store'
 import { LoginType } from 'module/login'
 import errorCode from 'src/config/error'
 
+import ApiRequest from 'lib/Request'
+
 axios.interceptors.response.use((response) =>
 {
   return response
@@ -29,6 +31,7 @@ export default {
   {
     Vue.prototype._ = _
     Vue.prototype.moment = moment
+    Vue.prototype.$api = new ApiRequest()
     Vue.prototype.$callApi = async (key, data) =>
     {
       const keys = key.split('.')

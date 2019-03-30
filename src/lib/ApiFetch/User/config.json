@@ -1,0 +1,18 @@
+{
+  "login": {
+    "uri": "login",
+    "method": "post"
+  },
+  "register": {
+    "uri": "register",
+    "method": "post"
+  },
+  "info": {
+    "uri": "user",
+    "method": "get"
+  },
+  "createUser": {
+    "uri": "user/create",
+    "method": "post"
+  }
+}
