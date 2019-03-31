@@ -14,7 +14,7 @@ class ApiErrorException extends LogicalException
   static handle(error, {request, response}) {
     // console.log(error, error.message)
     const transBody = {
-      code: error.status,
+      code: [error.status],
       data: error.message
     }
     Log.info(JSON.stringify(transBody))

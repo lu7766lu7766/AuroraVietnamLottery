@@ -8,39 +8,44 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/login',
+      path: 'login',
       name: 'login',
       component: () => import('pages/Login')
     },
     {
-      path: '/register',
+      path: 'register',
       name: 'register',
       component: () => import('pages/Register')
     },
     {
-      path: '/betting',
+      path: '/',
       component: () => import('pages/Main'),
       children: [
         {
-          path: '',
+          path: 'betting',
           name: 'betting',
           component: () => import('pages/Betting')
-        }
-      ]
-    },
-    {
-      path: 'report',
-      component: () => import('pages/Main'),
-      children: [
-        {
-          path: 'bet',
-          name: 'bet-report',
-          component: () => import('pages/Report/Bet')
         },
         {
-          path: 'store',
-          name: 'store-report',
-          component: () => import('pages/Report/Store')
+          path: 'report',
+          component: () => import('pages/Report'),
+          children: [
+            {
+              path: 'bet',
+              name: 'bet-report',
+              component: () => import('pages/Report/Bet')
+            },
+            {
+              path: 'transfer',
+              name: 'transfer-report',
+              component: () => import('pages/Report/Transfer')
+            }
+          ]
+        },
+        {
+          path: 'transferPoint',
+          name: 'transferPoint',
+          component: () => import('pages/TransferPoint')
         }
       ]
     },

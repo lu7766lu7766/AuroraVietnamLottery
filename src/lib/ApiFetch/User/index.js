@@ -23,4 +23,8 @@ export default class User extends BaseFetch
   async createUser(data) {
     return await this.request('createUser', data)
   }
+
+  async transfer(data, options) {
+    return await this.request('transfer', data, options)
+  }
 }

@@ -14,5 +14,9 @@
   "createUser": {
     "uri": "user/create",
     "method": "post"
+  },
+  "transfer": {
+    "uri": "transferPoint",
+    "method": "put"
   }
 }

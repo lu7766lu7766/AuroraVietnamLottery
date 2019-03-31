@@ -51,7 +51,9 @@ export default class BaseFetch
           store.commit(LoginType.clearAccessToken)
           break
         default:
-          errorMessages.push(errorCode[code])
+          errorMessages.push(errorCode[code]
+            ? errorCode[code]
+            : 'have error!')
           break
       }
     })

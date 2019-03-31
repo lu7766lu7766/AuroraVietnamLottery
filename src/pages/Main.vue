@@ -18,13 +18,14 @@
             <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Result</div>
           </v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
-            <div class="center" @click="openSide = false; $router.push({ name: 'store-report'})">Store Report</div>
+            <div class="center" @click="openSide = false; $router.push({ name: 'transfer-report'})">Transfer Report
+            </div>
           </v-ons-list-item>
 
           <!---------- Transfer---------->
           <v-ons-list-item class="bg-secondary text-white">Transfer</v-ons-list-item>
           <v-ons-list-item tappable>
-            <div class="center" @click="openSide = false; logout()">Point</div>
+            <div class="center" @click="openSide = false; $router.push({ name: 'transferPoint'})">Point</div>
           </v-ons-list-item>
 
           <!---------- System---------->
