@@ -27,11 +27,10 @@
     }),
     methods: {
       async dataInit() {
-        this.callApi('options.gameType', {}, {
-          s: res =>
-          {
-            this.options = _.keyBy(res.data, 'name')
-          }
+        this.callApi(async () =>
+        {
+          const res = await this.$api.bet.getGameTypeOptions()
+          this.options = _.keyBy(res.data, 'name')
         })
       },
       handleClick(tab) {

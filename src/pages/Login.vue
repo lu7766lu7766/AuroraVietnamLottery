@@ -21,7 +21,7 @@
       <v-ons-list v-loading="loading">
         <v-ons-list-item>
           <div class="center">
-            <v-ons-input placeholder="Your ID" float v-model="userID">
+            <v-ons-input placeholder="Your ID" float v-model="userName">
             </v-ons-input>
           </div>
         </v-ons-list-item>
@@ -61,25 +61,20 @@
   export default {
     mixins: [ReqMixins],
     data: () => ({
-      userID: '',
+      userName: '',
       password: ''
     }),
     methods: {
       async login() {
-        this.$api.user
-        // this.callApi('login', _.pick(this, ['userID', 'password']), {
-        //   s: res =>
-        //   {
-        //     this.$store.commit(LoginType.setAccessToken, res.data)
-        //     this.$router.push({
-        //       name: 'betting'
-        //     })
-        //   }
-        // })
+        this.callApi(async () =>
+        {
+          const res = await this.$api.user.login(_.pick(this, ['userName', 'password']))
+          this.$store.commit(LoginType.setAccessToken, res.data)
+          this.$router.push({
+            name: 'betting'
+          })
+        })
       }
-    },
-    async mounted() {
-      console.dir(await this.$api.user.getUserInfo())
     }
   }
 </script>

@@ -1,29 +1,3 @@
-export default {
-  login: {
-    uri: 'login',
-    method: 'post'
-  },
-  register: {
-    uri: 'register',
-    method: 'post'
-  },
-  info: {
-    user: {
-      uri: 'user'
-    }
-  },
-  options: {
-    uri: 'options',
-    gameType: {
-      uri: 'gameType'
-    }
-  },
-  bet: {
-    uri: 'bet',
-    method: 'post'
-  }
-}
-
 export const GET = 'get'
 export const POST = 'post'
 export const PUT = 'put'

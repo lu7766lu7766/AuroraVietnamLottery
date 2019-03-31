@@ -74,12 +74,11 @@
       openSide: false
     }),
     methods: {
-      async dataInit() {
-        this.callApi('info.user', {}, {
-          s: res =>
-          {
-            this.$store.commit(UserType.setInfo, res.data)
-          }
+      dataInit() {
+        this.callApi(async () =>
+        {
+          const res = await this.$api.user.getUserInfo()
+          this.$store.commit(UserType.setInfo, res.data)
         })
       },
       logout() {

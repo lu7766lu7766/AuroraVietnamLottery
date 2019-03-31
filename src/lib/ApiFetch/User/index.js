@@ -9,7 +9,7 @@ export default class User extends BaseFetch
   }
 
   async login(data) {
-    return await this.request('login', data)
+    return await await this.request('login', data)
   }
 
   async register(data) {

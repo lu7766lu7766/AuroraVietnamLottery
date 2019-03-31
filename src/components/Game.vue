@@ -6,13 +6,13 @@
         <div class="center">
           <v-ons-input :placeholder="'Number ' + (index + 1)"
                        float
-                       :name="'number'+index"
+                       :name="'number' + (index + 1)"
                        v-validate="'required|integer|length:' + strlen"
                        v-model="data.numbers[index]">
           </v-ons-input>
           <span class="el-message-box__errormsg"
-                v-if="errors.has('number'+index)">
-            {{ errors.first('number'+index) }}
+                v-if="errors.has('number' + (index + 1))">
+            {{ errors.first('number' + (index + 1)) }}
           </span>
         </div>
       </v-ons-list-item>
@@ -52,19 +52,16 @@
       EnterBtn: require('@/EnterBtn').default
     },
     data() {
-      const numbers = new Array(this.length)
-      // let val = ''
-      // while (val.length < this.strlen) val += '0'
-      // _.fill(numbers, val)
       return {
         data: {
-          numbers,
+          numbers: _.fill(Array(this.length), ''),
           point: 100
         }
       }
     },
     watch: {
       title() {
+        this.data.numbers = _.fill(Array(this.length), '')
         this.$nextTick(() =>
         {
           this.$validator.validate()
@@ -73,17 +70,20 @@
     },
     methods: {
       async submit() {
-        await this.callApi('bet', {
-          gameTypeID: this.$parent.gameTypeID,
-          betPoint: this.data.point,
-          numbers: this.data.numbers
+        this.callApi(async () =>
+        {
+          await this.$api.bet.bet({
+            gameTypeID: this.$parent.gameTypeID,
+            betPoint: this.data.point,
+            numbers: this.data.numbers
+          })
+          this.$notify({
+            title: 'Result',
+            message: 'Success',
+            position: 'bottom-left'
+          })
+          this.$store.commit(UserType.changePoint, -this.data.point)
         })
-        this.$notify({
-          title: 'Result',
-          message: 'Success',
-          position: 'bottom-left'
-        })
-        this.$store.commit(UserType.changePoint, -this.data.point)
       }
     },
     mounted() {

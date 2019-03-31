@@ -1,9 +1,9 @@
 import qs from 'qs'
 import store from 'src/store'
-import { apiHosts, POST, PUT } from 'src/config/api'
-import env from 'src/../env'
+import { POST, PUT } from 'src/config/api'
+// import env from 'src/../env'
 
-export var apiHost = `//${apiHosts[env.target]}`
+// export var apiHost = `//${apiHosts[env.target]}`
 
 /**
  * create api request body
@@ -16,9 +16,10 @@ export var apiHost = `//${apiHosts[env.target]}`
 export function createApiBody(method = 'get', uri = '', data = {}, header = {}) {
 
   let apiHeader = _.merge(getApiHeader(), header)
-
+  // uri = '/' + uri.split('/').filter(data => !_.isUndefined(data)).join('/')
   let res = {
-    url: apiHost + replaceMatchData(uri, data),
+    // url: apiHost + replaceMatchData(uri, data),
+    url: replaceMatchData(uri, data),
     headers: apiHeader,
     method,
     responseType: 'json',
