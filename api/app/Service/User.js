@@ -80,6 +80,18 @@ class User
   }
 
   /**
+   * api for update user
+   */
+  async updateUser({request, auth}) {
+    const user = await this.getUser({auth})
+    return await userRepo.updateUser({
+      id: user.id,
+      password: request.input('password'),
+      nickName: request.input('nickName')
+    })
+  }
+
+  /**
    * comon for transfer(add) point
    */
   async getSourceTargetUsers({request, auth}) {

@@ -16,8 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-// Route.on('/').render('welcome')
-// Route.get('/', () => 'hello world!!')
 Route.post('login', 'UserController.login').validator('Login')
 Route.get('isLogin', 'UserController.isLogin')
 Route.post('register', 'UserController.register').validator('AddUser')
@@ -31,8 +29,8 @@ Route.group(() =>
 Route.group(() =>
 {
   // about point
-  Route.put('transferPoint', 'UserController.transferPoint').validator('TransferPoint')
-  Route.put('addPoint', 'UserController.addPoint').middleware('admin').validator(['TransferPoint'])
+  Route.put('point/transfer', 'UserController.transferPoint').validator('TransferPoint')
+  Route.put('point/add', 'UserController.addPoint').middleware('admin').validator(['TransferPoint'])
 
   // about options
   Route.get('options/gameType', 'BetController.gameTypeOptions')
@@ -40,16 +38,17 @@ Route.group(() =>
   // about user
   Route.post('user/create', 'UserController.createUser').validator('AddUser')
   Route.get('user', 'UserController.getUser')
+  Route.put('user/update', 'UserController.updateUser').validator('UpdateUser')
 
   // about bet
   Route.post('bet', 'BetController.index').validator('Bet')
 
   // about report
-  // Route.get('detail/bet', 'ReportController.betDetail').validator(['Page', 'BetReport'])
-  // Route.get('detail/bet/total', 'ReportController.betTotal').validator('BetReport')
-  // Route.get('detail/store', 'ReportController.storeDetail').validator(['Page', 'Store'])
-  // Route.get('detail/store/total', 'ReportController.storeTotal').validator(['Store'])
+  Route.get('report/bet', 'ReportController.betDetail').validator(['Page', 'BetReport'])
+  Route.get('report/bet/total', 'ReportController.betTotal').validator('BetReport')
+  // Route.get('report/transfer', 'ReportController.storeDetail').validator(['Page', 'Store'])
+  // Route.get('report/tramsfer/total', 'ReportController.storeTotal').validator(['Store'])
 
-  // Route.post('user/update', 'UserController.updateUser')
+  //
   // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
 }).middleware(['auth'])

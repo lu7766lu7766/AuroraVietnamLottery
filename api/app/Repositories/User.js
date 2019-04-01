@@ -21,6 +21,16 @@ class User
     await user.save()
   }
 
+  async updateUser({id, password, nickName}) {
+    const user = await UserModel.find(id)
+    if (password)
+    {
+      user.password = password
+    }
+    user.nick_name = nickName
+    return await user.save()
+  }
+
   /**
    * 新增點數異動紀錄
    */

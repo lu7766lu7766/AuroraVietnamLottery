@@ -42,6 +42,13 @@ class UserController
   }
 
   /**
+   * update user
+   */
+  async updateUser(context) {
+    return await userService.updateUser(context)
+  }
+
+  /**
    * transfer user point 傳送者會扣點
    */
   async transferPoint(context) {
