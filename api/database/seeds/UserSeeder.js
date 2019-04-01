@@ -10,18 +10,15 @@
  |
  */
 
-// const Database = use('Database')
-const User = use('App/Models/User')
-
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+const UserModel = use('Models/User')
 
 class UserSeeder
 {
   async run() {
     // const users = await Database.table('users')
     // const user = new User()
-    const user = Create.model('User')
+    const user = new UserModel()
 
     user.user_name = 'lu7766'
     user.password = 'lu90354'

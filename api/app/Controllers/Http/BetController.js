@@ -1,6 +1,7 @@
 'use strict'
 
-const betService = Create.service('Bet')
+const betService = App.make('Service/Bet')
+const GameTypeConstant = use('Constants/GameType')
 
 class BetController
 {
@@ -9,7 +10,7 @@ class BetController
   }
 
   async gameTypeOptions() {
-    return Constant('gameType').options()
+    return GameTypeConstant.options()
   }
 }
 

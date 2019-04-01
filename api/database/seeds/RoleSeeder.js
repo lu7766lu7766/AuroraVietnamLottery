@@ -11,14 +11,15 @@
  */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+const RoleModel = use('Models/Role')
+const RoleConstant = use('Constants/Role')
 
 class RoleSeeder
 {
   async run() {
-    _.forEach(Constant('Role').enum(), async (name, id) =>
+    _.forEach(RoleConstant.enum(), async (name, id) =>
     {
-      const role = Create.model('Role')
+      const role = new RoleModel()
       role.id = id
       role.name = name
       await role.save()

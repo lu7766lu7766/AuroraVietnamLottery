@@ -1,6 +1,8 @@
 'use strict'
 
-const userRepo = Create.repository('User')
+const userRepo = App.make('Repositories/User')
+const RoleConstant = use('Constants/Role')
+const UserCodes = use('ApiCodes/User1000')
 
 class User
 {
@@ -45,7 +47,7 @@ class User
       userName: request.input('userName'),
       password: request.input('password'),
       nickName: request.input('nickName'),
-      roleID: Constant('Role').GAMER_CODE,
+      roleID: RoleConstant.GAMER_CODE,
       parentID: null
     })
   }
@@ -57,12 +59,12 @@ class User
     // auth middleware
     const user = await this.getUser({auth})
 
-    request.roleID = (user.role_id + 1) >= Constant('Role').GAMER_CODE
-      ? Constant('Role').GAMER_CODE
+    request.roleID = (user.role_id + 1) >= RoleConstant.GAMER_CODE
+      ? RoleConstant.GAMER_CODE
       : (user.role_id + 1)
 
     // 管理者才有權限決定新用戶權限，沒給就是新增者的下個等級
-    if (user.role_id == Constant('Role').ADMIN_CODE)
+    if (user.role_id == RoleConstant.ADMIN_CODE)
     {
       request.roleID = request.input('roleID', request.roleID)
     }
@@ -89,7 +91,7 @@ class User
       targetUser = await userRepo.findUserByUserName(request.input('userName'))
     } catch (e)
     {
-      throw new ApiErrorException(Codes('User1000').USER_NOT_FOUND)
+      throw new ApiErrorException(UserCodes.USER_NOT_FOUND)
     }
 
     return {
@@ -105,12 +107,12 @@ class User
     const {sourceUser, targetUser} = await this.getSourceTargetUsers({request, auth})
     if (sourceUser.id === targetUser.id)
     {
-      throw new ApiErrorException(Codes('User1000').CANNOT_TRANSFER_TO_YOURSELF)
+      throw new ApiErrorException(UserCodes.CANNOT_TRANSFER_TO_YOURSELF)
     }
     const point = +request.input('point')
     if (+sourceUser.point - point < 0)
     {
-      throw new ApiErrorException(Codes('User1000').POINT_CANNOT_LESS_0)
+      throw new ApiErrorException(UserCodes.POINT_CANNOT_LESS_0)
     }
     await userRepo.transferPoint(sourceUser, targetUser, point)
   }

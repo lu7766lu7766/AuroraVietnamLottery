@@ -1,6 +1,6 @@
 'use strict'
 
-const userService = Create.service('User')
+const userService = App.make('Service/User')
 
 class UserController
 {
@@ -56,14 +56,6 @@ class UserController
     await userService.addPoint(context)
     return true
   }
-
-  // /**
-  //  * change user point
-  //  */
-  // async passPointChanged(context) {
-  //   await Validator('PassPoint').validateAll(context.request.all())
-  //   return await userService.passPointChanged(context)
-  // }
 }
 
 module.exports = UserController

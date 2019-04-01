@@ -1,6 +1,8 @@
 'use strict'
 
-class PageLoginValidator
+const CommonCodes = use('ApiCodes/Common')
+
+class PageValidator
 {
   get rules() {
     return {
@@ -10,12 +12,11 @@ class PageLoginValidator
   }
 
   get messages() {
-    const commonCodes = Codes('Common')
     return {
-      'page.number': commonCodes.PAGE_TYPE_ERROR,
-      'perPage.number': commonCodes.PERPAGE_TYPE_ERROR
+      'page.number': CommonCodes.PAGE_TYPE_ERROR,
+      'perPage.number': CommonCodes.PERPAGE_TYPE_ERROR
     }
   }
 }
 
-module.exports = PageLoginValidator
+module.exports = PageValidator

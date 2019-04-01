@@ -1,16 +1,19 @@
 'use strict'
 
+const RoleConstant = use('Constants/Role')
+const UserCodes = use('ApiCodes/User1000')
+
 class AdminMiddleware
 {
   async handle({auth}, next) {
     const user = await auth.getUser()
-    if (user.role_id == Constant('Role').ADMIN_CODE)
+    if (user.role_id == RoleConstant.ADMIN_CODE)
     {
       await next()
     }
     else
     {
-      throw new ApiErrorException(Codes('User1000').NO_PERMISSION)
+      throw new ApiErrorException(UserCodes.NO_PERMISSION)
     }
   }
 }

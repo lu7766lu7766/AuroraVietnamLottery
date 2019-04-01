@@ -1,9 +1,11 @@
 'use strict'
 
+const GameTypeConstant = use('Constants/GameType')
+
 class GamesFactory
 {
   constructor(game_type) {
-    return use('App/Service/Games/' + Constant('GameType').enum()[game_type])
+    return use('App/Service/Games/' + GameTypeConstant.enum()[game_type])
   }
 }
 

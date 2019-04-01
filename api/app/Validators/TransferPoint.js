@@ -1,5 +1,7 @@
 'use strict'
 
+const UserCodes = use('ApiCodes/User1000')
+
 class TransferPointValidator
 {
   get rules() {
@@ -10,12 +12,11 @@ class TransferPointValidator
   }
 
   get messages() {
-    const userCodes = Codes('User1000')
     return {
-      'userName.required': userCodes.USER_NAME_IS_REQUIRED,
-      'point.required': userCodes.POINT_IS_REQUIRED,
-      'point.number': userCodes.POINT_TYPE_ERROR,
-      'point.min': userCodes.POINT_MORE_THEN_0
+      'userName.required': UserCodes.USER_NAME_IS_REQUIRED,
+      'point.required': UserCodes.POINT_IS_REQUIRED,
+      'point.number': UserCodes.POINT_TYPE_ERROR,
+      'point.min': UserCodes.POINT_MORE_THEN_0
     }
   }
 }

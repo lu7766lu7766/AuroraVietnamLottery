@@ -1,5 +1,9 @@
 'use strict'
-const userService = Create.service('User')
+const userService = App.make('Service/User')
+const betRepo = App.make('Repositories/Bet')
+const UserCodes = use('ApiCodes/User1000')
+const BetCodes = use('ApiCodes/Bet2000')
+const GameTypeModel = use('Models/GameType')
 
 class Bet
 {
@@ -24,7 +28,7 @@ class Bet
 
     // get bet date
     request.date = this.getBetDate()
-    await Create.repository('Bet').bet({
+    await betRepo.bet({
       user,
       betPoint: request.betPoint,
       date: request.date,
@@ -41,7 +45,7 @@ class Bet
   checkPoint(user, point) {
     if (user.point < point)
     {
-      throw new ApiErrorException(Codes('User1000').POINT_CANNOT_LESS_0())
+      throw new ApiErrorException(UserCodes.POINT_CANNOT_LESS_0())
     }
   }
 
@@ -52,10 +56,10 @@ class Bet
     try
     {
       // find will no throw exception
-      return await Model('GameType').findOrFail(gameType)
+      return await GameTypeModel.findOrFail(gameType)
     } catch (e)
     {
-      throw new ApiErrorException(Codes('Bet2000').GAME_TYPE_NOT_FOUNT)
+      throw new ApiErrorException(BetCodes.GAME_TYPE_NOT_FOUNT)
     }
   }
 
@@ -70,7 +74,7 @@ class Bet
       now.format(`${this.dateFormat} ${this.stopBetStartTime}`), now.format(`${this.dateFormat} ${this.stopBetEndTime}`
       ), 'second'))
     {
-      throw new ApiErrorException(Codes('Bet2000').INVALID_TIME)
+      throw new ApiErrorException(BetCodes.INVALID_TIME)
     }
   }
 

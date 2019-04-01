@@ -1,4 +1,5 @@
 'use strict'
+const UserCodes = use('ApiCodes/User1000')
 
 class LoginValidator
 {
@@ -10,7 +11,6 @@ class LoginValidator
   }
 
   get messages() {
-    const UserCodes = Codes('User1000')
     return {
       'userName.required': UserCodes.USER_NAME_IS_REQUIRED,
       'password.required': UserCodes.PASSWORD_IS_REQUIRED

@@ -1,7 +1,7 @@
 'use strict'
-const GameBase = use('App/Service/Games/base')
+const BaseGame = use('App/Service/Games/base')
 
-class BaseXGame extends GameBase
+class BaseXGame extends BaseGame
 {
   get needMatch() { return -1 }
 

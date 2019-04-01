@@ -1,4 +1,6 @@
 'use strict'
+const RoleContant = use('Constants/Role')
+const UserCodes = use('ApiCodes/User1000')
 
 class UserValidator
 {
@@ -7,12 +9,11 @@ class UserValidator
       userName: 'required|unique:users,user_name',
       password: 'required',
       nickName: 'sometimes|string',
-      roleID: 'sometimes|number|in:' + Constant('Role').validateString()
+      roleID: 'sometimes|number|in:' + RoleContant.validateString()
     }
   }
 
   get messages() {
-    const UserCodes = Codes('User1000')
     return {
       'userName.required': UserCodes.USER_NAME_IS_REQUIRED,
       'userName.unique': UserCodes.USER_EXISTS,

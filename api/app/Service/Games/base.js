@@ -1,5 +1,8 @@
 'use strict'
 
+const reportRepo = App.make('Repositories/Report')
+const BonusRateConstant = use('Constants/BonusRate')
+
 class BaseGame
 {
   /**
@@ -35,7 +38,7 @@ class BaseGame
    * to count how much point you get
    */
   get bunusRate() {
-    return _.find(Constant('BonusRate').enum(), {game_type_id: this.gameTypeID})
+    return _.find(BonusRateConstant.enum(), {game_type_id: this.gameTypeID})
   }
 
   /**
@@ -69,7 +72,7 @@ class BaseGame
    * update db
    */
   async updateDB(winPoint) {
-    Create.repository('Report').winPoint({
+    reportRepo.winPoint({
       userID: this.user.id,
       betID: this.betID,
       date: this.lottery.date,

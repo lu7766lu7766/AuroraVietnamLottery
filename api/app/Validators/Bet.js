@@ -1,5 +1,8 @@
 'use strict'
 
+const GameTypeConstant = use('Constants/GameType')
+const BetCodes = use('ApiCodes/Bet2000')
+
 class BetValidator
 {
   static getSizeString(val) {
@@ -7,7 +10,7 @@ class BetValidator
   }
 
   get rules() {
-    const gameTypeRules = Constant('GameType').rules()
+    const gameTypeRules = GameTypeConstant.rules()
     return {
       'gameTypeID': 'required',
       'betPoint': 'required|integer',
@@ -19,18 +22,17 @@ class BetValidator
   }
 
   get messages() {
-    const betCodes = Codes('Bet2000')
     return {
-      'gameTypeID.required': betCodes.GAME_TYPE_IS_REQUIRED,
-      'betPoint.required': betCodes.BET_POINT_IS_REQUIRED,
-      'betPoint.number': betCodes.BET_POINT_TYPE_ERROR,
-      'numbers.require': betCodes.NUMBERS_IS_REQUIRED,
-      'numbers.array': betCodes.NUMBERS_TYPE_ERROR,
-      'numbers.min': betCodes.NUMBERS_QUANTITY_IS_INVALID,
-      'numbers.max': betCodes.NUMBERS_QUANTITY_IS_INVALID,
-      'numbers.*.numberString': betCodes.NUMBER_TYPE_ERROR,
-      'numbers.*.min': betCodes.NUMBER_LENGTH_IS_INVALID,
-      'numbers.*.max': betCodes.NUMBER_LENGTH_IS_INVALID
+      'gameTypeID.required': BetCodes.GAME_TYPE_IS_REQUIRED,
+      'betPoint.required': BetCodes.BET_POINT_IS_REQUIRED,
+      'betPoint.number': BetCodes.BET_POINT_TYPE_ERROR,
+      'numbers.require': BetCodes.NUMBERS_IS_REQUIRED,
+      'numbers.array': BetCodes.NUMBERS_TYPE_ERROR,
+      'numbers.min': BetCodes.NUMBERS_QUANTITY_IS_INVALID,
+      'numbers.max': BetCodes.NUMBERS_QUANTITY_IS_INVALID,
+      'numbers.*.numberString': BetCodes.NUMBER_TYPE_ERROR,
+      'numbers.*.min': BetCodes.NUMBER_LENGTH_IS_INVALID,
+      'numbers.*.max': BetCodes.NUMBER_LENGTH_IS_INVALID
     }
   }
 }

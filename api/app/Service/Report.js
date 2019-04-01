@@ -3,8 +3,11 @@
 const aRequest = require('async-request')
 const cheerio = require('cheerio')
 
-const reportRepo = Create.repository('Report')
-const betRepo = Create.repository('Bet')
+const userService = App.make('Service/User')
+const reportRepo = App.make('Repositories/Report')
+const betRepo = App.make('Repositories/Bet')
+const ReportCodes = use('ApiCodes/Report3000')
+const GamesFactory = use('Factories/Games')
 
 class Report
 {
@@ -39,7 +42,7 @@ class Report
       } catch (e2)
       {
         Log.error(e2)
-        throw new ApiErrorException(Codes('Report3000').CANNOT_TAKE_LOTTERY_NUMBERS, [e1, e2].join('; '))
+        throw new ApiErrorException(ReportCodes.CANNOT_TAKE_LOTTERY_NUMBERS, [e1, e2].join('; '))
       }
     }
   }
@@ -93,7 +96,6 @@ class Report
     const bets = await betRepo.getUnSettleBet()
     for (let x of bets)
     {
-      // const bet = await Model('Bet').query().with('user').with('numbers').where('id', x.id).fetch()
       let bet = await betRepo.getBetData(x.id)
       await bet.loadMany({
         lottery: null,
@@ -104,22 +106,18 @@ class Report
 
       bet = bet.toJSON()
 
-      const GameProccesor = new (Factory('Games'))(bet.game_type.id)
+      const GameProccesor = new GamesFactory(bet.game_type.id)
       const gameProccesor = new GameProccesor(bet)
       gameProccesor.settle()
     }
     return true
   }
 
-  async getUser({auth}) {
-    return await Create.service('User').getUser({auth})
-  }
-
   /**
    * 投注明細
    */
   async betDetail({auth, request}) {
-    const user = await this.getUser({auth})
+    const user = await userService.getUser({auth})
     return reportRepo.getBetDetail(user.id, request.input('page'), request.input('perPage'), request.input('isSettle'))
   }
 
@@ -127,7 +125,7 @@ class Report
    * 投注明細總計
    */
   async betTotal({auth, request}) {
-    const user = await this.getUser({auth})
+    const user = await userService.getUser({auth})
     return reportRepo.getBetTotal(user.id, request.input('isSettle'))
   }
 
@@ -135,7 +133,7 @@ class Report
    * 儲值, 提領明細
    */
   async storeDetail({auth, request}) {
-    const user = await this.getUser({auth})
+    const user = await userService.getUser({auth})
     return await reportRepo.getStoreDetail(user.id, request.input('page'), request.input('perPage'), request.input('status'))
   }
 
@@ -143,7 +141,7 @@ class Report
    * 儲值, 提領明細總計
    */
   async storeTotal({auth, request}) {
-    const user = await this.getUser({auth})
+    const user = await userService.getUser({auth})
     return await reportRepo.getStoreTotal(user.id, request.input('status'))
   }
 }

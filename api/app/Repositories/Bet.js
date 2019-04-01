@@ -1,5 +1,8 @@
 'use strict'
 
+const BetModel = use('Models/Bet')
+const CommonCodes = use('ApiCodes/Common')
+
 class Bet
 {
   async bet({user, betPoint, date, gameTypeID, numbers}) {
@@ -12,7 +15,7 @@ class Bet
       await user.save(trx)
 
       // start proccess bet
-      const bet = Create.model('Bet')
+      const bet = new BetModel()
       bet.lotteries_date = date
       bet.user_id = user.id
       bet.game_type_id = gameTypeID
@@ -31,7 +34,7 @@ class Bet
     } catch (e)
     {
       trx.rollback()
-      throw new ApiErrorException(Codes('Common').CREATE_FAIL)
+      throw new ApiErrorException(CommonCodes.CREATE_FAIL)
     }
   }
 
@@ -46,7 +49,7 @@ class Bet
   }
 
   async getBetData(id) {
-    return await Model('Bet').find(id)
+    return await BetModel.find(id)
   }
 }
 

@@ -1,14 +1,15 @@
 'use strict'
-const GameBase = use('App/Service/Games/base')
+const BaseGame = use('App/Service/Games/base')
+const GameTypeConstant = use('Constants/GameType')
 
-class LO extends GameBase
+class LO extends BaseGame
 {
   /**
    * lo
    * 選一個2位數的號碼，核對全部(27個)號後兩碼，依號碼出現次數計算獎勵
    * 中一個號碼3.27倍，以此類推
    */
-  get gameTypeID() { return Constant('GameType').LO_CODE }
+  get gameTypeID() { return GameTypeConstant.LO_CODE }
 
   countMatchedNumbers() {
     const betNum = this.betNumbers[0]

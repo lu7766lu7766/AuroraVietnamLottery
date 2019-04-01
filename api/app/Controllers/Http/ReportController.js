@@ -1,6 +1,6 @@
 'use strict'
 
-const reportService = Create.service('Report')
+const reportService = App.make('Service/Report')
 
 class ReportController
 {

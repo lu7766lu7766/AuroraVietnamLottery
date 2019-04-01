@@ -1,8 +1,10 @@
 'use strict'
 
+const ReportCodes = use('ApiCodes/Report3000')
+
 class BetReportValidator
 {
-  rules() {
+  get rules() {
     return {
       isSettle: 'sometimes|number|in:0,1'
     }
@@ -10,8 +12,8 @@ class BetReportValidator
 
   get messages() {
     return {
-      'isSettle.number': Codes('Report3000').IS_SETTLE_TYPE_ERROR,
-      'isSettle.in': Codes('Report3000').IS_SETTLE_VALUE_ERROR
+      'isSettle.number': ReportCodes.IS_SETTLE_TYPE_ERROR,
+      'isSettle.in': ReportCodes.IS_SETTLE_VALUE_ERROR
     }
   }
 }

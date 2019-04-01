@@ -1,6 +1,7 @@
 'use strict'
 
 const Env = use('Env')
+const CommonCodes = use('ApiCodes/Common')
 
 class LocalMiddleware
 {
@@ -11,7 +12,7 @@ class LocalMiddleware
     }
     else
     {
-      throw new ApiErrorException(Codes('Common').ERROR)
+      throw new ApiErrorException(CommonCodes.ERROR)
     }
   }
 }

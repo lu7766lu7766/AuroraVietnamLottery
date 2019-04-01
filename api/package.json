@@ -44,6 +44,14 @@
   },
   "devDependencies": {},
   "autoload": {
-    "App": "./app"
+    "App": "./app",
+    "Service": "./app/Service",
+    "Constants": "./app/Constants",
+    "Repositories": "./app/Repositories",
+    "Providers": "./app/Providers",
+    "Models": "./app/Models",
+    "Factories": "./app/Factories",
+    "ApiCodes": "./app/Constants/ApiCodes",
+    "Validators": "./app/Validators"
   }
 }

@@ -10,9 +10,10 @@
  |
  */
 
-const GameType = use('App/Models/GameType')
+const GameTypeModel = use('Models/GameType')
+const GameTypeConstant = use('Constants/GameType')
+
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
 
 class GameTypeSeeder
 {
@@ -25,9 +26,9 @@ class GameTypeSeeder
     //   await gameType.save()
     // }
 
-    _.forEach(Constant('GameType').enum(), async (name, id) =>
+    _.forEach(GameTypeConstant.enum(), async (name, id) =>
     {
-      const gameType = Create.model('GameType')
+      const gameType = new GameTypeModel()
       gameType.id = id
       gameType.name = name
       await gameType.save()

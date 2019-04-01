@@ -1,3 +1,5 @@
+const GameTypeConstant = use('Constants/GameType')
+
 class RoleConstants
 {
   static get LO() { return 3.27 }
@@ -13,38 +15,37 @@ class RoleConstants
   static get THOUSAND_PERCENT() { return 400 }
 
   static enum() {
-    const gameType = Constant('GameType')
     return [
       {
-        game_type_id: gameType.LO_CODE,
+        game_type_id: GameTypeConstant.LO_CODE,
         rate: this.LO
       },
       {
-        game_type_id: gameType.X2_CODE,
+        game_type_id: GameTypeConstant.X2_CODE,
         rate: this.X2
       },
       {
-        game_type_id: gameType.X3_CODE,
+        game_type_id: GameTypeConstant.X3_CODE,
         rate: this.X3
       },
       {
-        game_type_id: gameType.X4_CODE,
+        game_type_id: GameTypeConstant.X4_CODE,
         rate: this.X4
       },
       {
-        game_type_id: gameType.KEP_CODE,
+        game_type_id: GameTypeConstant.KEP_CODE,
         rate: this.TEN_PERCENT
       },
       {
-        game_type_id: gameType.THREEC_CODE,
+        game_type_id: GameTypeConstant.THREEC_CODE,
         rate: this.THOUSAND_PERCENT
       },
       {
-        game_type_id: gameType.DAU_CODE,
+        game_type_id: GameTypeConstant.DAU_CODE,
         rate: this.TEN_PERCENT
       },
       {
-        game_type_id: gameType.DIT_CODE,
+        game_type_id: GameTypeConstant.DIT_CODE,
         rate: this.TEN_PERCENT
       }
     ]

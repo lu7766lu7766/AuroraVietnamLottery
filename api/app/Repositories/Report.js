@@ -1,5 +1,10 @@
 'use strict'
 
+const LotteryModel = use('Models/Lottery')
+const BetModel = use('Models/Bet')
+const UserModel = use('Models/User')
+const PointLogModel = use('Models/PointLog')
+
 class Report
 {
   async getTargetDateNumbers(date) {
@@ -9,16 +14,16 @@ class Report
   }
 
   async addRowBySql(sqlBody) {
-    await Model('Lottery').create(sqlBody)
+    await LotteryModel.create(sqlBody)
   }
 
   async winPoint({userID, betID, date, winPoint}) {
     const trx = await DB.beginTransaction()
-    const bet = await Model('Bet').find(betID)
+    const bet = await BetModel.find(betID)
     if (winPoint > 0)
     {
       bet.win_point = winPoint
-      const user = await Model('User').find(userID)
+      const user = await UserModel.find(userID)
       user.point += +winPoint
       await user.save()
     }
@@ -29,7 +34,7 @@ class Report
 
   // bet detail
   getBetQueryBySettle(isSettle) {
-    const query = Model('Bet').query()
+    const query = BetModel.query()
     if (typeof isSettle == 'string') query.where('is_settle', isSettle)
     return query
   }
@@ -48,7 +53,7 @@ class Report
 
   // store detail
   getStoreQueryByStatus(status) {
-    const query = Model('PointLog').query()
+    const query = PointLogModel.query()
     if (typeof status == 'string')
     {
       query.where('point',

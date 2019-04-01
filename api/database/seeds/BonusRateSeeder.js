@@ -11,13 +11,13 @@
  */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+const BonusRateConstant = use('Constants/BonusRate')
 
 class BonusRateSeeder
 {
   async run() {
     await DB.table('bonus_rates')
-      .insert(Constant('BonusRate').enum())
+      .insert(BonusRateConstant.enum())
   }
 }
 

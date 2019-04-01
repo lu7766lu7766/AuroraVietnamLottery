@@ -1,13 +1,17 @@
 'use strict'
 
+const UserModel = use('Models/User')
+const PointLogTypeConstant = use('Constants/PointLogType')
+const CommonCodes = use('ApiCodes/Common')
+
 class User
 {
   async findUserByUserName(userName) {
-    return Model('User').findByOrFail('user_name', userName)
+    return UserModel.findByOrFail('user_name', userName)
   }
 
   async addUser({userName, password, nickName, roleID, parentID}) {
-    const user = Create.model('User')
+    const user = new UserModel()
     user.user_name = userName
     user.password = password
     user.nick_name = nickName
@@ -33,7 +37,7 @@ class User
         source_user_id: sourceUser.id,
         target_user_id: targetUser.id,
         point,
-        type_id: Constant('PointLogType').TRANSFER_CODE,
+        type_id: PointLogTypeConstant.TRANSFER_CODE,
         created_at: now,
         updated_at: now
       })
@@ -41,7 +45,7 @@ class User
     } catch (e)
     {
       trx.rollback()
-      throw new ApiErrorException(Codes('Common').UPDATE_FAIL, e)
+      throw new ApiErrorException(CommonCodes.UPDATE_FAIL, e)
     }
   }
 
@@ -59,7 +63,7 @@ class User
         source_user_id: sourceUser.id,
         target_user_id: targetUser.id,
         point,
-        type_id: Constant('PointLogType').ADD_CODE,
+        type_id: PointLogTypeConstant.ADD_CODE,
         created_at: now,
         updated_at: now
       })
@@ -67,28 +71,9 @@ class User
     } catch (e)
     {
       trx.rollback()
-      throw new ApiErrorException(Codes('Common').UPDATE_FAIL, e)
+      throw new ApiErrorException(CommonCodes.UPDATE_FAIL, e)
     }
   }
-
-  // /**
-  //  * 審核點數異動
-  //  */
-  // async passPoint(id) {
-  //
-  //   const log = await Model('PointLog').find(id)
-  //   const user = await Model('User').find(log.user_id)
-  //   const newPoint = log.point + user.point
-  //   if (newPoint < 0)
-  //   {
-  //     throw new ApiErrorException(Codes('User1000').POINT_CANNOT_LESS_0)
-  //   }
-  //   log.is_pass = true
-  //   await log.save()
-  //   user.point = newPoint
-  //   await user.save()
-  //   trx.commit()
-  // }
 
   /**
    * delete older access token

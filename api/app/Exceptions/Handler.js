@@ -1,6 +1,7 @@
 'use strict'
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
+const UserCodes = use('ApiCodes/user1000')
 
 /**
  * This class handles all exceptions thrown during
@@ -35,7 +36,7 @@ class ExceptionHandler extends BaseExceptionHandler
       case 'UserNotFoundException':
       case 'PasswordMisMatchException':
         res.send({
-          code: [Codes('User1000').USER_OR_PASSWORD_ERROR],
+          code: [UserCodes.USER_OR_PASSWORD_ERROR],
           data: false
         })
         break
