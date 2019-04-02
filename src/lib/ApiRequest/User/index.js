@@ -25,6 +25,10 @@ export default class User extends BaseRequest
   }
 
   async transfer(data, options) {
-    return await this.request('transfer', data, options)
+    return await this.request('transferPoint', data, options)
+  }
+
+  async add(data, options) {
+    return await this.request('addPoint', data, options)
   }
 }

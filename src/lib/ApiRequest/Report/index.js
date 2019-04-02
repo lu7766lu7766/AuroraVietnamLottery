@@ -8,27 +8,27 @@ export default class Report extends BaseRequest
     this.config = _config
   }
 
-  async getBetDetail() {
-    return await this.request('betDetail')
+  async getBetDetail(data) {
+    return await this.request('betDetail', data)
   }
 
-  async getBetTotal() {
-    return await this.request('betTotal')
+  async getBetTotal(data) {
+    return await this.request('betTotal', data)
   }
 
-  async getTransferDetail() {
-    return await this.request('transferDetail')
+  async getTransferDetail(data) {
+    return await this.request('transferDetail', data)
   }
 
-  async getTransferTotal() {
-    return await this.request('transferTotal')
+  async getTransferTotal(data) {
+    return await this.request('transferTotal', data)
   }
 
-  async getStoreDetail() {
-    return await this.request('storeDetail')
+  async getStoreDetail(data) {
+    return await this.request('storeDetail', data)
   }
 
-  async getStoreTotal() {
-    return await this.request('storeTotal')
+  async getStoreTotal(data) {
+    return await this.request('storeTotal', data)
   }
 }

@@ -48,7 +48,7 @@ class Report
   }
 
   async getBetTotal(userID, isSettle) {
-    return _.head(await this.getCommonBetQuery(userID, isSettle).count('1 as total'))
+    return _.head(await this.getCommonBetQuery(userID, isSettle).count('* as total'))
   }
 
   // transfer detail
@@ -57,7 +57,6 @@ class Report
       .where('type_id', PointLogTypeConstant.enum()[type])
     if (!_.isNull(identity))
     {
-
       if (identity === PointLogTypeConstant.SELLER_CODE)
       {
         // 轉出者
@@ -74,12 +73,13 @@ class Report
       // 儲值
       query.where('target_user_id', userID)
     }
+    return query
   }
 
   async getTransferDetail(userID, page, perPage, identity) {
     return await this.getCommonPointLogQuery(userID, PointLogTypeConstant.TRANSFER_CODE, identity)
-      .with('source_user', query => query.select('user_name', 'nick_name'))
-      .with('target_user', query => query.select('user_name', 'nick_name'))
+      .with('source_user')
+      .with('target_user')
       .offset((page - 1) * perPage)
       .limit(perPage)
       .fetch()
@@ -87,14 +87,14 @@ class Report
 
   async getTransferTotal(userID, identity) {
     return _.head(await this.getCommonPointLogQuery(userID, PointLogTypeConstant.TRANSFER_CODE, identity)
-      .count('1 as total'))
+      .count('* as total'))
   }
 
   // store detail
   async getStoreDetail(userID, page, perPage) {
     return await this.getCommonPointLogQuery(userID, PointLogTypeConstant.ADD_CODE)
-      .with('source_user', query => query.select('user_name', 'nick_name'))
-      .with('target_user', query => query.select('user_name', 'nick_name'))
+      .with('source_user')
+      .with('target_user')
       .offset((page - 1) * perPage)
       .limit(perPage)
       .fetch()
@@ -103,7 +103,7 @@ class Report
   async getStoreTotal(userID) {
     return _.head(await this.getCommonPointLogQuery(userID, PointLogTypeConstant.ADD_CODE)
       .where('type_id', PointLogTypeConstant.ADD_CODE)
-      .count('1 as total'))
+      .count('* as total'))
   }
 }
 

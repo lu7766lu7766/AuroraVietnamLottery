@@ -22,8 +22,7 @@
     },
     data: () => ({
       options: {},
-      cpName: 'lo',
-      loading: false
+      cpName: 'lo'
     }),
     methods: {
       async dataInit() {
