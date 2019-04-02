@@ -5,12 +5,12 @@ const Model = use('Model')
 
 class PointLog extends Model
 {
-  creator() {
-    return this.hasOne('App/Models/User', 'creator_id', 'id')
+  source_user() {
+    return this.hasOne('App/Models/User', 'source_user_id', 'id')
   }
 
-  user() {
-    return this.hasOne('App/Models/User', 'user_id', 'id')
+  target_user() {
+    return this.hasOne('App/Models/User', 'target_user_id', 'id')
   }
 
   type() {

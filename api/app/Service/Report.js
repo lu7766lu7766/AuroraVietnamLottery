@@ -9,6 +9,8 @@ const betRepo = App.make('Repositories/Bet')
 const ReportCodes = use('ApiCodes/Report3000')
 const GamesFactory = use('Factories/Games')
 
+// const PointLogTypeConstant = use('Constants/PointLogType')
+
 class Report
 {
   get source1() { return 'https://xosodaiphat.com/xsmb-xo-so-mien-bac.html' }
@@ -118,7 +120,7 @@ class Report
    */
   async betDetail({auth, request}) {
     const user = await userService.getUser({auth})
-    return reportRepo.getBetDetail(user.id, request.input('page'), request.input('perPage'), request.input('isSettle'))
+    return reportRepo.getBetDetail(user.id, request.input('page', 1), request.input('perPage', 20), +request.input('isSettle'))
   }
 
   /**
@@ -126,23 +128,39 @@ class Report
    */
   async betTotal({auth, request}) {
     const user = await userService.getUser({auth})
-    return reportRepo.getBetTotal(user.id, request.input('isSettle'))
+    return reportRepo.getBetTotal(user.id, +request.input('isSettle'))
   }
 
   /**
-   * 儲值, 提領明細
+   * 轉移明細
+   */
+  async transferDetail({auth, request}) {
+    const user = await userService.getUser({auth})
+    return await reportRepo.getTransferDetail(user.id, request.input('page', 1), request.input('perPage', 20), +request.input('identity'))
+  }
+
+  /**
+   * 轉移明細總計
+   */
+  async transferTotal({auth, request}) {
+    const user = await userService.getUser({auth})
+    return await reportRepo.getTransferTotal(user.id, +request.input('identity'))
+  }
+
+  /**
+   * 儲值明細
    */
   async storeDetail({auth, request}) {
     const user = await userService.getUser({auth})
-    return await reportRepo.getStoreDetail(user.id, request.input('page'), request.input('perPage'), request.input('status'))
+    return await reportRepo.getStoreDetail(user.id, request.input('page', 1), request.input('perPage', 20))
   }
 
   /**
-   * 儲值, 提領明細總計
+   * 儲值明細總計
    */
-  async storeTotal({auth, request}) {
+  async storeTotal({auth}) {
     const user = await userService.getUser({auth})
-    return await reportRepo.getStoreTotal(user.id, request.input('status'))
+    return await reportRepo.getStoreTotal(user.id)
   }
 }
 

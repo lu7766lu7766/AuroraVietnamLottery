@@ -42,14 +42,28 @@ class ReportController
   }
 
   /**
-   * 儲值, 提領明細
+   * 轉移明細
+   */
+  async transferDetail({auth, request}) {
+    return reportService.transferDetail({auth, request})
+  }
+
+  /**
+   * 轉移明細總計
+   */
+  async transferTotal({auth, request}) {
+    return reportService.transferTotal({auth, request})
+  }
+
+  /**
+   * 儲值明細
    */
   async storeDetail({auth, request}) {
     return reportService.storeDetail({auth, request})
   }
 
   /**
-   * 儲值, 提領明細總計
+   * 儲值明細總計
    */
   async storeTotal({auth, request}) {
     return reportService.storeTotal({auth, request})

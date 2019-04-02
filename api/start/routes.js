@@ -44,10 +44,12 @@ Route.group(() =>
   Route.post('bet', 'BetController.index').validator('Bet')
 
   // about report
-  Route.get('report/bet', 'ReportController.betDetail').validator(['Page', 'BetReport'])
+  Route.get('report/bet', 'ReportController.betDetail').validator(['BetReport'])
   Route.get('report/bet/total', 'ReportController.betTotal').validator('BetReport')
-  // Route.get('report/transfer', 'ReportController.storeDetail').validator(['Page', 'Store'])
-  // Route.get('report/tramsfer/total', 'ReportController.storeTotal').validator(['Store'])
+  Route.get('report/transfer', 'ReportController.transferDetail').validator(['TransferReport'])
+  Route.get('report/transfer/total', 'ReportController.transferTotal').validator(['TransferReport'])
+  Route.get('report/store', 'ReportController.storeDetail')
+  Route.get('report/store/total', 'ReportController.storeTotal')
 
   //
   // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')

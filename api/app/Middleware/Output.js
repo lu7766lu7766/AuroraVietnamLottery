@@ -7,7 +7,7 @@ class OutputMiddleware
   async handle({response}, next) {
     await next()
     response.send({
-      code: CommonCodes.OK,
+      code: [CommonCodes.OK],
       data: response._lazyBody.content
     })
   }

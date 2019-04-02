@@ -8,6 +8,10 @@ class PointLogTypeConstants
 
   static get TRANSFER() { return 'transfer'}
 
+  static get SELLER_CODE() { return -1 }
+
+  static get BUYER_CODE() { return 1 }
+
   static enum() {
     return {
       [this.ADD_CODE]: this.ADD,

@@ -4,6 +4,7 @@ const LotteryModel = use('Models/Lottery')
 const BetModel = use('Models/Bet')
 const UserModel = use('Models/User')
 const PointLogModel = use('Models/PointLog')
+const PointLogTypeConstant = use('Constants/PointLogType')
 
 class Report
 {
@@ -33,50 +34,76 @@ class Report
   }
 
   // bet detail
-  getBetQueryBySettle(isSettle) {
-    const query = BetModel.query()
-    if (typeof isSettle == 'string') query.where('is_settle', isSettle)
-    return query
+  getCommonBetQuery(userID, isSettle) {
+    return BetModel.query().where('user_id', userID).where('is_settle', isSettle)
   }
 
-  async getBetDetail(userID, page = 1, perPage = 20, isSettle = null) {
-    return await this.getBetQueryBySettle(isSettle)
-      .where('user_id', userID)
+  async getBetDetail(userID, page, perPage, isSettle) {
+    return await this.getCommonBetQuery(userID, isSettle)
+      .select('lotteries_date', 'game_type_id', 'bet_point', 'win_point', 'created_at')
+      .offset((page - 1) * perPage)
+      .limit(perPage)
+      .orderBy('id', 'desc')
+      .fetch()
+  }
+
+  async getBetTotal(userID, isSettle) {
+    return _.head(await this.getCommonBetQuery(userID, isSettle).count('1 as total'))
+  }
+
+  // transfer detail
+  getCommonPointLogQuery(userID, type, identity = null) {
+    let query = PointLogModel.query()
+      .where('type_id', PointLogTypeConstant.enum()[type])
+    if (!_.isNull(identity))
+    {
+
+      if (identity === PointLogTypeConstant.SELLER_CODE)
+      {
+        // 轉出者
+        query.where('source_user_id', userID)
+      }
+      else if (identity === PointLogTypeConstant.BUYER_CODE)
+      {
+        // 轉入者
+        query.where('target_user_id', userID)
+      }
+    }
+    else
+    {
+      // 儲值
+      query.where('target_user_id', userID)
+    }
+  }
+
+  async getTransferDetail(userID, page, perPage, identity) {
+    return await this.getCommonPointLogQuery(userID, PointLogTypeConstant.TRANSFER_CODE, identity)
+      .with('source_user', query => query.select('user_name', 'nick_name'))
+      .with('target_user', query => query.select('user_name', 'nick_name'))
       .offset((page - 1) * perPage)
       .limit(perPage)
       .fetch()
   }
 
-  async getBetTotal(userID, isSettle = null) {
-    return await this.getBetQueryBySettle(isSettle).where('user_id', userID).count('* as total')
+  async getTransferTotal(userID, identity) {
+    return _.head(await this.getCommonPointLogQuery(userID, PointLogTypeConstant.TRANSFER_CODE, identity)
+      .count('1 as total'))
   }
 
   // store detail
-  getStoreQueryByStatus(status) {
-    const query = PointLogModel.query()
-    if (typeof status == 'string')
-    {
-      query.where('point',
-        status > 0
-          ? '>'
-          : '<',
-        0)
-    }
-    return query
-  }
-
-  async getStoreDetail(userID, page = 1, perPage = 20, status = null) {
-    return await this.getStoreQueryByStatus(status)
-      .with('creator', query => query.select('id', 'user_id', 'name'))
-      .with('user', query => query.select('id', 'user_id', 'name'))
-      .where('user_id', userID)
+  async getStoreDetail(userID, page, perPage) {
+    return await this.getCommonPointLogQuery(userID, PointLogTypeConstant.ADD_CODE)
+      .with('source_user', query => query.select('user_name', 'nick_name'))
+      .with('target_user', query => query.select('user_name', 'nick_name'))
       .offset((page - 1) * perPage)
       .limit(perPage)
       .fetch()
   }
 
-  async getStoreTotal(userID, status = null) {
-    return await this.getStoreQueryByStatus(status).where('user_id', userID).count('* as total')
+  async getStoreTotal(userID) {
+    return _.head(await this.getCommonPointLogQuery(userID, PointLogTypeConstant.ADD_CODE)
+      .where('type_id', PointLogTypeConstant.ADD_CODE)
+      .count('1 as total'))
   }
 }
 
