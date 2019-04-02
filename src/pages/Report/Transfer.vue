@@ -1,5 +1,5 @@
 <template>
   <div>
-    i'm store report
+    i'm transfer report
   </div>
 </template>

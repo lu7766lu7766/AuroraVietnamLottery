@@ -1,8 +1,8 @@
 export default class Request
 {
   constructor() {
-    this.user = new (require('./ApiFetch/User').default)
-    this.bet = new (require('./ApiFetch/Bet').default)
-    this.report = new (require('./ApiFetch/Report').default)
+    this.user = new (require('./ApiRequest/User').default)
+    this.bet = new (require('./ApiRequest/Bet').default)
+    this.report = new (require('./ApiRequest/Report').default)
   }
 }

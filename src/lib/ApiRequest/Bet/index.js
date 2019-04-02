@@ -1,7 +1,7 @@
-import BaseFetch from '../BaseFetch'
+import BaseRequest from '../BaseRequest'
 import _config from './config'
 
-export default class Bet extends BaseFetch
+export default class Bet extends BaseRequest
 {
   constructor() {
     super()

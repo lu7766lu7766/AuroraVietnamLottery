@@ -15,7 +15,7 @@ axios.interceptors.response.use((response) =>
   return Promise.reject(error.response)
 })
 
-export default class BaseFetch
+export default class BaseRequest
 {
   constructor() {
   }

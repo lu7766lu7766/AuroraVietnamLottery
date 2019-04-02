@@ -15,7 +15,7 @@
           <!---------- Report ---------->
           <v-ons-list-item class="bg-secondary text-white">Report</v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
-            <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Result</div>
+            <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Report</div>
           </v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
             <div class="center" @click="openSide = false; $router.push({ name: 'transfer-report'})">Transfer Report
