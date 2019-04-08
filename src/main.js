@@ -17,6 +17,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VeeValidate from 'vee-validate'
 import en from 'vee-validate/dist/locale/en'
 
+import VueBus from 'vue-bus'
+
+Vue.use(VueBus)
+
 const config = {
   locale: 'en',
   events: 'input|blur',
@@ -33,6 +37,10 @@ Vue.config.productionTip = false
 import MyPlugin from 'src/plugin'
 
 Vue.use(MyPlugin)
+
+import $ from 'jquery'
+
+window.$ = $
 
 new Vue({
   router,

@@ -65,17 +65,37 @@
       }
     },
     methods: {
+      onBottom() {
+        if (this.paginate.page < this.lastPage)
+        {
+          this.onPageChange(this.paginate.page + 1)
+        }
+      },
       async getDatas() {
-        const res = await axios.all([
-          this.$api.report.getTransferDetail(this.requestBody),
-          this.$api.report.getTransferTotal(this.requestBody)
-        ])
-        this.datas = res[0].data
-        this.paginate.total = res[1].data.total
+        const res = await this.$api.report.getTransferDetail(this.requestBody)
+        this.datas = res.data
+      },
+      async getTotal() {
+        const res = await this.$api.report.getTransferTotal(this.requestBody)
+        this.paginate.total = res.data.total
+      },
+      onSearch() {
+        this.callApi(() =>
+        {
+          axios.all([this.getDatas(), this.getTotal()])
+        })
+      },
+      onPageChange(page) {
+        this.paginate.page = page
+        this.callApi(this.getDatas)
       }
     },
     mounted() {
-      this.callApi(this.getDatas)
+      this.onSearch()
+      this.$bus.on('onBottom', this.onBottom)
+    },
+    destroyed() {
+      this.$bus.off('onBottom')
     }
   }
 </script>

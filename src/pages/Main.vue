@@ -78,6 +78,12 @@
       openSide: false
     }),
     methods: {
+      onScroll(e) {
+        if (e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight)
+        {
+          this.$bus.emit('onBottom')
+        }
+      },
       dataInit() {
         this.callApi(async () =>
         {
@@ -99,6 +105,10 @@
     },
     mounted() {
       this.dataInit()
+      $('.page__content').on('scroll', this.onScroll)
+    },
+    destroyed() {
+      $('.page__content').off('scroll')
     }
   }
 </script>
