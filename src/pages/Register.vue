@@ -31,6 +31,12 @@
             </v-ons-input>
           </div>
         </v-ons-list-item>
+        <v-ons-list-item>
+          <div class="center">
+            <v-ons-input placeholder="Nick Name" float v-model="nickName">
+            </v-ons-input>
+          </div>
+        </v-ons-list-item>
 
         <v-ons-list-item>
           <v-ons-col>
@@ -60,7 +66,8 @@
     mixins: [ReqMixins],
     data: () => ({
       userName: '',
-      password: ''
+      password: '',
+      nickName: ''
     }),
     methods: {
       async register() {
