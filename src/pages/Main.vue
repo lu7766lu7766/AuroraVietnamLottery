@@ -6,6 +6,9 @@
       <v-ons-page>
         <v-ons-list>
 
+          <v-ons-list-item class="bg-dark text-white">
+            <div class="center">Hi {{ thisNickName }} !</div>
+          </v-ons-list-item>
           <!---------- Game ---------->
           <v-ons-list-item class="bg-secondary text-white">Game</v-ons-list-item>
           <v-ons-list-item tappable modifier="chevron">
@@ -87,6 +90,9 @@
       }
     },
     computed: {
+      thisNickName() {
+        return _(this).getVal('$store.state.User.info.nick_name', '')
+      },
       thisPoint() {
         return _(this).getVal('$store.state.User.info.point', 0)
       }

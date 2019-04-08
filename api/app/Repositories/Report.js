@@ -40,7 +40,9 @@ class Report
 
   async getBetDetail(userID, page, perPage, isSettle) {
     return await this.getCommonBetQuery(userID, isSettle)
-      .select('lotteries_date', 'game_type_id', 'bet_point', 'win_point', 'created_at')
+      .select('id', 'lotteries_date', 'game_type_id', 'bet_point', 'win_point', 'created_at')
+      .with('numbers')
+      .with('game_type')
       .offset((page - 1) * perPage)
       .limit(perPage)
       .orderBy('id', 'desc')

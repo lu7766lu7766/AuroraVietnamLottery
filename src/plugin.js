@@ -18,5 +18,13 @@ export default {
     Vue.prototype._ = _
     Vue.prototype.moment = moment
     Vue.prototype.$api = new ApiRequest()
+    Vue.filter('dateTime', function (value)
+    {
+      return moment(value).format('YYYY-MM-DD HH:mm:ss')
+    })
+    Vue.filter('date', function (value)
+    {
+      return moment(value).format('YYYY-MM-DD')
+    })
   }
 }
