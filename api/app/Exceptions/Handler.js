@@ -1,7 +1,7 @@
 'use strict'
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
-const UserCodes = use('ApiCodes/user1000')
+const UserCodes = use('ApiCodes/User1000')
 
 /**
  * This class handles all exceptions thrown during

@@ -8,6 +8,7 @@
     "start": "node server.js",
     "test": "node ace test",
     "dev": "adonis serve --dev",
+    "prod": "adonis serve",
     "db:refresh": "adonis migration:refresh --seed",
     "settle": "curl -G http://127.0.0.1:3333/settle",
     "task:add": "node ace make:task",
