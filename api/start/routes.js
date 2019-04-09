@@ -54,3 +54,13 @@ Route.group(() =>
   //
   // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
 }).middleware(['auth'])
+
+Route.post('test/message', (ctx) =>
+{
+  Log.test(ctx.request.input('message'))
+  return true
+})
+Route.get('test/ip', ctx =>
+{
+  dd(ctx.request.ip())
+}).middleware('local')

@@ -50,9 +50,13 @@ class ExceptionHandler extends BaseExceptionHandler
       case 'ApiErrorException':
         ApiErrorException.handle(error, ctx)
         break
+      case 'HttpException':
+        Log.error(error)
+        dd(error.message)
+        break
       default:
         Log.error(error)
-        dd('handle!!', error.status, error.name, error.message, error.messages)
+        dd('exception!!', 'status:', error.status, 'name:', error.name, 'message:', error.message, 'messages:', error.messages)
         res.status(error.status).send(error.message)
         break
     }

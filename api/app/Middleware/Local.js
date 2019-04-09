@@ -1,12 +1,11 @@
 'use strict'
 
-const Env = use('Env')
 const CommonCodes = use('ApiCodes/Common')
 
 class LocalMiddleware
 {
   async handle({request, response}, next) {
-    if (request.ip() == Env.get('HOST'))
+    if (request.ip() == '127.0.0.1')
     {
       await next()
     }

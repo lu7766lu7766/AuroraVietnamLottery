@@ -52,6 +52,12 @@ class AppProvider extends ServiceProvider
           .transport('error')
           .error(`${moment().format(this.format)}: ${msg}`)
       }
+
+      static test(msg) {
+        Logger
+          .transport('test')
+          .error(`${moment().format(this.format)}: ${msg}`)
+      }
     }
     global.dd = Logger.alert
 
