@@ -46,6 +46,11 @@ export default new Router({
           path: 'transferPoint',
           name: 'transferPoint',
           component: () => import('pages/TransferPoint')
+        },
+        {
+          path: 'createUser',
+          name: 'createUser',
+          component: () => import('pages/CreateUser')
         }
       ]
     },

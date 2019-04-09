@@ -34,6 +34,9 @@
           <!---------- System---------->
           <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
           <v-ons-list-item tappable>
+            <div class="center" @click="openSide = false; $router.push({ name: 'createUser'})">Create User</div>
+          </v-ons-list-item>
+          <v-ons-list-item tappable>
             <div class="center" @click="openSide = false; logout()">Logout</div>
           </v-ons-list-item>
 
@@ -102,6 +105,15 @@
       },
       thisPoint() {
         return _(this).getVal('$store.state.User.info.point', 0)
+      },
+      isAdmin() {
+        return _(this.$store.getters).getVal(UserType.isAdmin)
+      },
+      isSupplier() {
+        return _(this.$store.getters).getVal(UserType.isSupplier)
+      },
+      isGamer() {
+        return _(this.$store.getters).getVal(UserType.isGamer)
       }
     },
     mounted() {
