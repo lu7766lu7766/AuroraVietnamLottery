@@ -10,6 +10,6 @@ export const UnLoginCode = 401
  */
 export const apiHosts = {
   local: 'localhost:3333',
-  test: '202.153.169.28:3333',
+  test: 'game.smartoceanglobal.com:3333',
   stable: ''
 }

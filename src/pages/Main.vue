@@ -75,7 +75,8 @@
   export default {
     mixins: [ReqMixins],
     data: () => ({
-      openSide: false
+      openSide: false,
+      scroller: null
     }),
     methods: {
       onScroll(e) {
@@ -105,10 +106,11 @@
     },
     mounted() {
       this.dataInit()
-      document.querySelector('.container').parentNode.addEventListener('scroll', this.onScroll, true)
+      this.scroller = document.querySelector('.container').parentNode
+      this.scroller.addEventListener('scroll', this.onScroll, true)
     },
-    destroyed() {
-      document.querySelector('.container').parentNode.removeEventListener('scroll', this.onScroll)
+    beforeDestroy() {
+      this.scroller.removeEventListener('scroll', this.onScroll)
     }
   }
 </script>

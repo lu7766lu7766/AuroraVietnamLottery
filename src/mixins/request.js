@@ -5,7 +5,14 @@ export default {
   methods: {
     async callApi(f) {
       this.$loading()
-      await f()
+      try
+      {
+        await f()
+      } catch (e)
+      {
+        this.$loading.close()
+        throw e
+      }
       this.$loading.close()
     },
     doSearch(f) {
