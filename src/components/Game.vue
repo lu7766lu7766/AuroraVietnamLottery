@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading">
+  <div>
     <h1>{{ this.title }}</h1>
     <v-ons-list>
       <v-ons-list-item v-for="index in _.range(0, length)" :key="index">

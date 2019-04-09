@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading">
+  <div>
     <el-tabs v-model="cpName" @tab-click="handleClick">
       <el-tab-pane
           v-for="code in _.keys(options)" :key="code" :label="code.toUpperCase()" :name="code"></el-tab-pane>

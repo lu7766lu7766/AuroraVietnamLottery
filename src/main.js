@@ -21,6 +21,7 @@ import VueBus from 'vue-bus'
 
 Vue.use(VueBus)
 
+
 const config = {
   locale: 'en',
   events: 'input|blur',
@@ -38,9 +39,16 @@ import MyPlugin from 'src/plugin'
 
 Vue.use(MyPlugin)
 
-import $ from 'jquery'
 
-window.$ = $
+// import VueLoading from 'vue-loading-overlay'
+// import 'vue-loading-overlay/dist/vue-loading.css'
+//
+// //vue-loading-overlay
+// Vue.use(VueLoading) //Use default options
+import 'vue2-toast/lib/toast.css'
+import Toast from 'vue2-toast'
+
+Vue.use(Toast)
 
 new Vue({
   router,

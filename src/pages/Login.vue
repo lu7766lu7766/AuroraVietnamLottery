@@ -18,7 +18,7 @@
       </v-ons-row>
 
 
-      <v-ons-list v-loading="loading">
+      <v-ons-list>
         <v-ons-list-item>
           <div class="center">
             <v-ons-input placeholder="Your ID" float v-model="userName">

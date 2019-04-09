@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading">
+  <div>
     <h1>Transfer point</h1>
     <v-ons-list>
       <v-ons-list-item>

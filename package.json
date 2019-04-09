@@ -1,57 +1,57 @@
 {
-    "name": "helloworld",
-    "displayName": "HelloCordova",
-    "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
-    "main": "index.js",
-    "scripts": {
-        "dev": "vue-cli-service serve",
-        "build": "vue-cli-service build",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build:android": "yarn build && cordova build android",
-        "build:ios": "yarn build && cordova build ios",
-        "run:android": "yarn build && cordova run android",
-        "run:ios": "yarn build && cordova run ios"
+  "name": "helloworld",
+  "displayName": "HelloCordova",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:android": "yarn build && cordova build android",
+    "build:ios": "yarn build && cordova build ios",
+    "run:android": "yarn build && cordova run android",
+    "run:ios": "yarn build && cordova run ios"
+  },
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@vue/cli": "^3.2.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "cordova-android": "^7.1.4",
+    "cordova-ios": "^4.5.5",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "element-ui": "^2.4.11",
+    "global": "^4.3.2",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "onsenui": "^2.10.6",
+    "qs": "^6.6.0",
+    "vee-validate": "^2.1.4",
+    "vue": "^2.5.17",
+    "vue-bus": "^1.2.1",
+    "vue-onsenui": "^2.6.1",
+    "vue-router": "^3.0.1",
+    "vue2-toast": "^2.0.2",
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-service": "^3.2.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
     },
-    "author": "Apache Cordova Team",
-    "license": "Apache-2.0",
-    "private": true,
-    "dependencies": {
-        "@vue/cli": "^3.2.1",
-        "axios": "^0.18.0",
-        "bootstrap": "^4.1.3",
-        "cordova-android": "^7.1.4",
-        "cordova-ios": "^4.5.5",
-        "cordova-plugin-whitelist": "^1.3.3",
-        "element-ui": "^2.4.11",
-        "global": "^4.3.2",
-        "jquery": "^3.3.1",
-        "lodash": "^4.17.11",
-        "moment": "^2.23.0",
-        "onsenui": "^2.10.6",
-        "qs": "^6.6.0",
-        "vee-validate": "^2.1.4",
-        "vue": "^2.5.17",
-        "vue-bus": "^1.2.1",
-        "vue-onsenui": "^2.6.1",
-        "vue-router": "^3.0.1",
-        "vuex": "^3.0.1",
-        "vuex-persistedstate": "^2.5.4"
-    },
-    "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.2.0",
-        "@vue/cli-service": "^3.2.0",
-        "stylus": "^0.54.5",
-        "stylus-loader": "^3.0.2",
-        "vue-template-compiler": "^2.5.17"
-    },
-    "cordova": {
-        "plugins": {
-            "cordova-plugin-whitelist": {}
-        },
-        "platforms": [
-            "android",
-            "ios"
-        ]
-    }
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  }
 }

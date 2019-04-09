@@ -1,5 +1,5 @@
 <template>
-  <section v-loading="loading">
+  <section>
     <el-tabs v-model="search.identity">
       <el-tab-pane v-for="(name, code) in options" :key="code" :label="name" :name="code"></el-tab-pane>
     </el-tabs>
@@ -44,10 +44,10 @@
 </template>
 
 <script>
-  import ReqMixins from 'mixins/request'
+  import ScrollBottom from 'mixins/scrollBottom'
 
   export default {
-    mixins: [ReqMixins],
+    mixins: [ScrollBottom],
     data: () => ({
       options: {
         '-1': 'Seller',
@@ -61,41 +61,27 @@
     watch: {
       'search.identity'() {
         this.datas = []
-        this.getDatas()
+        this.onSearch()
       }
     },
     methods: {
-      onBottom() {
-        if (this.paginate.page < this.lastPage)
-        {
-          this.onPageChange(this.paginate.page + 1)
-        }
-      },
       async getDatas() {
         const res = await this.$api.report.getTransferDetail(this.requestBody)
-        this.datas = res.data
+        this.datas = _.concat(this.datas, res.data)
       },
       async getTotal() {
         const res = await this.$api.report.getTransferTotal(this.requestBody)
         this.paginate.total = res.data.total
       },
       onSearch() {
-        this.callApi(() =>
+        this.doSearch(async () =>
         {
-          axios.all([this.getDatas(), this.getTotal()])
+          await axios.all([this.getDatas(), this.getTotal()])
         })
-      },
-      onPageChange(page) {
-        this.paginate.page = page
-        this.callApi(this.getDatas)
       }
     },
     mounted() {
       this.onSearch()
-      this.$bus.on('onBottom', this.onBottom)
-    },
-    destroyed() {
-      this.$bus.off('onBottom')
     }
   }
 </script>

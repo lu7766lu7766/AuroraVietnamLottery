@@ -1,5 +1,5 @@
 <template>
-  <el-row v-loading="loading">
+  <el-row>
     <el-tabs v-model="search.isSettle">
       <el-tab-pane v-for="(name, code) in options.tab" :key="code" :label="name" :name="code"></el-tab-pane>
     </el-tabs>
@@ -68,11 +68,10 @@
 </template>
 
 <script>
-  import ReqMixins from 'mixins/request'
-  import PaginateMixins from 'mixins/paginate'
+  import ScrollBottom from 'mixins/scrollBottom'
 
   export default {
-    mixins: [ReqMixins, PaginateMixins],
+    mixins: [ScrollBottom],
     data: () => ({
       options: {
         tab: {
@@ -89,41 +88,27 @@
     watch: {
       'search.isSettle'() {
         this.datas = []
-        this.getDatas()
+        this.onSearch()
       }
     },
     methods: {
-      onBottom() {
-        if (this.paginate.page < this.lastPage)
-        {
-          this.onPageChange(this.paginate.page + 1)
-        }
-      },
       async getDatas() {
         const res = await this.$api.report.getBetDetail(this.requestBody)
-        this.datas = res.data
+        this.datas = _.concat(this.datas, res.data)
       },
       async getTotal() {
         const res = await this.$api.report.getBetTotal(this.requestBody)
         this.paginate.total = res.data.total
       },
       onSearch() {
-        this.callApi(() =>
+        this.doSearch(async () =>
         {
-          axios.all([this.getDatas(), this.getTotal()])
+          await axios.all([this.getDatas(), this.getTotal()])
         })
-      },
-      onPageChange(page) {
-        this.paginate.page = page
-        this.callApi(this.getDatas)
       }
     },
     mounted() {
       this.onSearch()
-      this.$bus.on('onBottom', this.onBottom)
-    },
-    destroyed() {
-      this.$bus.off('onBottom')
     }
   }
 </script>

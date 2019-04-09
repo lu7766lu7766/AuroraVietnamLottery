@@ -105,10 +105,10 @@
     },
     mounted() {
       this.dataInit()
-      $('.page__content').on('scroll', this.onScroll)
+      document.querySelector('.container').parentNode.addEventListener('scroll', this.onScroll, true)
     },
     destroyed() {
-      $('.page__content').off('scroll')
+      document.querySelector('.container').parentNode.removeEventListener('scroll', this.onScroll)
     }
   }
 </script>

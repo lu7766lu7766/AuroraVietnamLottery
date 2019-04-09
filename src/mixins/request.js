@@ -2,14 +2,18 @@ import PageMixins from 'mixins/paginate'
 
 export default {
   mixins: [PageMixins],
-  data: () => ({
-    loading: false
-  }),
   methods: {
     async callApi(f) {
-      this.loading = true
+      this.$loading()
       await f()
-      this.loading = false
+      this.$loading.close()
+    },
+    doSearch(f) {
+      this.callApi(f)
+    },
+    doPageChange(page, f) {
+      this.paginate.page = page
+      this.callApi(f)
     }
   },
   computed: {
