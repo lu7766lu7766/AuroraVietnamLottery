@@ -15,6 +15,10 @@
     "uri": "user/create",
     "method": "post"
   },
+  "updateUser": {
+    "uri": "user/update",
+    "method": "put"
+  },
   "transferPoint": {
     "uri": "point/transfer",
     "method": "put"

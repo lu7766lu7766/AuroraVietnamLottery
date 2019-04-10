@@ -9,44 +9,64 @@
           <v-ons-list-item class="bg-dark text-white">
             <div class="center">Hi {{ User.nickName }} !</div>
           </v-ons-list-item>
-          <!---------- Game ---------->
-          <v-ons-list-item class="bg-secondary text-white">Game</v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
-            <div class="center" @click="openSide = false; $router.push({ name: 'betting'})">Betting</div>
-          </v-ons-list-item>
 
-          <!---------- Report ---------->
-          <v-ons-list-item class="bg-secondary text-white">Report</v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
-            <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Report</div>
-          </v-ons-list-item>
-          <v-ons-list-item tappable modifier="chevron">
-            <div class="center" @click="openSide = false; $router.push({ name: 'transfer-report'})">Transfer Report
-            </div>
-          </v-ons-list-item>
+          <section v-show="!backend">
+            <!---------- Game ---------->
+            <v-ons-list-item class="bg-secondary text-white">Game</v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="openSide = false; $router.push({ name: 'betting'})">Betting</div>
+            </v-ons-list-item>
 
-          <!---------- Transfer---------->
-          <v-ons-list-item class="bg-secondary text-white">Transfer</v-ons-list-item>
-          <v-ons-list-item tappable>
-            <div class="center" @click="openSide = false; $router.push({ name: 'transferPoint'})">Point</div>
-          </v-ons-list-item>
-          <!--<v-ons-list-item tappable v-if="User.isManager">-->
-          <!--<div class="center" @click="openSide = false; $router.push({ name: 'addPoing'})">Add Point</div>-->
-          <!--</v-ons-list-item>-->
-          <!---------- System---------->
-          <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
-          <v-ons-list-item tappable v-if="User.isManager">
-            <div class="center" @click="openSide = false; $router.push({ name: 'createUser'})">Create User</div>
-          </v-ons-list-item>
-          <!--<v-ons-list-item tappable>-->
-          <!--<div class="center" @click="openSide = false; $router.push({ name: 'updateUser'})">Update User Profile</div>-->
-          <!--</v-ons-list-item>-->
+            <!---------- Report ---------->
+            <v-ons-list-item class="bg-secondary text-white">Report</v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="openSide = false; $router.push({ name: 'bet-report'})">Bet Report</div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="openSide = false; $router.push({ name: 'transfer-report'})">Transfer Report
+              </div>
+            </v-ons-list-item>
 
-          <v-ons-list-item tappable>
-            <div class="center" @click="openSide = false; logout()">Logout</div>
-          </v-ons-list-item>
+            <!---------- Transfer---------->
+            <v-ons-list-item class="bg-secondary text-white">Point</v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="openSide = false; $router.push({ name: 'transferPoint' })">Transfer Point
+              </div>
+            </v-ons-list-item>
+
+
+            <!---------- System---------->
+            <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="openSide = false; $router.push({ name: 'updateUser'})">Update Profile</div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
+              <div class="center" @click="backend = !backend" v-if="User.isManager">Backend</div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable>
+              <div class="center" @click="openSide = false; logout()">Logout</div>
+            </v-ons-list-item>
+          </section>
+
+          <section v-show="backend">
+            <v-ons-list-item class="bg-secondary text-white">Backend</v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
+              <div class="center" @click="openSide = false; $router.push({ name: 'createUser'})" v-if="User.isManager">
+                Create User
+              </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
+              <div class="center" @click="openSide = false; $router.push({ name: 'addPoint' })" v-if="User.isAdmin">
+                Add Point
+              </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron">
+              <div class="center" @click="backend = !backend">Back</div>
+            </v-ons-list-item>
+          </section>
 
         </v-ons-list>
+
       </v-ons-page>
     </v-ons-splitter-side>
 
@@ -85,7 +105,8 @@
     mixins: [ReqMixins],
     data: () => ({
       openSide: false,
-      scroller: null
+      scroller: null,
+      backend: false
     }),
     methods: {
       onScroll(e) {
@@ -94,7 +115,7 @@
           this.$bus.emit('onBottom')
         }
       },
-      dataInit() {
+      getUserInfo() {
         this.callApi(async () =>
         {
           const res = await this.$api.user.getUserInfo()
@@ -107,12 +128,14 @@
       }
     },
     mounted() {
-      this.dataInit()
+      this.getUserInfo()
       this.scroller = document.querySelector('.container').parentNode
       this.scroller.addEventListener('scroll', this.onScroll, true)
+      this.$bus.on('getUserInfo', this.getUserInfo)
     },
     beforeDestroy() {
       this.scroller.removeEventListener('scroll', this.onScroll)
+      this.$bus.off('getUserInfo')
     }
   }
 </script>

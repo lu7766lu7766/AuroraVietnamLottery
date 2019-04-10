@@ -48,9 +48,19 @@ export default new Router({
           component: () => import('pages/TransferPoint')
         },
         {
+          path: 'addPoint',
+          name: 'addPoint',
+          component: () => import('pages/AddPoint')
+        },
+        {
           path: 'createUser',
           name: 'createUser',
           component: () => import('pages/CreateUser')
+        },
+        {
+          path: 'updateUser',
+          name: 'updateUser',
+          component: () => import('pages/UpdateUser')
         }
       ]
     },

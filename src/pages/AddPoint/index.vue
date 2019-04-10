@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Transfer point</h1>
+    <h1>Add point</h1>
     <v-ons-list>
       <v-ons-list-item>
         <div class="center">
@@ -19,7 +19,7 @@
 
       <v-ons-list-item>
         <div class="center">
-          <el-input-number placeholder="How much point you want to transfer"
+          <el-input-number placeholder="How much point you want to add"
                            name="point"
                            v-validate="'required|integer|min:0'"
                            v-model="data.point"
@@ -57,7 +57,7 @@
       submit() {
         this.callApi(async () =>
         {
-          this.$api.user.transferPoint(_.pick(this.data, ['userName', 'point']), {
+          this.$api.user.addPoint(_.pick(this.data, ['userName', 'point']), {
             s: () =>
             {
               this.$notify({
@@ -65,7 +65,7 @@
                 message: 'Success',
                 position: 'bottom-left'
               })
-              this.$store.commit(UserType.changePoint, -this.data.point)
+              this.$bus.emit('getUserInfo')
             },
             f: errorMessges =>
             {
