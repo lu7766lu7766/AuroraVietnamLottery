@@ -7,7 +7,7 @@
         <v-ons-list>
 
           <v-ons-list-item class="bg-dark text-white">
-            <div class="center">Hi {{ thisNickName }} !</div>
+            <div class="center">Hi {{ User.nickName }} !</div>
           </v-ons-list-item>
           <!---------- Game ---------->
           <v-ons-list-item class="bg-secondary text-white">Game</v-ons-list-item>
@@ -30,12 +30,18 @@
           <v-ons-list-item tappable>
             <div class="center" @click="openSide = false; $router.push({ name: 'transferPoint'})">Point</div>
           </v-ons-list-item>
-
+          <!--<v-ons-list-item tappable v-if="User.isManager">-->
+          <!--<div class="center" @click="openSide = false; $router.push({ name: 'addPoing'})">Add Point</div>-->
+          <!--</v-ons-list-item>-->
           <!---------- System---------->
           <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
-          <v-ons-list-item tappable>
+          <v-ons-list-item tappable v-if="User.isManager">
             <div class="center" @click="openSide = false; $router.push({ name: 'createUser'})">Create User</div>
           </v-ons-list-item>
+          <!--<v-ons-list-item tappable>-->
+          <!--<div class="center" @click="openSide = false; $router.push({ name: 'updateUser'})">Update User Profile</div>-->
+          <!--</v-ons-list-item>-->
+
           <v-ons-list-item tappable>
             <div class="center" @click="openSide = false; logout()">Logout</div>
           </v-ons-list-item>
@@ -56,7 +62,7 @@
           <div class="center">Vietnam Lottery</div>
           <div class="right">
             <div style="padding: 0 10px" class="text-danger">
-              {{ thisPoint }}
+              {{ User.point }}
             </div>
           </div>
         </v-ons-toolbar>
@@ -97,23 +103,7 @@
       },
       logout() {
         this.$store.commit(LoginType.clearAccessToken)
-      }
-    },
-    computed: {
-      thisNickName() {
-        return _(this).getVal('$store.state.User.info.nick_name', '')
-      },
-      thisPoint() {
-        return _(this).getVal('$store.state.User.info.point', 0)
-      },
-      isAdmin() {
-        return _(this.$store.getters).getVal(UserType.isAdmin)
-      },
-      isSupplier() {
-        return _(this.$store.getters).getVal(UserType.isSupplier)
-      },
-      isGamer() {
-        return _(this.$store.getters).getVal(UserType.isGamer)
+        this.$store.commit(UserType.clearInfo)
       }
     },
     mounted() {

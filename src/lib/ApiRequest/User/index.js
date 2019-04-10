@@ -20,8 +20,8 @@ export default class User extends BaseRequest
     return await this.request('info')
   }
 
-  async createUser(data) {
-    return await this.request('createUser', data)
+  async createUser(data, options) {
+    return await this.request('createUser', data, options)
   }
 
   async transfer(data, options) {

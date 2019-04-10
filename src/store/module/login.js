@@ -26,7 +26,6 @@ export default {
     clearAccessToken(state) {
       state.token = null
       state.type = null
-      state.userInfo = {}
       router.replace({name: 'login'})
     }
   },

@@ -1,64 +1,57 @@
 <template>
   <div>
-    <h1>Transfer point</h1>
+    <h1>Create user</h1>
     <v-ons-list>
       <v-ons-list-item>
         <div class="center">
-          <el-input placeholder="Please input target User ID"
-                    name="userID"
+          <el-input placeholder="Please input user ID"
+                    name="userName"
                     v-validate="'required'"
                     v-model="data.userName">
-            <template slot="prepend">UserID</template>
+            <template slot="prepend">User ID</template>
           </el-input>
           <span class="el-message-box__errormsg"
-                v-if="errors.has('userID')">
-            {{ errors.first('userID') }}
+                v-if="errors.has('userName')">
+            {{ errors.first('userName') }}
           </span>
         </div>
       </v-ons-list-item>
 
       <v-ons-list-item>
         <div class="center">
-          <el-input placeholder="Please input target User ID"
-                    name="userID"
+          <el-input placeholder="Please input password"
+                    name="password"
                     v-validate="'required'"
-                    v-model="data.userName">
-            <template slot="prepend">UserID</template>
+                    v-model="data.password">
+            <template slot="prepend">Password</template>
           </el-input>
           <span class="el-message-box__errormsg"
-                v-if="errors.has('userID')">
-            {{ errors.first('userID') }}
+                v-if="errors.has('password')">
+            {{ errors.first('password') }}
           </span>
         </div>
       </v-ons-list-item>
 
       <v-ons-list-item>
         <div class="center">
-          <el-input placeholder="Please input target User ID"
-                    name="userID"
-                    v-validate="'required'"
-                    v-model="data.userName">
-            <template slot="prepend">UserID</template>
+          <el-input placeholder="Please input nick name"
+                    name="nickName"
+                    v-model="data.nickName">
+            <template slot="prepend">Nick Name</template>
           </el-input>
-          <span class="el-message-box__errormsg"
-                v-if="errors.has('userID')">
-            {{ errors.first('userID') }}
-          </span>
         </div>
       </v-ons-list-item>
 
       <v-ons-list-item>
         <div class="center">
-          <el-input placeholder="Please input target User ID"
-                    name="userID"
-                    v-validate="'required'"
-                    v-model="data.userName">
-            <template slot="prepend">UserID</template>
-          </el-input>
-          <span class="el-message-box__errormsg"
-                v-if="errors.has('userID')">
-            {{ errors.first('userID') }}
-          </span>
+          <el-select v-if="User.isAdmin" v-model="data.roleID" placeholder="Role">
+            <el-option
+                v-for="(name, id) in options.Role"
+                :key="id"
+                :label="name"
+                :value="id">
+            </el-option>
+          </el-select>
         </div>
       </v-ons-list-item>
 
@@ -69,7 +62,7 @@
 
 <script>
   import ReqMixins from 'mixins/request'
-  import { UserType } from 'module/user'
+  import Role from 'constants/Role'
 
   export default {
     mixins: [ReqMixins],
@@ -77,6 +70,9 @@
       EnterBtn: require('@/EnterBtn').default
     },
     data: () => ({
+      options: {
+        Role: Role.enum()
+      },
       data: {
         userName: '',
         password: '',

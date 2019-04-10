@@ -1,7 +1,9 @@
 import ApiRequest from 'lib/Request'
-import { Role } from 'config/role'
 
-global.Role = Role
+import User from 'lib/User'
+
+global.User = new User()
+
 
 _.mixin({
   getVal: function (data, prop, defaultVal = '')
@@ -21,7 +23,7 @@ export default {
     Vue.prototype._ = _
     Vue.prototype.moment = moment
     Vue.prototype.$api = new ApiRequest()
-    Vue.prototype.Role = Role
+    Vue.prototype.User = global.User
 
     Vue.filter('dateTime', function (value)
     {
