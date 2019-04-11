@@ -7,7 +7,7 @@ var webpackConfig = require('./webpack.config')
 // }
 
 module.exports = {
-  baseUrl: '/',
+  baseUrl: './',
   outputDir: 'www',
   lintOnSave: true,
   assetsDir: 'static',

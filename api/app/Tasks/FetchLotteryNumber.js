@@ -6,7 +6,7 @@ const shell = require('shelljs')
 class FetchLotteryNumber extends Task
 {
   static get schedule() {
-    return '* */16 19 * * *'
+    return '*/16 19 * * *'
     // return '*/10 * * * * *'
   }
 

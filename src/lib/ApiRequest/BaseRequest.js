@@ -6,7 +6,7 @@ import errorCode from 'src/config/error'
 import { apiHosts } from 'src/config/api'
 import env from 'src/../env'
 
-axios.defaults.baseURL = `//${apiHosts[env.target]}`
+axios.defaults.baseURL = `http://${apiHosts[env.target]}`
 axios.interceptors.response.use((response) =>
 {
   return response

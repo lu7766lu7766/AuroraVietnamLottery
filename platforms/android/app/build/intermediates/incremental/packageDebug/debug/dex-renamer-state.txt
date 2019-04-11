@@ -1,0 +1,4 @@
+#Thu Apr 11 18:32:23 CST 2019
+base.0=/Users/lu7766/Documents/htdocs/Work/Jac/Aurora/VietnamLottery/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
