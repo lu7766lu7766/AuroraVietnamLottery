@@ -57,7 +57,10 @@ class Report
     const $trs = $(`#kqngay_${m_id} table tr`)
     $trs.not($trs.first()).find('span').each(function (i)
     {
-      sqlBody['number' + (i + 1)] = $(this).text()
+      if (!isNaN(parseInt($(this).text())))
+      {
+        sqlBody['number' + (i + 1)] = $(this).text()
+      }
     })
     if (Object.keys(sqlBody).length < 27)
     {
@@ -77,7 +80,11 @@ class Report
     {
       $(this).html().replace('<br>', ' ').split(' ').forEach(num =>
       {
-        sqlBody['number' + (numKey++)] = num
+        // value has word not number
+        if (!isNaN(parseInt(value)))
+        {
+          sqlBody['number' + (numKey++)] = num
+        }
       })
     })
     if (Object.keys(sqlBody).length < 27)
@@ -107,7 +114,7 @@ class Report
       })
 
       bet = bet.toJSON()
-
+      // Log.info(JSON.stringify(bet))
       const GameProccesor = new GamesFactory(bet.game_type.id)
       const gameProccesor = new GameProccesor(bet)
       gameProccesor.settle()

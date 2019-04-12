@@ -11,7 +11,7 @@ class BetSchema extends Schema
     {
       table.increments()
       // table.string('id', 100).notNullable().unique()
-      table.date('lotteries_date').notNullable()
+      table.string('lotteries_date', 10).notNullable()
       table.integer('user_id').notNullable()
       table.integer('game_type_id').notNullable()
       table.integer('bet_point').notNullable()

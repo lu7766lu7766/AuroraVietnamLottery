@@ -3,10 +3,10 @@
 const Task = use('Task')
 const shell = require('shelljs')
 
-class FetchLotteryNumber extends Task
+class FetchLotteryNumbers extends Task
 {
   static get schedule() {
-    return '*/16 19 * * *'
+    return '31 19 * * * *'
     // return '*/10 * * * * *'
   }
 
@@ -16,4 +16,4 @@ class FetchLotteryNumber extends Task
   }
 }
 
-module.exports = FetchLotteryNumber
+module.exports = FetchLotteryNumbers
