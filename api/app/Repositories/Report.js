@@ -108,12 +108,17 @@ class Report
       .count('* as total'))
   }
 
-  async getLotteryNumbers(page, perPage) {
+  async getHistoryLottery(page, perPage) {
     return await LotteryModel.query()
       .offset((page - 1) * perPage)
       .limit(perPage)
       .orderBy('date', 'desc')
       .fetch()
+  }
+
+  async getHistoryLotteryTotal() {
+    return await LotteryModel.query()
+      .count('* as total')
   }
 }
 

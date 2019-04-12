@@ -22,5 +22,13 @@
   "storeTotal": {
     "uri": "report/store/store",
     "method": "get"
+  },
+  "historyLottery": {
+    "uri": "report/history/lottery",
+    "method": "get"
+  },
+  "historyLotteryTotal": {
+    "uri": "report/history/lottery/total",
+    "method": "get"
   }
 }

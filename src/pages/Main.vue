@@ -26,6 +26,10 @@
               <div class="center" @click="openSide = false; $router.push({ name: 'transfer-report'})">Transfer Report
               </div>
             </v-ons-list-item>
+            <v-ons-list-item tappable>
+              <div class="center" @click="openSide = false; $router.push({ name: 'history-lottery'})">History Numbers
+              </div>
+            </v-ons-list-item>
 
             <!---------- Transfer---------->
             <v-ons-list-item class="bg-secondary text-white">Point</v-ons-list-item>

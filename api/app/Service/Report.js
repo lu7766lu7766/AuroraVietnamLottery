@@ -171,10 +171,17 @@ class Report
   }
 
   /**
-   * 儲值明細總計
+   * 取得歷史號碼
    */
-  async getLotteryNumbers({request}) {
-    return await reportRepo.getLotteryNumbers(request.input('page', 1), request.input('perPage', 20))
+  async getHistoryLottery({request}) {
+    return await reportRepo.getHistoryLottery(request.input('page', 1), request.input('perPage', 20))
+  }
+
+  /**
+   * 取得歷史號碼筆數
+   */
+  async getHistoryLotteryTotal() {
+    return await reportRepo.getHistoryLotteryTotal()
   }
 }
 

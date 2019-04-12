@@ -48,7 +48,8 @@ Route.group(() =>
   Route.get('transfer/total', 'ReportController.transferTotal').validator(['TransferReport'])
   Route.get('store', 'ReportController.storeDetail')
   Route.get('store/total', 'ReportController.storeTotal')
-  Route.get('history/lottery', 'ReportController.getLotteryNumbers')
+  Route.get('history/lottery', 'ReportController.getHistoryLottery')
+  Route.get('history/lottery/total', 'ReportController.getHistoryLotteryTotal')
 }).prefix('report').middleware(['auth'])
 
 // about user

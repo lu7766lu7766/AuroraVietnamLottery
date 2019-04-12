@@ -72,8 +72,15 @@ class ReportController
   /**
    * 取得歷史號碼
    */
-  async getLotteryNumbers({request}) {
-    return await reportService.getLotteryNumbers({request})
+  async getHistoryLottery({request}) {
+    return await reportService.getHistoryLottery({request})
+  }
+
+  /**
+   * 取得歷史號碼Total
+   */
+  async getHistoryLotteryTotal() {
+    return await reportService.getHistoryLotteryTotal()
   }
 }
 

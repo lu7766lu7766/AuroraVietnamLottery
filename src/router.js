@@ -39,6 +39,11 @@ export default new Router({
               path: 'transfer',
               name: 'transfer-report',
               component: () => import('pages/Report/Transfer')
+            },
+            {
+              path: 'history-lottery',
+              name: 'history-lottery',
+              component: () => import('pages/Report/HistoryLottery')
             }
           ]
         },
