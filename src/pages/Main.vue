@@ -38,7 +38,7 @@
             <!---------- System---------->
             <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">
-              <div class="center" @click="openSide = false; $router.push({ name: 'updateUser'})">Update Profile</div>
+              <div class="center" @click="openSide = false; $router.push({ name: 'updateMyself'})">Update Profile</div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
               <div class="center" @click="backend = !backend" v-if="User.isManager">Backend</div>

@@ -31,42 +31,49 @@ class ReportController
    * 投注明細
    */
   async betDetail({auth, request}) {
-    return reportService.betDetail({auth, request})
+    return await reportService.betDetail({auth, request})
   }
 
   /**
    * 投注明細總計
    */
   async betTotal({auth, request}) {
-    return reportService.betTotal({auth, request})
+    return await reportService.betTotal({auth, request})
   }
 
   /**
    * 轉移明細
    */
   async transferDetail({auth, request}) {
-    return reportService.transferDetail({auth, request})
+    return await reportService.transferDetail({auth, request})
   }
 
   /**
    * 轉移明細總計
    */
   async transferTotal({auth, request}) {
-    return reportService.transferTotal({auth, request})
+    return await reportService.transferTotal({auth, request})
   }
 
   /**
    * 儲值明細
    */
   async storeDetail({auth, request}) {
-    return reportService.storeDetail({auth, request})
+    return await reportService.storeDetail({auth, request})
   }
 
   /**
    * 儲值明細總計
    */
   async storeTotal({auth, request}) {
-    return reportService.storeTotal({auth, request})
+    return await reportService.storeTotal({auth, request})
+  }
+
+  /**
+   * 取得歷史號碼
+   */
+  async getLotteryNumbers({request}) {
+    return await reportService.getLotteryNumbers({request})
   }
 }
 

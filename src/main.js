@@ -17,6 +17,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VeeValidate from 'vee-validate'
 import en from 'vee-validate/dist/locale/en'
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 import VueBus from 'vue-bus'
 
 Vue.use(VueBus)

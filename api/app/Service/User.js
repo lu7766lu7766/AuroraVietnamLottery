@@ -82,9 +82,9 @@ class User
   /**
    * api for update user
    */
-  async updateUser({request, auth}) {
+  async updateMyself({request, auth}) {
     const user = await this.getUser({auth})
-    return await userRepo.updateUser({
+    return await userRepo.updateMyself({
       id: user.id,
       password: request.input('password'),
       nickName: request.input('nickName')

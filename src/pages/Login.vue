@@ -6,50 +6,51 @@
 
     <div style="height: 20vh"></div>
 
-    <v-ons-card>
+    <div class="col-md-4 center-box">
+      <v-ons-card class="col-md-12">
+        <v-ons-row>
+          <v-ons-col width="30px">
+            <v-ons-icon size="30px" icon="md-home"></v-ons-icon>
+          </v-ons-col>
+          <v-ons-col>
+            <div style="font-size: 25px; font-weight: bold">Login</div>
+          </v-ons-col>
+        </v-ons-row>
 
-      <v-ons-row>
-        <v-ons-col width="30px">
-          <v-ons-icon size="30px" icon="md-home"></v-ons-icon>
-        </v-ons-col>
-        <v-ons-col>
-          <div style="font-size: 25px; font-weight: bold">Login</div>
-        </v-ons-col>
-      </v-ons-row>
 
+        <v-ons-list>
+          <v-ons-list-item>
+            <div class="center">
+              <v-ons-input placeholder="Your ID" float v-model="userName">
+              </v-ons-input>
+            </div>
+          </v-ons-list-item>
+          <v-ons-list-item>
+            <div class="center">
+              <v-ons-input placeholder="Password" float type="password" v-model="password">
+              </v-ons-input>
+            </div>
+          </v-ons-list-item>
 
-      <v-ons-list>
-        <v-ons-list-item>
-          <div class="center">
-            <v-ons-input placeholder="Your ID" float v-model="userName">
-            </v-ons-input>
-          </div>
-        </v-ons-list-item>
-        <v-ons-list-item>
-          <div class="center">
-            <v-ons-input placeholder="Password" float type="password" v-model="password">
-            </v-ons-input>
-          </div>
-        </v-ons-list-item>
+          <v-ons-list-item>
+            <v-ons-row>
+              <v-ons-col>
+                <v-ons-button modifier="cta" @click="login">
+                  Login
+                </v-ons-button>
+              </v-ons-col>
+              <v-ons-col>
+                <v-ons-button modifier="light" @click="$router.push({ name: 'register' })">
+                  Register
+                </v-ons-button>
+              </v-ons-col>
+            </v-ons-row>
 
-        <v-ons-list-item>
-          <v-ons-row>
-            <v-ons-col>
-              <v-ons-button modifier="cta" @click="login">
-                Login
-              </v-ons-button>
-            </v-ons-col>
-            <v-ons-col>
-              <v-ons-button modifier="light" @click="$router.push({ name: 'register' })">
-                Register
-              </v-ons-button>
-            </v-ons-col>
-          </v-ons-row>
+          </v-ons-list-item>
 
-        </v-ons-list-item>
-
-      </v-ons-list>
-    </v-ons-card>
+        </v-ons-list>
+      </v-ons-card>
+    </div>
 
   </v-ons-page>
 </template>
@@ -78,3 +79,7 @@
     }
   }
 </script>
+
+<style lang="stylus">
+
+</style>

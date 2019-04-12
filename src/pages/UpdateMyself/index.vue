@@ -62,7 +62,7 @@
       submit() {
         this.callApi(async () =>
         {
-          this.$api.user.updateUser(_.pick(this.data, ['password', 'nickName']), {
+          this.$api.user.updateMyself(_.pick(this.data, ['password', 'nickName']), {
             s: () =>
             {
               this.$notify({

@@ -107,6 +107,14 @@ class Report
       .where('type_id', PointLogTypeConstant.ADD_CODE)
       .count('* as total'))
   }
+
+  async getLotteryNumbers(page, perPage) {
+    return await LotteryModel.query()
+      .offset((page - 1) * perPage)
+      .limit(perPage)
+      .orderBy('date', 'desc')
+      .fetch()
+  }
 }
 
 module.exports = Report

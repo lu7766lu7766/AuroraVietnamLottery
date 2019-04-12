@@ -11,20 +11,20 @@
     "uri": "user",
     "method": "get"
   },
-  "createUser": {
-    "uri": "user/create",
+  "create": {
+    "uri": "user",
     "method": "post"
   },
-  "updateUser": {
-    "uri": "user/update",
+  "updateMyself": {
+    "uri": "user",
     "method": "put"
   },
   "transferPoint": {
-    "uri": "point/transfer",
+    "uri": "user/point/transfer",
     "method": "put"
   },
   "addPoint": {
-    "uri": "point/add",
+    "uri": "user/point/add",
     "method": "put"
   }
 }

@@ -169,6 +169,13 @@ class Report
     const user = await userService.getUser({auth})
     return await reportRepo.getStoreTotal(user.id)
   }
+
+  /**
+   * 儲值明細總計
+   */
+  async getLotteryNumbers({request}) {
+    return await reportRepo.getLotteryNumbers(request.input('page', 1), request.input('perPage', 20))
+  }
 }
 
 module.exports = Report

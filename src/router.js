@@ -58,9 +58,9 @@ export default new Router({
           component: () => import('pages/CreateUser')
         },
         {
-          path: 'updateUser',
-          name: 'updateUser',
-          component: () => import('pages/UpdateUser')
+          path: 'updateMyself',
+          name: 'updateMyself',
+          component: () => import('pages/UpdateMyself')
         }
       ]
     },

@@ -44,8 +44,8 @@ class UserController
   /**
    * update user
    */
-  async updateUser(context) {
-    return await userService.updateUser(context)
+  async updateMyself(context) {
+    return await userService.updateMyself(context)
   }
 
   /**

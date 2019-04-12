@@ -26,34 +26,43 @@ Route.group(() =>
   Route.get('settle', 'ReportController.settle')
 }).middleware('local')
 
+// about bet
 Route.group(() =>
 {
+  Route.post('/', 'BetController.index').validator('Bet')
+  // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
+}).prefix('bet').middleware(['auth'])
+
+// about options
+Route.group(() =>
+{
+  Route.get('gameType', 'BetController.gameTypeOptions')
+}).middleware(['auth'])
+
+// about report
+Route.group(() =>
+{
+  Route.get('bet', 'ReportController.betDetail').validator(['BetReport'])
+  Route.get('bet/total', 'ReportController.betTotal').validator('BetReport')
+  Route.get('transfer', 'ReportController.transferDetail').validator(['TransferReport'])
+  Route.get('transfer/total', 'ReportController.transferTotal').validator(['TransferReport'])
+  Route.get('store', 'ReportController.storeDetail')
+  Route.get('store/total', 'ReportController.storeTotal')
+  Route.get('history/lottery', 'ReportController.getLotteryNumbers')
+}).prefix('report').middleware(['auth'])
+
+// about user
+Route.group(() =>
+{
+  Route.post('/', 'UserController.createUser').validator('AddUser')
+  Route.get('/', 'UserController.getUser')
+  Route.put('/', 'UserController.updateMyself').validator('UpdateMyself')
   // about point
   Route.put('point/transfer', 'UserController.transferPoint').validator('TransferPoint')
   Route.put('point/add', 'UserController.addPoint').middleware('admin').validator(['TransferPoint'])
+}).prefix('user').middleware(['auth'])
 
-  // about options
-  Route.get('options/gameType', 'BetController.gameTypeOptions')
-
-  // about user
-  Route.post('user/create', 'UserController.createUser').validator('AddUser')
-  Route.get('user', 'UserController.getUser')
-  Route.put('user/update', 'UserController.updateUser').validator('UpdateUser')
-
-  // about bet
-  Route.post('bet', 'BetController.index').validator('Bet')
-
-  // about report
-  Route.get('report/bet', 'ReportController.betDetail').validator(['BetReport'])
-  Route.get('report/bet/total', 'ReportController.betTotal').validator('BetReport')
-  Route.get('report/transfer', 'ReportController.transferDetail').validator(['TransferReport'])
-  Route.get('report/transfer/total', 'ReportController.transferTotal').validator(['TransferReport'])
-  Route.get('report/store', 'ReportController.storeDetail')
-  Route.get('report/store/total', 'ReportController.storeTotal')
-
-  //
-  // Route.put('passPoint', 'UserController.passPointChanged').middleware('admin')
-}).middleware(['auth'])
+//////////////////////////////////////////////////////////////////////////////
 
 Route.post('test/message', (ctx) =>
 {

@@ -21,7 +21,7 @@ class User
     await user.save()
   }
 
-  async updateUser({id, password, nickName}) {
+  async updateMyself({id, password, nickName}) {
     const user = await UserModel.find(id)
     if (password)
     {

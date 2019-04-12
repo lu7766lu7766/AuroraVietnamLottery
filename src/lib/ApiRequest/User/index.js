@@ -21,11 +21,11 @@ export default class User extends BaseRequest
   }
 
   async createUser(data, options) {
-    return await this.request('createUser', data, options)
+    return await this.request('create', data, options)
   }
 
-  async updateUser(data, options) {
-    return await this.request('updateUser', data, options)
+  async updateMyself(data, options) {
+    return await this.request('updateMyself', data, options)
   }
 
   async transferPoint(data, options) {
