@@ -2,6 +2,7 @@
 
 const BaseExceptionHandler = use('BaseExceptionHandler')
 const UserCodes = use('ApiCodes/User1000')
+const CommonCodes = use('ApiCodes/Common')
 
 /**
  * This class handles all exceptions thrown during
@@ -52,7 +53,10 @@ class ExceptionHandler extends BaseExceptionHandler
         break
       case 'HttpException':
         Log.error(error)
-        dd(error.message)
+        res.send({
+          code: [CommonCodes.ROUTE_NOT_FOUND],
+          data: error.message
+        })
         break
       default:
         Log.error(error)

@@ -4,7 +4,7 @@ class Common
 
   static get ERROR() { return -1 }
 
-  static get MODEL_NOT_FOUND() { return -2 }
+  static get ROUTE_NOT_FOUND() { return -2 }
 
   static get CREATE_FAIL() { return -3 }
 

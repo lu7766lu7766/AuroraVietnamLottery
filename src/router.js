@@ -44,28 +44,45 @@ export default new Router({
               path: 'history-lottery',
               name: 'history-lottery',
               component: () => import('pages/Report/HistoryLottery')
+            },
+            {
+              path: 'store',
+              name: 'store-report',
+              component: () => import('pages/Report/Store')
             }
           ]
         },
         {
-          path: 'transferPoint',
-          name: 'transferPoint',
-          component: () => import('pages/TransferPoint')
+          path: 'point',
+          component: () => import('pages/Point'),
+          children: [
+            {
+              path: 'transfer',
+              name: 'transfer-point',
+              component: () => import('pages/Point/Transfer')
+            },
+            {
+              path: 'add',
+              name: 'add-point',
+              component: () => import('pages/Point/Add')
+            }
+          ]
         },
         {
-          path: 'addPoint',
-          name: 'addPoint',
-          component: () => import('pages/AddPoint')
-        },
-        {
-          path: 'createUser',
-          name: 'createUser',
-          component: () => import('pages/CreateUser')
-        },
-        {
-          path: 'updateMyself',
-          name: 'updateMyself',
-          component: () => import('pages/UpdateMyself')
+          path: 'user',
+          component: () => import('pages/User'),
+          children: [
+            {
+              path: 'create',
+              name: 'create-user',
+              component: () => import('pages/User/Create')
+            },
+            {
+              path: 'update-myself',
+              name: 'update-myself',
+              component: () => import('pages/User/UpdateMyself')
+            }
+          ]
         }
       ]
     },

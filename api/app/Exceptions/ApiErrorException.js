@@ -18,7 +18,7 @@ class ApiErrorException extends LogicalException
       data: error.message
     }
     Log.info(JSON.stringify(transBody))
-    response.status(200).send(transBody)
+    response.send(transBody)
   }
 }
 

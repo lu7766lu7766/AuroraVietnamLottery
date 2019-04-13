@@ -1,8 +1,5 @@
 <template>
   <section>
-    <el-tabs v-model="search.identity">
-      <el-tab-pane v-for="(name, code) in options" :key="code" :label="name" :name="code"></el-tab-pane>
-    </el-tabs>
     <v-ons-card v-for="(data, index) in datas" :key="index">
       <v-ons-list>
         <!--<v-ons-list-header>Default</v-ons-list-header>-->
@@ -49,13 +46,6 @@
   export default {
     mixins: [ScrollBottom],
     data: () => ({
-      options: {
-        '-1': 'Seller',
-        '1': 'Buyer'
-      },
-      search: {
-        identity: '1'
-      },
       datas: []
     }),
     watch: {
@@ -66,11 +56,11 @@
     },
     methods: {
       async getDatas() {
-        const res = await this.$api.report.getTransferDetail(this.requestBody)
+        const res = await this.$api.report.getStoreDetail(this.requestBody)
         this.datas = _.concat(this.datas, res.data)
       },
       async getTotal() {
-        const res = await this.$api.report.getTransferTotal(this.requestBody)
+        const res = await this.$api.report.getStoreTotal(this.requestBody)
         this.paginate.total = res.data.total
       },
       onSearch() {

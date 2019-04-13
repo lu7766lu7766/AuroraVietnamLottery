@@ -70,11 +70,6 @@ class Report
         query.where('target_user_id', userID)
       }
     }
-    else
-    {
-      // 儲值
-      query.where('target_user_id', userID)
-    }
     return query
   }
 

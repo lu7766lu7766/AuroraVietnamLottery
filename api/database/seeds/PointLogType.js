@@ -11,9 +11,8 @@
  */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
 
-class RoleSeeder
+class PointLogType
 {
   async run() {
     await DB.table('point_log_types').insert([
@@ -23,4 +22,4 @@ class RoleSeeder
   }
 }
 
-module.exports = RoleSeeder
+module.exports = PointLogType

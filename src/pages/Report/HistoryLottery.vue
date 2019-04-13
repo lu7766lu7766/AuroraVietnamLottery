@@ -11,7 +11,7 @@
             {{ data.date | date }}
           </el-col>
         </v-ons-list-item>
-        <v-ons-list-item v-for="(nums, index) in _.chunk(getNumbers(data), 2)">
+        <v-ons-list-item v-for="(nums, index) in _.chunk(getNumbers(data), 2)" :key="index">
           <el-col :span="12" v-if="nums[0]">
             <el-col :span="11">
               Num{{ index*2 + 1 }}:

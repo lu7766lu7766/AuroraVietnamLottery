@@ -1,4 +1,5 @@
 const {ServiceProvider, ioc} = require('@adonisjs/fold')
+const Env = use('Env')
 
 class AppProvider extends ServiceProvider
 {
@@ -25,7 +26,7 @@ class AppProvider extends ServiceProvider
     global.ApiErrorException = app.use('App/Exceptions/ApiErrorException')
 
     global.GetIncrement = async table => (await DB.table('INFORMATION_SCHEMA.TABLES').select('AUTO_INCREMENT')
-      .where('TABLE_SCHEMA', 'vietnam')
+      .where('TABLE_SCHEMA', Env.get('DB_DATABASE'))
       .where('TABLE_NAME', table)
       .first()).AUTO_INCREMENT
 

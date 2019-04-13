@@ -34,7 +34,7 @@
             <!---------- Transfer---------->
             <v-ons-list-item class="bg-secondary text-white">Point</v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">
-              <div class="center" @click="openSide = false; $router.push({ name: 'transferPoint' })">Transfer Point
+              <div class="center" @click="openSide = false; $router.push({ name: 'transfer-point' })">Transfer Point
               </div>
             </v-ons-list-item>
 
@@ -42,7 +42,7 @@
             <!---------- System---------->
             <v-ons-list-item class="bg-secondary text-white">System</v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">
-              <div class="center" @click="openSide = false; $router.push({ name: 'updateMyself'})">Update Profile</div>
+              <div class="center" @click="openSide = false; $router.push({ name: 'update-myself'})">Update Profile</div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
               <div class="center" @click="backend = !backend" v-if="User.isManager">Backend</div>
@@ -55,13 +55,18 @@
           <section v-show="backend">
             <v-ons-list-item class="bg-secondary text-white">Backend</v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
-              <div class="center" @click="openSide = false; $router.push({ name: 'createUser'})" v-if="User.isManager">
+              <div class="center" @click="openSide = false; $router.push({ name: 'create-user'})" v-if="User.isManager">
                 Create User
               </div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
-              <div class="center" @click="openSide = false; $router.push({ name: 'addPoint' })" v-if="User.isAdmin">
+              <div class="center" @click="openSide = false; $router.push({ name: 'add-point' })" v-if="User.isAdmin">
                 Add Point
+              </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
+              <div class="center" @click="openSide = false; $router.push({ name: 'store-report' })" v-if="User.isAdmin">
+                Store Report
               </div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">

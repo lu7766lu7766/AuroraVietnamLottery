@@ -20,7 +20,7 @@
     "method": "get"
   },
   "storeTotal": {
-    "uri": "report/store/store",
+    "uri": "report/store/total",
     "method": "get"
   },
   "historyLottery": {
