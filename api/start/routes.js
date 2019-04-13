@@ -18,7 +18,7 @@ const Route = use('Route')
 
 Route.post('login', 'UserController.login').validator('Login')
 Route.get('isLogin', 'UserController.isLogin')
-Route.post('register', 'UserController.register').validator('AddUser')
+Route.post('register', 'UserController.register').validator('User/Add')
 
 Route.group(() =>
 {
@@ -41,10 +41,10 @@ Route.group(() =>
 // about report
 Route.group(() =>
 {
-  Route.get('bet', 'ReportController.betDetail').validator(['BetReport'])
-  Route.get('bet/total', 'ReportController.betTotal').validator('BetReport')
-  Route.get('transfer', 'ReportController.transferDetail').validator(['TransferReport'])
-  Route.get('transfer/total', 'ReportController.transferTotal').validator(['TransferReport'])
+  Route.get('bet', 'ReportController.betDetail').validator(['Report/Bet'])
+  Route.get('bet/total', 'ReportController.betTotal').validator('Report/Bet')
+  Route.get('transfer', 'ReportController.transferDetail').validator(['Report/Transfer'])
+  Route.get('transfer/total', 'ReportController.transferTotal').validator(['Report/Transfer'])
   Route.get('store', 'ReportController.storeDetail').middleware('admin')
   Route.get('store/total', 'ReportController.storeTotal').middleware('admin')
   Route.get('history/lottery', 'ReportController.getHistoryLottery')
@@ -54,13 +54,24 @@ Route.group(() =>
 // about user
 Route.group(() =>
 {
-  Route.post('/', 'UserController.createUser').validator('AddUser')
+  Route.post('/', 'UserController.userAddForSupplier').middleware('manager').validator('User/Add')
   Route.get('/', 'UserController.getUser')
-  Route.put('/', 'UserController.updateMyself').validator('UpdateMyself')
+  Route.put('/', 'UserController.updateMyself').validator('User/UpdateMyself')
   // about point
-  Route.put('point/transfer', 'UserController.transferPoint').validator('TransferPoint')
-  Route.put('point/add', 'UserController.addPoint').middleware('admin').validator(['TransferPoint'])
+  Route.put('point/transfer', 'UserController.transferPoint').validator('Point/Transfer')
+  Route.put('point/add', 'UserController.addPoint').middleware('admin').validator(['Point/Transfer'])
+  // user list
+
 }).prefix('user').middleware(['auth'])
+// about user for backend
+Route.group(() =>
+{
+  Route.get('list', 'UserController.userList')
+  Route.get('list/total', 'UserController.userListTotal')
+  Route.post('maintain', 'UserController.userAdd').validator('User/Add')
+  Route.put('maintain', 'UserController.userUpdate').validator('User/Update')
+  Route.delete('maintain', 'UserController.userDelete').validator('User/Delete')
+}).prefix('user').middleware(['auth', 'admin'])
 
 //////////////////////////////////////////////////////////////////////////////
 

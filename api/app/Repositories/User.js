@@ -10,27 +10,6 @@ class User
     return UserModel.findByOrFail('user_name', userName)
   }
 
-  async addUser({userName, password, nickName, roleID, parentID}) {
-    const user = new UserModel()
-    user.user_name = userName
-    user.password = password
-    user.nick_name = nickName
-    user.role_id = roleID
-    user.point = 0
-    user.parent_id = parentID
-    await user.save()
-  }
-
-  async updateMyself({id, password, nickName}) {
-    const user = await UserModel.find(id)
-    if (password)
-    {
-      user.password = password
-    }
-    user.nick_name = nickName
-    return await user.save()
-  }
-
   /**
    * 新增點數異動紀錄
    */
@@ -83,6 +62,73 @@ class User
       trx.rollback()
       throw new ApiErrorException(CommonCodes.UPDATE_FAIL, e)
     }
+  }
+
+  /**
+   * 取得使用者列表
+   */
+  async getUserList(page, perPage) {
+    await UserModel
+      .query()
+      .offset((page - 1) * perPage)
+      .limit(perPage)
+      .fetch()
+  }
+
+  /**
+   * 取得使用者列表
+   */
+  async getUserListTotal() {
+    await UserModel
+      .query()
+      .count('* as total')
+  }
+
+  /**
+   * 新增一個使用者
+   */
+  async userAdd({userName, password, nickName, roleID, parentID}) {
+    const user = new UserModel()
+    user.user_name = userName
+    user.password = password
+    user.nick_name = nickName
+    user.role_id = roleID
+    user.point = 0
+    user.parent_id = parentID
+    await user.save()
+  }
+
+  /**
+   * 更新自己
+   */
+  async updateMyself({id, password, nickName}) {
+    const user = await UserModel.find(id)
+    if (password)
+    {
+      user.password = password
+    }
+    user.nick_name = nickName
+    return await user.save()
+  }
+
+  /**
+   * 更新使用者
+   */
+  async doUserUpdate(user, req) {
+    if (req.password)
+    {
+      user.password = req.password
+    }
+    user.nick_name = req.nickName
+    user.role_id = req.roleID
+    return await user.save()
+  }
+
+  /**
+   * 更新使用者
+   */
+  async doUserUpdate({userID}) {
+    return await UserModel.query().where('user_id', userID).delete()
   }
 
   /**

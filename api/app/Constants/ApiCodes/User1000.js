@@ -21,6 +21,14 @@ class User1000
   static get POINT_MORE_THEN_0() { return 1010 }
 
   static get CANNOT_TRANSFER_TO_YOURSELF() { return 1011 }
+
+  static get USER_NOT_EXISTS() { return 1012 }
+
+  static get ROLE_NOT_EXISTS() { return 1013 }
+
+  static get USER_ID_IS_REQUIRED() { return 1014 }
+
+  static get ADMIN_CANNOT_CHANGE_ROLE() { return 1015 }
 }
 
 module.exports = User1000

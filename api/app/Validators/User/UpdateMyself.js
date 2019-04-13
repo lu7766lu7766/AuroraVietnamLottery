@@ -1,4 +1,5 @@
 'use strict'
+const UserCodes = use('ApiCodes/User1000')
 
 class UserValidator
 {

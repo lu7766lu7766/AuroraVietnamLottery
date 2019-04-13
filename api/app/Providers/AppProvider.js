@@ -1,5 +1,5 @@
 const {ServiceProvider, ioc} = require('@adonisjs/fold')
-const Env = use('Env')
+
 
 class AppProvider extends ServiceProvider
 {
@@ -11,6 +11,7 @@ class AppProvider extends ServiceProvider
    * my global function
    */
   async boot() {
+    const Env = use('Env')
     const app = this.app
     const Logger = app.use('Logger')
 

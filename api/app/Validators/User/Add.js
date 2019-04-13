@@ -17,7 +17,8 @@ class UserValidator
     return {
       'userName.required': UserCodes.USER_NAME_IS_REQUIRED,
       'userName.unique': UserCodes.USER_EXISTS,
-      'password.required': UserCodes.PASSWORD_IS_REQUIRED
+      'password.required': UserCodes.PASSWORD_IS_REQUIRED,
+      'roleID.in': UserCodes.ROLE_NOT_EXISTS
     }
   }
 }

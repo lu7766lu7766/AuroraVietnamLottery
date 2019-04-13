@@ -3,6 +3,7 @@
 const userRepo = App.make('Repositories/User')
 const RoleConstant = use('Constants/Role')
 const UserCodes = use('ApiCodes/User1000')
+const UserModel = use('Models/User')
 
 class User
 {
@@ -15,10 +16,8 @@ class User
     const tokenData = await auth.attempt(userName, password)
     const user = await userRepo.findUserByUserName(userName)
 
-    if (userName == 'lu7766')
-    {
-      tokenData.data = `${tokenData.type} ${tokenData.token}`
-    }
+    tokenData.data = `${tokenData.type} ${tokenData.token}`
+
     // 新登入需刪棄用舊的token // 若是需要多處登入，則移除這行
     await userRepo.deleteOldTokensByUser(user)
 
@@ -49,45 +48,6 @@ class User
       nickName: request.input('nickName'),
       roleID: RoleConstant.GAMER_CODE,
       parentID: null
-    })
-  }
-
-  /**
-   * api for create a new user(has parent)
-   */
-  async createUser({request, auth}) {
-    // auth middleware
-    const user = await this.getUser({auth})
-
-    request.roleID = (user.role_id + 1) >= RoleConstant.GAMER_CODE
-      ? RoleConstant.GAMER_CODE
-      : (user.role_id + 1)
-
-    // 管理者才有權限決定新用戶權限，沒給就是新增者的下個等級
-    if (user.role_id == RoleConstant.ADMIN_CODE)
-    {
-      request.roleID = request.input('roleID', request.roleID)
-    }
-
-    request.parentID = user.id
-    await userRepo.addUser({
-      userName: request.input('userName'),
-      password: request.input('password'),
-      nickName: request.input('nickName', request.input('userName')),
-      roleID: request.roleID,
-      parentID: request.parentID
-    })
-  }
-
-  /**
-   * api for update user
-   */
-  async updateMyself({request, auth}) {
-    const user = await this.getUser({auth})
-    return await userRepo.updateMyself({
-      id: user.id,
-      password: request.input('password'),
-      nickName: request.input('nickName')
     })
   }
 
@@ -139,12 +99,81 @@ class User
     await userRepo.addPoint(sourceUser, targetUser, +request.input('point'))
   }
 
-  // /**
-  //  * 審核點數異動
-  //  */
-  // async passPointChanged(context) {
-  //   await userRepo.passPoint(context.request.input('id'))
-  // }
+  // backend user maintain
+  /**
+   * api get user list
+   */
+  async userList({request}) {
+    await userRepo.getUserList(request.input('page', 1), request.input('perPage', 20))
+  }
+
+  /**
+   * api get user total
+   */
+  async userListTotal() {
+    await userRepo.getUserListTotal()
+  }
+
+  /**
+   * api for create a new user(has parent)
+   */
+  async userAdd({request, auth}) {
+    // auth middleware
+    const user = await this.getUser({auth})
+
+    // 管理者才有權限決定新用戶權限，沒給就是新增者的下個等級
+    const roleID = user.role_id == RoleConstant.ADMIN_CODE
+      ? request.input('roleID', RoleConstant.SUPPLIER_CODE)
+      : RoleConstant.GAMER_CODE
+
+    const parentID = user.id
+
+    await userRepo.userAdd({
+      userName: request.input('userName'),
+      password: request.input('password'),
+      nickName: request.input('nickName', request.input('userName')),
+      roleID: roleID,
+      parentID: parentID
+    })
+  }
+
+  /**
+   * api for update user
+   */
+  async updateMyself({request, auth}) {
+    const user = await this.getUser({auth})
+    return await userRepo.updateMyself({
+      id: user.id,
+      password: request.input('password'),
+      nickName: request.input('nickName')
+    })
+  }
+
+  /**
+   * api user update
+   */
+  async userUpdate({request}) {
+    const user = await UserModel.find(request.input('userID'))
+    const roleID = request.input('roleID')
+    if (['root', 'lu7766'].indexOf(user.userName) && roleID != RoleConstant.ADMIN_CODE)
+    {
+      throw new ApiErrorException(UserCodes.ADMIN_CANNOT_CHANGE_ROLE)
+    }
+    await userRepo.doUserUpdate(user, {
+      password: request.input('password'),
+      nickName: request.input('nickName'),
+      roleID: request.input('roleID')
+    })
+  }
+
+  /**
+   * api user delete
+   */
+  async userDelete({request}) {
+    await userRepo.doUserDelete({
+      userID: request.input('userID')
+    })
+  }
 }
 
 module.exports = User

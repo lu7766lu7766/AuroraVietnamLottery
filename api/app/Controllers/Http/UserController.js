@@ -34,21 +34,6 @@ class UserController
   }
 
   /**
-   * add new user
-   */
-  async createUser(context) {
-    await userService.createUser(context)
-    return await userService.login(context)
-  }
-
-  /**
-   * update user
-   */
-  async updateMyself(context) {
-    return await userService.updateMyself(context)
-  }
-
-  /**
    * transfer user point 傳送者會扣點
    */
   async transferPoint(context) {
@@ -61,6 +46,60 @@ class UserController
    */
   async addPoint(context) {
     await userService.addPoint(context)
+    return true
+  }
+
+  // backend user maintain
+  /**
+   * get user list
+   */
+  async userList(context) {
+    return await userService.userList(context)
+  }
+
+  /**
+   * get user list total
+   */
+  async userListTotal(context) {
+    return await userService.userListTotal(context)
+  }
+
+  /**
+   * user add for supplier
+   */
+  async userAddForSupplier(context) {
+    await userService.userAdd(context)
+    return true
+  }
+
+  /**
+   * user add
+   */
+  async userAdd(context) {
+    await userService.userAdd(context)
+    return true
+  }
+
+  /**
+   * update user
+   */
+  async updateMyself(context) {
+    return await userService.updateMyself(context)
+  }
+
+  /**
+   * user update
+   */
+  async userUpdate(context) {
+    await userService.userUpdate(context)
+    return true
+  }
+
+  /**
+   * delete user
+   */
+  async userDelete(context) {
+    await userService.userDelete(context)
     return true
   }
 }
