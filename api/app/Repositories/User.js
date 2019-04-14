@@ -68,7 +68,7 @@ class User
    * 取得使用者列表
    */
   async getUserList(page, perPage) {
-    await UserModel
+    return await UserModel
       .query()
       .offset((page - 1) * perPage)
       .limit(perPage)
@@ -79,15 +79,15 @@ class User
    * 取得使用者列表
    */
   async getUserListTotal() {
-    await UserModel
+    return _.head(await UserModel
       .query()
-      .count('* as total')
+      .count('* as total'))
   }
 
   /**
    * 新增一個使用者
    */
-  async userAdd({userName, password, nickName, roleID, parentID}) {
+  async doUserAdd({userName, password, nickName, roleID, parentID}) {
     const user = new UserModel()
     user.user_name = userName
     user.password = password
@@ -101,14 +101,14 @@ class User
   /**
    * 更新自己
    */
-  async updateMyself({id, password, nickName}) {
+  async doUpdateMyself({id, password, nickName}) {
     const user = await UserModel.find(id)
     if (password)
     {
       user.password = password
     }
     user.nick_name = nickName
-    return await user.save()
+    await user.save()
   }
 
   /**
@@ -125,10 +125,10 @@ class User
   }
 
   /**
-   * 更新使用者
+   * 刪除使用者
    */
-  async doUserUpdate({userID}) {
-    return await UserModel.query().where('user_id', userID).delete()
+  async doUserDelete({userName}) {
+    return await UserModel.query().where('user_name', userName).delete()
   }
 
   /**

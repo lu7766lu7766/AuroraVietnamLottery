@@ -6,7 +6,7 @@ class BetReportValidator
 {
   get rules() {
     return {
-      isSettle: 'sometimes|number|in:0,1'
+      isSettle: 'number|in:0,1'
     }
   }
 

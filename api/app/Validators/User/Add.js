@@ -8,8 +8,8 @@ class UserValidator
     return {
       userName: 'required|unique:users,user_name',
       password: 'required',
-      nickName: 'sometimes|string',
-      roleID: 'sometimes|number|in:' + RoleContant.validateString()
+      nickName: 'string',
+      roleID: 'number|in:' + RoleContant.validateString()
     }
   }
 

@@ -21,10 +21,30 @@
   },
   "transferPoint": {
     "uri": "user/point/transfer",
-    "method": "put"
+    "method": "post"
   },
   "addPoint": {
     "uri": "user/point/add",
+    "method": "post"
+  },
+  "list": {
+    "uri": "user/list",
+    "method": "get"
+  },
+  "listTotal": {
+    "uri": "user/list/total",
+    "method": "get"
+  },
+  "add": {
+    "uri": "user/maintain",
+    "method": "post"
+  },
+  "update": {
+    "uri": "user/maintain",
     "method": "put"
+  },
+  "delete": {
+    "uri": "user/maintain",
+    "method": "delete"
   }
 }

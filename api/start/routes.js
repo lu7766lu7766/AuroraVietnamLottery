@@ -58,8 +58,8 @@ Route.group(() =>
   Route.get('/', 'UserController.getUser')
   Route.put('/', 'UserController.updateMyself').validator('User/UpdateMyself')
   // about point
-  Route.put('point/transfer', 'UserController.transferPoint').validator('Point/Transfer')
-  Route.put('point/add', 'UserController.addPoint').middleware('admin').validator(['Point/Transfer'])
+  Route.post('point/transfer', 'UserController.transferPoint').validator('Point/Transfer')
+  Route.post('point/add', 'UserController.addPoint').middleware('admin').validator(['Point/Transfer'])
   // user list
 
 }).prefix('user').middleware(['auth'])

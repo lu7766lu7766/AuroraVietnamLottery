@@ -29,6 +29,10 @@ class User1000
   static get USER_ID_IS_REQUIRED() { return 1014 }
 
   static get ADMIN_CANNOT_CHANGE_ROLE() { return 1015 }
+
+  static get CANNOT_CHANGE_ADMIN_PROFILE() { return 1016 }
+
+  static get THIS_ADMIN_CANNOT_DELETE() { return 1016 }
 }
 
 module.exports = User1000

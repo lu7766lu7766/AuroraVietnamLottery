@@ -5,8 +5,8 @@ class UserValidator
 {
   get rules() {
     return {
-      password: 'sometimes|string',
-      nickName: 'sometimes|string'
+      password: 'string',
+      nickName: 'string'
     }
   }
 

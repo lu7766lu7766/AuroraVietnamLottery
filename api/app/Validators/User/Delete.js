@@ -5,14 +5,15 @@ class UserValidator
 {
   get rules() {
     return {
-      userID: 'required|exists:users,user_id'
+      userName: 'required|exists:users,user_name|not_in:lu7766,root'
     }
   }
 
   get messages() {
     return {
-      'userID.required': UserCodes.USER_ID_IS_REQUIRED,
-      'userID.exists': UserCodes.USER_NOT_EXISTS
+      'userName.required': UserCodes.USER_NAME_IS_REQUIRED,
+      'userName.exists': UserCodes.USER_NOT_EXISTS,
+      'userName.not_in': UserCodes.THIS_ADMIN_CANNOT_DELETE
     }
   }
 }

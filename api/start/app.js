@@ -23,7 +23,8 @@ const providers = [
   '@adonisjs/lucid/providers/LucidProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
   'adonis-scheduler/providers/SchedulerProvider',
-  path.join(__dirname, '..', 'app', 'Providers', 'AppProvider')
+  path.join(__dirname, '..', 'providers', 'AppProvider'),
+  path.join(__dirname, '..', 'providers', 'ValidationProvider')
 ]
 
 /*

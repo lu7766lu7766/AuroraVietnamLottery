@@ -104,14 +104,14 @@ class User
    * api get user list
    */
   async userList({request}) {
-    await userRepo.getUserList(request.input('page', 1), request.input('perPage', 20))
+    return await userRepo.getUserList(request.input('page', 1), request.input('perPage', 20))
   }
 
   /**
    * api get user total
    */
   async userListTotal() {
-    await userRepo.getUserListTotal()
+    return await userRepo.getUserListTotal()
   }
 
   /**
@@ -128,7 +128,7 @@ class User
 
     const parentID = user.id
 
-    await userRepo.userAdd({
+    await userRepo.doUserAdd({
       userName: request.input('userName'),
       password: request.input('password'),
       nickName: request.input('nickName', request.input('userName')),
@@ -142,7 +142,7 @@ class User
    */
   async updateMyself({request, auth}) {
     const user = await this.getUser({auth})
-    return await userRepo.updateMyself({
+    await userRepo.doUpdateMyself({
       id: user.id,
       password: request.input('password'),
       nickName: request.input('nickName')
@@ -152,13 +152,26 @@ class User
   /**
    * api user update
    */
-  async userUpdate({request}) {
+  async userUpdate({request, auth}) {
+    const modifier = await this.getUser({auth})
     const user = await UserModel.find(request.input('userID'))
     const roleID = request.input('roleID')
-    if (['root', 'lu7766'].indexOf(user.userName) && roleID != RoleConstant.ADMIN_CODE)
+    if (['root', 'lu7766'].indexOf(user.userName) > -1)
     {
-      throw new ApiErrorException(UserCodes.ADMIN_CANNOT_CHANGE_ROLE)
+      if (roleID != RoleConstant.ADMIN_CODE)
+      {
+        throw new ApiErrorException(UserCodes.ADMIN_CANNOT_CHANGE_ROLE)
+      }
+      if (user.userName === 'root' && ['root', 'lu7766'].indexOf(modifier.userName) === -1)
+      {
+        throw new ApiErrorException(UserCodes.CANNOT_CHANGE_ADMIN_PROFILE)
+      }
+      if (user.userName === 'lu7766' && modifier.userName !== 'lu7766')
+      {
+        throw new ApiErrorException(UserCodes.CANNOT_CHANGE_ADMIN_PROFILE)
+      }
     }
+
     await userRepo.doUserUpdate(user, {
       password: request.input('password'),
       nickName: request.input('nickName'),
@@ -171,9 +184,10 @@ class User
    */
   async userDelete({request}) {
     await userRepo.doUserDelete({
-      userID: request.input('userID')
+      userName: request.input('userName')
     })
   }
 }
+
 
 module.exports = User

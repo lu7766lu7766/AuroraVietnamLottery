@@ -85,7 +85,7 @@
       submit() {
         this.callApi(async () =>
         {
-          this.$api.user.createUser(_.pick(this.data, ['userName', 'password', 'nickName', 'roleID']), {
+          this.$api.user.create(_.pick(this.data, ['userName', 'password', 'nickName', 'roleID']), {
             s: () =>
             {
               this.$notify({

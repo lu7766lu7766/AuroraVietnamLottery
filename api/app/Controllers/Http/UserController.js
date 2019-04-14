@@ -84,7 +84,8 @@ class UserController
    * update user
    */
   async updateMyself(context) {
-    return await userService.updateMyself(context)
+    await userService.updateMyself(context)
+    return true
   }
 
   /**

@@ -6,8 +6,8 @@ class UserValidator
   get rules() {
     return {
       userID: 'required|exists:users,user_id',
-      password: 'sometimes|string',
-      nickName: 'sometimes|string',
+      password: 'string',
+      nickName: 'string',
       roleID: 'number|in:' + RoleContant.validateString()
     }
   }
