@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Create user</h1>
+    <h1>Create User</h1>
     <v-ons-list>
       <v-ons-list-item>
         <div class="center">

@@ -3,6 +3,10 @@ import store from 'src/store'
 
 export default class User
 {
+  get anthor() {return 'lu7766'}
+
+  get admin() { return 'root'}
+
   constructor(info) {
     this._info = info
   }

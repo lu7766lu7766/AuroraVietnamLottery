@@ -45,7 +45,9 @@
               <div class="center" @click="openSide = false; $router.push({ name: 'update-myself'})">Update Profile</div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
-              <div class="center" @click="backend = !backend" v-if="User.isManager">Backend</div>
+              <div class="center" @click="backend = !backend">
+                <span v-if="User.isManager">Backend</span>
+              </div>
             </v-ons-list-item>
             <v-ons-list-item tappable>
               <div class="center" @click="openSide = false; logout()">Logout</div>
@@ -54,19 +56,24 @@
 
           <section v-show="backend">
             <v-ons-list-item class="bg-secondary text-white">Backend</v-ons-list-item>
-            <v-ons-list-item tappable modifier="chevron" v-show="User.isManager">
-              <div class="center" @click="openSide = false; $router.push({ name: 'create-user'})" v-if="User.isManager">
-                Create User
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isSupplier">
+              <div class="center" @click="openSide = false; $router.push({ name: 'create-user'})">
+                <span v-if="User.isSupplier">Create User</span>
               </div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
-              <div class="center" @click="openSide = false; $router.push({ name: 'add-point' })" v-if="User.isAdmin">
-                Add Point
+              <div class="center" @click="openSide = false; $router.push({ name: 'add-point' })">
+                <span v-if="User.isAdmin">Add Point</span>
               </div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
-              <div class="center" @click="openSide = false; $router.push({ name: 'store-report' })" v-if="User.isAdmin">
-                Store Report
+              <div class="center" @click="openSide = false; $router.push({ name: 'store-report' })">
+                <span v-if="User.isAdmin">Store Report</span>
+              </div>
+            </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
+              <div class="center" @click="openSide = false; $router.push({ name: 'user-manage' })">
+                <span v-if="User.isAdmin">User Manage</span>
               </div>
             </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">

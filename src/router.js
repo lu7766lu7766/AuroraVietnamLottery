@@ -81,6 +81,11 @@ export default new Router({
               path: 'update-myself',
               name: 'update-myself',
               component: () => import('pages/User/UpdateMyself')
+            },
+            {
+              path: 'list',
+              name: 'user-manage',
+              component: () => import('pages/User/List')
             }
           ]
         }
