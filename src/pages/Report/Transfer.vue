@@ -61,7 +61,7 @@
     watch: {
       'search.identity'() {
         this.datas = []
-        this.onSearch()
+        this.doSearch()
       }
     },
     methods: {
@@ -72,16 +72,10 @@
       async getTotal() {
         const res = await this.$api.report.getTransferTotal(this.requestBody)
         this.paginate.total = res.data.total
-      },
-      onSearch() {
-        this.doSearch(() =>
-        {
-          axios.all([this.getDatas(), this.getTotal()])
-        })
       }
     },
     mounted() {
-      this.onSearch()
+      this.doSearch()
     }
   }
 </script>

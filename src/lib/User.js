@@ -17,6 +17,10 @@ export default class User
       : store.state.User.info
   }
 
+  get userID() {
+    return _(this.info).getVal('id', '')
+  }
+
   get userName() {
     return _(this.info).getVal('user_name', '')
   }

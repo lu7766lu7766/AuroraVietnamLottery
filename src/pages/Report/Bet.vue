@@ -88,7 +88,7 @@
     watch: {
       'search.isSettle'() {
         this.datas = []
-        this.onSearch()
+        this.doSearch()
       }
     },
     methods: {
@@ -99,16 +99,10 @@
       async getTotal() {
         const res = await this.$api.report.getBetTotal(this.requestBody)
         this.paginate.total = res.data.total
-      },
-      onSearch() {
-        this.doSearch(async () =>
-        {
-          await axios.all([this.getDatas(), this.getTotal()])
-        })
       }
     },
     mounted() {
-      this.onSearch()
+      this.doSearch()
     }
   }
 </script>

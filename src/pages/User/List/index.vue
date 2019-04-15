@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>User Manage</h1>
+    <el-button @click="$bus.emit('userListAdd.show')" type="primary" size="small">Add</el-button>
     <el-table
         :data="datas"
         stripe
@@ -24,28 +25,38 @@
           label="Created Time">
       </el-table-column>
       <el-table-column
+          prop="updated_at"
+          label="Updated Time">
+      </el-table-column>
+      <el-table-column
           label="Action"
           width="200">
         <template slot-scope="scope">
-          <el-button @click="doEdit(scope.row)" type="primary" size="small" v-if="canEdit(scope.row)">Edit
+          <el-button @click="$bus.emit('userListEdit.show', scope.row)"
+                     type="warning"
+                     size="small"
+                     v-if="canEdit(scope.row)">Edit
           </el-button>
           <el-button @click="doDelete(scope.row)" type="danger" size="small" v-if="canDelete(scope.row)">Delete
           </el-button>
         </template>
       </el-table-column>
     </el-table>
+    <add />
+    <edit />
   </div>
 </template>
 
 <script>
-  import ReqMixins from 'mixins/request'
+  import ListMixins from 'mixins/list'
   import Role from 'constants/Role'
   import libUser from 'lib/User'
 
   export default {
-    mixins: [ReqMixins],
+    mixins: [ListMixins],
     components: {
-      EnterBtn: require('@/EnterBtn').default
+      Add: require('./modal/Add').default,
+      Edit: require('./modal/Edit').default
     },
     data: () => ({
       options: {
@@ -70,9 +81,7 @@
           }
         })
       },
-      onSearch() {
-        axios.all([this.getDatas(), this.getTotal()])
-      },
+
       indexMethod(index) {
         return (this.paginate.page - 1) * this.paginate.perPage + index + 1
       },
@@ -88,15 +97,19 @@
         const user = new libUser(data)
         return [User.anthor, User.admin].indexOf(user.userName) === -1
       },
-      doEdit() {
-
-      },
-      doDelete() {
-
+      doDelete(data) {
+        const user = new libUser(data)
+        this.callApi(async () =>
+        {
+          await this.$api.user.delete({userName: user.userName}, {
+            s: this.reqSuccess,
+            f: this.reqFail
+          })
+        })
       }
     },
     mounted() {
-      this.onSearch()
+      this.doSearch()
     }
   }
 </script>

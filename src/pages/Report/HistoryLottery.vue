@@ -59,16 +59,10 @@
       async getTotal() {
         const res = await this.$api.report.getHistoryLotteryTotal(this.requestBody)
         this.paginate.total = res.data.total
-      },
-      onSearch() {
-        this.doSearch(() =>
-        {
-          axios.all([this.getDatas(), this.getTotal()])
-        })
       }
     },
     mounted() {
-      this.onSearch()
+      this.doSearch()
     }
   }
 </script>

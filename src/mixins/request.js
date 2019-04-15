@@ -15,8 +15,29 @@ export default {
       }
       this.$loading.close()
     },
-    doSearch(f) {
-      this.callApi(f)
+    sMsg() {
+      this.$message({
+        type: 'success',
+        message: `success`
+      })
+    },
+    fMsg() {
+      this.$message({
+        type: 'error',
+        message: `error`
+      })
+    },
+    doSearch() {
+      this.callApi(async () =>
+      {
+        await axios.all([this.getDatas(), this.getTotal()])
+      })
+    },
+    doRefresh() {
+      this.callApi(async () =>
+      {
+        await this.getDatas()
+      })
     },
     doPageChange(page, f) {
       this.paginate.page = page

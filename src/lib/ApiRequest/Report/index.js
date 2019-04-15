@@ -35,4 +35,8 @@ export default class Report extends BaseRequest
   async getHistoryLottery(data) {
     return await this.request('historyLottery', data)
   }
+
+  async getHistoryLotteryTotal(data) {
+    return await this.request('historyLotteryTotal', data)
+  }
 }

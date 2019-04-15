@@ -1,11 +1,12 @@
 'use strict'
 const UserCodes = use('ApiCodes/User1000')
+const RoleContant = use('Constants/Role')
 
 class UserValidator
 {
   get rules() {
     return {
-      userID: 'required|exists:users,user_id',
+      userID: 'required|exists:users,id',
       password: 'string',
       nickName: 'string',
       roleID: 'number|in:' + RoleContant.validateString()
