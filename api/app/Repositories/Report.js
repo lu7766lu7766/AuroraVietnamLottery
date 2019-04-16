@@ -54,9 +54,9 @@ class Report
   }
 
   // transfer detail
-  getCommonPointLogQuery(userID, type, identity = null) {
+  getCommonPointLogQuery(userID, type_id, identity = null) {
     let query = PointLogModel.query()
-      .where('type_id', PointLogTypeConstant.enum()[type])
+      .where('type_id', type_id)
     if (!_.isNull(identity))
     {
       if (identity === PointLogTypeConstant.SELLER_CODE)
