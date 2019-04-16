@@ -42,6 +42,14 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+        class="center-box"
+        style="margin-top:20px"
+        background
+        layout="prev, pager, next"
+        :current-page="paginate.page"
+        :total="lastPage">
+    </el-pagination>
     <add />
     <edit />
   </div>
