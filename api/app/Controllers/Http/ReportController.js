@@ -13,7 +13,7 @@ class ReportController
   async fetch({request}) {
     // check has new numbers?
     const date = moment(request.input('date', moment())).format('YYYY-MM-DD')
-    if (!await reportService.checkTodayNumbers(date))
+    if (!await reportService.checkDateNumbers(date))
     {
       await reportService.fetchNumbers(date)
     }

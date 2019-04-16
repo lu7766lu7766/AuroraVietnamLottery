@@ -49,6 +49,11 @@ export default new Router({
               path: 'store',
               name: 'store-report',
               component: () => import('pages/Report/Store')
+            },
+            {
+              path: 'fetch-numbers',
+              name: 'fetch-numbers',
+              component: () => import('pages/Report/FetchNumbers')
             }
           ]
         },

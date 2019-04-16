@@ -52,7 +52,6 @@ class ExceptionHandler extends BaseExceptionHandler
         ApiErrorException.handle(error, ctx)
         break
       case 'HttpException':
-        Log.error(error)
         res.send({
           code: [CommonCodes.ROUTE_NOT_FOUND],
           data: error.message

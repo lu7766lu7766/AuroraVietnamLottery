@@ -76,6 +76,11 @@
                 <span v-if="User.isAdmin">User Manage</span>
               </div>
             </v-ons-list-item>
+            <v-ons-list-item tappable modifier="chevron" v-show="User.isAdmin">
+              <div class="center" @click="openSide = false; $router.push({ name: 'fetch-numbers' })">
+                <span v-if="User.isAdmin">Fetch Numbers</span>
+              </div>
+            </v-ons-list-item>
             <v-ons-list-item tappable modifier="chevron">
               <div class="center" @click="backend = !backend">Back</div>
             </v-ons-list-item>

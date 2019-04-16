@@ -19,7 +19,7 @@ class Report
 
   get format() { return 'YYYY-MM-DD HH:mm:ss' }
 
-  async checkTodayNumbers(date) {
+  async checkDateNumbers(date) {
     const res = await reportRepo.getTargetDateNumbers(date)
     return !!res.length
   }
@@ -64,7 +64,8 @@ class Report
     })
     if (Object.keys(sqlBody).length < 27)
     {
-      throw `crawler source1 error! length: ${_.keys(sqlBody).length}; content: ` + JSON.stringify(sqlBody)
+      throw `crawler source1 error! date: ${date}; length: ${_.keys(sqlBody).length}; content: `
+      + JSON.stringify(sqlBody)
     }
     return sqlBody
   }
@@ -81,7 +82,7 @@ class Report
       $(this).html().replace('<br>', ' ').split(' ').forEach(num =>
       {
         // value has word not number
-        if (!isNaN(parseInt(value)))
+        if (!isNaN(parseInt(num)))
         {
           sqlBody['number' + (numKey++)] = num
         }
@@ -89,7 +90,8 @@ class Report
     })
     if (Object.keys(sqlBody).length < 27)
     {
-      throw `crawler source2 error! length: ${_.keys(sqlBody).length}; content: ` + JSON.stringify(sqlBody)
+      throw `crawler source2 error! date: ${date}; length: ${_.keys(sqlBody).length}; content: `
+      + JSON.stringify(sqlBody)
     }
     return sqlBody
   }

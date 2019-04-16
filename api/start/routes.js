@@ -50,6 +50,12 @@ Route.group(() =>
   Route.get('history/lottery', 'ReportController.getHistoryLottery')
   Route.get('history/lottery/total', 'ReportController.getHistoryLotteryTotal')
 }).prefix('report').middleware(['auth'])
+// for backend
+Route.group(() =>
+{
+  Route.post('fetch', 'ReportController.fetch')
+}).prefix('report').middleware(['auth', 'admin'])
+
 
 // about user
 Route.group(() =>
@@ -60,8 +66,6 @@ Route.group(() =>
   // about point
   Route.post('point/transfer', 'UserController.transferPoint').validator('Point/Transfer')
   Route.post('point/add', 'UserController.addPoint').middleware('admin').validator(['Point/Transfer'])
-  // user list
-
 }).prefix('user').middleware(['auth'])
 // about user for backend
 Route.group(() =>
