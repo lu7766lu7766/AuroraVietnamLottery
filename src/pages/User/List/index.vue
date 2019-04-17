@@ -21,6 +21,11 @@
           width="180">
       </el-table-column>
       <el-table-column
+          prop="phone"
+          label="Phone"
+          width="120">
+      </el-table-column>
+      <el-table-column
           prop="created_at"
           label="Created Time">
       </el-table-column>

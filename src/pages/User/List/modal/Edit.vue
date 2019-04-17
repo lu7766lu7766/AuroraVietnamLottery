@@ -29,6 +29,13 @@
     </div>
 
     <div class="form-group row">
+      <label class="col-md-3 control-label required">Phone <b>*</b></label>
+      <div class="col-md-9">
+        <input type="text" class="form-control" readonly v-model="data.phone">
+      </div>
+    </div>
+
+    <div class="form-group row">
       <label class="col-md-3 control-label required">Role <b>*</b></label>
       <div class="col-md-9 p-t-7">
         <el-radio v-for="(name, val) in Role"
@@ -85,6 +92,7 @@
           userName: this.user.userName,
           password: '',
           nickName: this.user.nickName,
+          phone: this.user.phone,
           roleID: this.user.roleID + ''
         }
         this.visible = true

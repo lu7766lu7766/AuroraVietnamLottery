@@ -33,6 +33,10 @@ export default class User
     return _(this.info).getVal('nick_name', '')
   }
 
+  get phone() {
+    return _(this.info).getVal('phone', '')
+  }
+
   get roleID() {
     return _(this.info).getVal('role_id', '')
   }
