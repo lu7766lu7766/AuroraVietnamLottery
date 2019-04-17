@@ -28,10 +28,20 @@ class ValidationProvider extends ServiceProvider
     }
   }
 
+  async lengthFn(data, field, message, args, get) {
+    const value = get(data, field)
+    // value has word not number
+    if ((value + '').length !== args[0])
+    {
+      throw message
+    }
+  }
+
   boot() {
     const Validator = use('Validator')
     Validator.extend('exists', this.existsFn.bind(this))
     Validator.extend('numberString', this.numberStringFn.bind(this))
+    Validator.extend('length', this.lengthFn.bind(this))
   }
 }
 

@@ -33,6 +33,16 @@ class User1000
   static get CANNOT_CHANGE_ADMIN_PROFILE() { return 1016 }
 
   static get THIS_ADMIN_CANNOT_DELETE() { return 1016 }
+
+  static get PHONE_IS_REQUIRED() { return 1017 }
+
+  static get PHONE_FORMAT_ERROR() { return 1018 }
+
+  static get VERIFY_CODE_IS_REQUIRED() { return 1019 }
+
+  static get VERIFY_CODE_LENGTH_ERROR() { return 1020 }
+
+  static get VERIFY_CODE_ERROR() { return 1021 }
 }
 
 module.exports = User1000

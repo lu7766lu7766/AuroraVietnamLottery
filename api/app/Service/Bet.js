@@ -5,7 +5,7 @@ const UserCodes = use('ApiCodes/User1000')
 const BetCodes = use('ApiCodes/Bet2000')
 const GameTypeModel = use('Models/GameType')
 
-class Bet
+class BetService
 {
   constructor() {
     this.stopBetStartTime = '19:09:59'
@@ -96,4 +96,4 @@ class Bet
   }
 }
 
-module.exports = Bet
+module.exports = BetService

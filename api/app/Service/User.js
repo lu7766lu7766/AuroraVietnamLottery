@@ -5,7 +5,7 @@ const RoleConstant = use('Constants/Role')
 const UserCodes = use('ApiCodes/User1000')
 const UserModel = use('Models/User')
 
-class User
+class UserService
 {
   /**
    * login api
@@ -39,13 +39,21 @@ class User
   }
 
   /**
+   * register
    * add new gamer user
    */
-  async register({request}) {
-    await userRepo.addUser({
+  async register({session, request}) {
+    const phone = request.input('phone')
+    const verify_code = session.get('verify_code', {})
+    if (verify_code[phone] !== request.input('verifyCode'))
+    {
+      throw new ApiErrorException(UserCodes.VERIFY_CODE_ERROR)
+    }
+    await userRepo.doUserAdd({
       userName: request.input('userName'),
       password: request.input('password'),
-      nickName: request.input('nickName'),
+      nickName: request.input('nickName', request.input('userName')),
+      phone: request.input('phone'),
       roleID: RoleConstant.GAMER_CODE,
       parentID: null
     })
@@ -132,6 +140,7 @@ class User
       userName: request.input('userName'),
       password: request.input('password'),
       nickName: request.input('nickName', request.input('userName')),
+      phone: request.input('phone'),
       roleID: roleID,
       parentID: parentID
     })
@@ -190,4 +199,4 @@ class User
 }
 
 
-module.exports = User
+module.exports = UserService

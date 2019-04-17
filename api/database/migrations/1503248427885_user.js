@@ -14,6 +14,7 @@ class UserSchema extends Schema
       table.string('user_name', 40).notNullable().unique()
       table.string('password', 150).notNullable()
       table.string('nick_name', 20)
+      table.string('phone', 10)
       table.integer('point').notNullable().default(0)
       table.integer('role_id')
       table.integer('parent_id')

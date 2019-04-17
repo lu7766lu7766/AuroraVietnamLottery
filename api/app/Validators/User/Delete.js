@@ -1,7 +1,7 @@
 'use strict'
 const UserCodes = use('ApiCodes/User1000')
 
-class UserValidator
+class UserDeleteValidator
 {
   get rules() {
     return {
@@ -18,4 +18,4 @@ class UserValidator
   }
 }
 
-module.exports = UserValidator
+module.exports = UserDeleteValidator

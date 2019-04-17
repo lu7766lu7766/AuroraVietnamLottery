@@ -4,7 +4,7 @@ const UserModel = use('Models/User')
 const PointLogTypeConstant = use('Constants/PointLogType')
 const CommonCodes = use('ApiCodes/Common')
 
-class User
+class UserRepository
 {
   async findUserByUserName(userName) {
     return UserModel.findByOrFail('user_name', userName)
@@ -87,11 +87,12 @@ class User
   /**
    * 新增一個使用者
    */
-  async doUserAdd({userName, password, nickName, roleID, parentID}) {
+  async doUserAdd({userName, password, nickName, phone, roleID, parentID}) {
     const user = new UserModel()
     user.user_name = userName
     user.password = password
     user.nick_name = nickName
+    user.phone = phone
     user.role_id = roleID
     user.point = 0
     user.parent_id = parentID
@@ -142,4 +143,4 @@ class User
   }
 }
 
-module.exports = User
+module.exports = UserRepository

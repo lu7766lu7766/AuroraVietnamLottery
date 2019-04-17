@@ -11,7 +11,7 @@ const GamesFactory = use('Factories/Games')
 
 // const PointLogTypeConstant = use('Constants/PointLogType')
 
-class Report
+class ReportService
 {
   get source1() { return 'https://xosodaiphat.com/xsmb-xo-so-mien-bac.html' }
 
@@ -187,4 +187,4 @@ class Report
   }
 }
 
-module.exports = Report
+module.exports = ReportService

@@ -3,7 +3,7 @@
 const BetModel = use('Models/Bet')
 const CommonCodes = use('ApiCodes/Common')
 
-class Bet
+class BetRepository
 {
   async bet({user, betPoint, date, gameTypeID, numbers}) {
     // start transaction
@@ -53,4 +53,4 @@ class Bet
   }
 }
 
-module.exports = Bet
+module.exports = BetRepository

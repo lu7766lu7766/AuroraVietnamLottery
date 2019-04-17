@@ -2,7 +2,7 @@
 const UserCodes = use('ApiCodes/User1000')
 const RoleContant = use('Constants/Role')
 
-class UserValidator
+class UserUpdateValidator
 {
   get rules() {
     return {
@@ -22,4 +22,4 @@ class UserValidator
   }
 }
 
-module.exports = UserValidator
+module.exports = UserUpdateValidator

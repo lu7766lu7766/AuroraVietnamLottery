@@ -6,7 +6,7 @@ const UserModel = use('Models/User')
 const PointLogModel = use('Models/PointLog')
 const PointLogTypeConstant = use('Constants/PointLogType')
 
-class Report
+class ReportRepository
 {
   async getTargetDateNumbers(date) {
     return await DB.table('lotteries')
@@ -117,4 +117,4 @@ class Report
   }
 }
 
-module.exports = Report
+module.exports = ReportRepository
