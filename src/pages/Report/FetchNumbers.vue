@@ -7,7 +7,7 @@
           <el-date-picker
               v-model="data.date"
               type="date"
-              placeholder="Select a date you want to fetch">
+              placeholder="Select a date you want to fetch within 7 days">
           </el-date-picker>
         </div>
       </v-ons-list-item>
