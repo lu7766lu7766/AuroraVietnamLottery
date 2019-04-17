@@ -43,6 +43,8 @@ class User1000
   static get VERIFY_CODE_LENGTH_ERROR() { return 1020 }
 
   static get VERIFY_CODE_ERROR() { return 1021 }
+
+  static get VERIFY_CODE_IS_EXPIRED() { return 1022 }
 }
 
 module.exports = User1000

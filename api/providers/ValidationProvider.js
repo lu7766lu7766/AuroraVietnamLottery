@@ -31,7 +31,8 @@ class ValidationProvider extends ServiceProvider
   async lengthFn(data, field, message, args, get) {
     const value = get(data, field)
     // value has word not number
-    if ((value + '').length !== args[0])
+    const [limit] = args
+    if ((value + '').length !== parseInt(limit))
     {
       throw message
     }

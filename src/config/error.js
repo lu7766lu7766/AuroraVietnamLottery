@@ -10,8 +10,15 @@ export default {
   '1005': 'Your point is not enough',
   '1006': 'User ID is wrong',
   '1007': 'Your have no permission',
+  '1020': 'Verify code is wrong, please check your phone!',
+  '1021': 'Verify code is wrong, please check your phone!',
+  '1022': 'Verify code is expired, please get a new one!',
   // Bet2000
   '2003': 'You can\'t bet between 19:10 to 19:30',
   // Report3000
-  '3001': 'Can\'t found the lottery numbers, please try again later'
+  '3001': 'Can\'t found the lottery numbers, please try again later',
+  // Report3000
+  '4001': 'Sms send faild, please contact service!',
+  '4002': 'Time too close, please try again later!',
+  '4003': 'This phone has been registed!'
 }

@@ -5,11 +5,12 @@ const UserCodes = use('ApiCodes/User1000')
 class UserCreateValidator
 {
   get rules() {
+    // dd(/09[0-9]{8}/.test(this.ctx.request.input('phone')))
     return {
       userName: 'required|unique:users,user_name',
       password: 'required',
       nickName: 'string',
-      phone: 'required|string|regex:/09[0-9]{8}/',
+      phone: 'required|regex:^09[0-9]{8}$',
       verifyCode: 'required|length:6',
       roleID: 'number|in:' + RoleContant.validateString()
     }

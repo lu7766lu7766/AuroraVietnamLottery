@@ -45,10 +45,16 @@ class UserService
   async register({session, request}) {
     const phone = request.input('phone')
     const verify_code = session.get('verify_code', {})
-    if (verify_code[phone] !== request.input('verifyCode'))
+    switch (true)
     {
-      throw new ApiErrorException(UserCodes.VERIFY_CODE_ERROR)
+      case verify_code[phone].code !== request.input('verifyCode'):
+        throw new ApiErrorException(UserCodes.VERIFY_CODE_ERROR)
+        break
+      case moment().diff(verify_code[phone].created_at, 'minutes') >= 5:
+        throw new ApiErrorException(UserCodes.VERIFY_CODE_IS_EXPIRED)
+        break
     }
+
     await userRepo.doUserAdd({
       userName: request.input('userName'),
       password: request.input('password'),
