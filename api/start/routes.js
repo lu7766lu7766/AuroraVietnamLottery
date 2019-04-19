@@ -16,7 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('login', 'UserController.login').validator('Login')
+Route.post('login', 'UserController.login').validator('Login').middleware('throttle:3,120')
 Route.get('isLogin', 'UserController.isLogin')
 Route.post('register', 'UserController.register').validator('User/Create')
 // about bet
