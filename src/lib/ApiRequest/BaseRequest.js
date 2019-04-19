@@ -3,10 +3,9 @@ import { SuccessCodes, UnLoginCode } from 'src/config/api'
 import store from 'src/store'
 import { LoginType } from 'module/login'
 import errorCode from 'src/config/error'
-import { apiHosts } from 'src/config/api'
 import env from 'src/../env'
 
-axios.defaults.baseURL = `http://${apiHosts[env.target]}`
+axios.defaults.baseURL = `http://${env.API_HOST}`
 axios.interceptors.response.use((response) =>
 {
   return response
