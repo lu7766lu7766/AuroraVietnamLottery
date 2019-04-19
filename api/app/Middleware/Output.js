@@ -4,12 +4,15 @@ const CommonCodes = use('ApiCodes/Common')
 
 class OutputMiddleware
 {
-  async handle({response}, next) {
+  async handle({request, response}, next) {
     await next()
-    response.send({
-      code: [CommonCodes.OK],
-      data: response._lazyBody.content
-    })
+    if (request.originalUrl().indexOf('/download') === -1)
+    {
+      return response.send({
+        code: [CommonCodes.OK],
+        data: response._lazyBody.content
+      })
+    }
   }
 }
 

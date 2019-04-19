@@ -82,6 +82,7 @@ Route.group(() =>
   Route.delete('maintain', 'UserController.userDelete').validator('User/Delete')
 }).prefix('user').middleware(['auth', 'admin'])
 
+Route.get('download/app', 'DownloadController.app')
 //////////////////////////////////////////////////////////////////////////////
 
 Route.post('test/message', (ctx) =>
